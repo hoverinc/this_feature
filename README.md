@@ -45,8 +45,7 @@ To set it up, put this in an initializer file:
 FeatureX.adapters = [FeatureX::Adapters::FlipperAdapter]
 ```
 
-This will call the `.setup` method on the FlipperAdapter, which performs
-the Flipper initialization.
+This `adapters=` call will call the `.setup` method on the FlipperAdapter, which performs the Flipper initialization.
 
 Then call `FeatureX.enabled?("flag name")`
 
