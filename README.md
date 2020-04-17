@@ -1,7 +1,9 @@
 # FeatureX
 
 The goal here is to replace all our feature flag calls with one to this
-gem's. That will let us migrate the flags from one provider to another more easily
+gem's.
+
+That will let us migrate the flags from one provider to another more easily
 
 # Todos
 
