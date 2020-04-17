@@ -5,20 +5,17 @@ module FeatureX
   module Adapters
     class FlipperAdapter < BaseAdapter
 
-      # Alias the toplevel constant from the gem
-      FLIPPER = ::Flipper
-
       def self.setup
-        FLIPPER.configure do |config|
+        Flipper.configure do |config|
           config.default do
-            adapter = FLIPPER::Adapters::ActiveRecord.new
-            FLIPPER.new(adapter)
+            adapter = Flipper::Adapters::ActiveRecord.new
+            Flipper.new(adapter)
           end
         end
       end
 
-      def self.enabled?(flag_name)
-        FLIPPER[flag_name].enabled?
+      def self.enabled?(flag_name, user=nil)
+        Flipper[flag_name].enabled?(*[user].compact)
       end
 
     end
