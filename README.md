@@ -8,6 +8,8 @@ The tests are a good reflection of the current development state.
 
 Simply run them with `rspec` after bundle installing.
 
+![](./test_status.png "Test Status")
+
 ## Installation
 
 Add this line to your application's Gemfile:
