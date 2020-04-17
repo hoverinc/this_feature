@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "flag_football"
+require "feature_x"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

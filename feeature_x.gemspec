@@ -1,16 +1,16 @@
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "flag_football/version"
+require "feature_x/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "flag_football"
-  spec.version       = FlagFootball::VERSION
+  spec.name          = "feature_x"
+  spec.version       = FeatureX::VERSION
   spec.authors       = ["Max Pleaner"]
   spec.email         = ["max.pleaner@hover.to"]
 
   spec.summary       = %q{Feature flag control}
   # spec.description   = %q{TODO: description}
-  spec.homepage      = "https://github.com/hoverinc/flag_football"
+  spec.homepage      = "https://github.com/hoverinc/feature_x"
 
   # spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 

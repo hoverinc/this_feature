@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    flag_football (0.1.0)
+    feature_x (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -27,7 +27,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 2.0)
-  flag_football!
+  feature_x!
   rake (~> 10.0)
   rspec (~> 3.0)
 

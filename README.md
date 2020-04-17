@@ -1,4 +1,4 @@
-# FlagFootball
+# FeatureX
 
 **todo: description**
 
@@ -7,7 +7,7 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'flag_football'
+gem 'feature_x'
 ```
 
 And then execute:
@@ -16,5 +16,5 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install flag_football
+    $ gem install feature_x
 
