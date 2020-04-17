@@ -2,6 +2,12 @@
 
 **todo: description**
 
+## Development
+
+The tests are a good reflection of the current development state.
+
+Simply run them with `rspec` after bundle installing.
+
 ## Installation
 
 Add this line to your application's Gemfile:
