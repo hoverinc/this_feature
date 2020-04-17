@@ -1,6 +1,11 @@
 # FeatureX
 
-**todo: description**
+The goal here is to replace all our feature flag calls with one to this
+gem's. That will let us migrate the flags from one provider to another more easily
+
+# Todos
+
+Add more adapters - ENV, Mixpanel, Yaml file, etc.
 
 ## Development
 
@@ -26,3 +31,21 @@ Or install it yourself as:
 
     $ gem install feature_x
 
+## Usage
+
+Currently the only available adapter is Flipper.
+
+Will update this document when more are added.
+
+To set it up, put this in an initializer file:
+
+```ruby
+FeatureX.adapters = [FeatureX::Adapters::FlipperAdapter]
+```
+
+This will call the `.setup` method on the FlipperAdapter, which performs
+the Flipper initialization.
+
+Then call `FeatureX.enabled?("flag name")`
+
+It will iterate through the adapters until one of them returns true/false.
