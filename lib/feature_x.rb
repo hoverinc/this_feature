@@ -18,13 +18,13 @@ module FeatureX
     @adapters = adapters_list
   end
 
-  def self.enabled?(flag_name)
+  def self.enabled?(flag_name, *args)
     # Queries each of the adapters in order,
     # returning the first non-nil result.
     # Returns nil if none were found.
     result = nil
     adapters.each do |adapter|
-      val = adapter.enabled?(flag_name)
+      val = adapter.enabled?(flag_name, *args)
       unless val.nil?
         result = val
         break

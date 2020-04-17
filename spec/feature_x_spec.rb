@@ -42,18 +42,29 @@ it "has a version number" do
       klass.adapters = [klass::Adapters::FlipperAdapter, klass::Adapters::FakeAdapter]
     end
     let(:flag_name) { "some flag" }
-    context "when given just a flag name" do
-      context "queries each adapter until it gets a yes/no answer" do
-        it "stops iterating if it gets a 'yes' answer" do
-          expect(klass.adapters[0]).to receive(:enabled?).with(flag_name).and_return true
-          expect(klass.adapters[1]).not_to receive(:enabled?)
-          expect(klass.enabled?(flag_name)).to eq(true)
-        end
+    context "queries each adapter until it gets a yes/no answer" do
+      it "stops iterating if it gets a 'yes' answer" do
+        expect(klass.adapters[0]).to receive(:enabled?).with(flag_name).and_return true
+        expect(klass.adapters[1]).not_to receive(:enabled?)
+        expect(klass.enabled?(flag_name)).to eq(true)
+      end
+      it "returns nil if none of them give a yes/no answer" do
+        expect(klass.adapters[0]).to receive(:enabled?).with(flag_name).and_return nil
+        expect(klass.adapters[1]).to receive(:enabled?).and_return nil
+        expect(klass.enabled?(flag_name)).to eq(nil)
+      end
+      it "stops iterating if it gets a 'no' answer" do
+        expect(klass.adapters[0]).to receive(:enabled?).with(flag_name).and_return false
+        expect(klass.adapters[1]).not_to receive(:enabled?)
+        expect(klass.enabled?(flag_name)).to eq(false)
       end
     end
     context "when given a flag name and user" do
+      let(:pseudo_user) { OpenStruct.new(flipper_id: 1) }
       it "passes along the user argument to the individual adapters" do
-        skip
+        expect(klass.adapters[0]).to receive(:enabled?).with(flag_name, pseudo_user).and_return true
+        expect(klass.adapters[1]).not_to receive(:enabled?)
+        expect(klass.enabled?(flag_name, pseudo_user)).to eq(true)
       end
     end
   end

@@ -12,37 +12,33 @@ RSpec.describe klass do
     let(:sample_flag) { "some flag" }
     before(:each) { klass.setup }
 
-    context "when given just a flag name" do
-
-      context "looking up a flag that doesnt exist" do
-        it "returns nil" do
-          skip
-          expect(FlipperFeature.pluck(:key)).to eq [sample_flag]
-          expect(FlipperGate.count).to eq 0
-          expect(klass.enabled?(sample_flag)).to be_nil
-        end
+    context "looking up a flag that doesnt exist" do
+      it "returns nil" do
+        skip
+        expect(FlipperFeature.pluck(:key)).to eq [sample_flag]
+        expect(FlipperGate.count).to eq 0
+        expect(klass.enabled?(sample_flag)).to be_nil
       end
+    end
 
-      context "looking up a flag that is set to true" do
-        it "returns true" do
-          Flipper[sample_flag].enable
-          expect(FlipperFeature.pluck(:key)).to eq [sample_flag]
-          expect(FlipperGate.pluck(:feature_key, :key, :value)).to(
-            eq [[sample_flag, "boolean", "true"]]
-          )
-          expect(klass.enabled?(sample_flag)).to be true
-        end
+    context "looking up a flag that is set to true" do
+      it "returns true" do
+        Flipper[sample_flag].enable
+        expect(FlipperFeature.pluck(:key)).to eq [sample_flag]
+        expect(FlipperGate.pluck(:feature_key, :key, :value)).to(
+          eq [[sample_flag, "boolean", "true"]]
+        )
+        expect(klass.enabled?(sample_flag)).to be true
       end
+    end
 
-      context "looking up a flag that is set to false" do
-        it "returns false" do
-          Flipper[sample_flag].disable
-          expect(FlipperFeature.pluck(:key)).to eq [sample_flag]
-          expect(FlipperGate.count).to eq 0
-          expect(klass.enabled?(sample_flag)).to be false
-        end
+    context "looking up a flag that is set to false" do
+      it "returns false" do
+        Flipper[sample_flag].disable
+        expect(FlipperFeature.pluck(:key)).to eq [sample_flag]
+        expect(FlipperGate.count).to eq 0
+        expect(klass.enabled?(sample_flag)).to be false
       end
-
     end
 
     context "when given a flag name and a user" do
