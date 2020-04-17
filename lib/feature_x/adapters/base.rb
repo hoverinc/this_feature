@@ -3,7 +3,11 @@ module FeatureX
     module Base
 
       def self.setup
-        raise Error.new("not implemented")
+        raise UnimplementedError
+      end
+
+      def self.enabled?(flag_name)
+        raise UnimplementedError
       end
 
     end

@@ -1,17 +1,18 @@
-RSpec.shared_examples "examples for interface method" do |fn_name, *params|
-  it "raises an error" do
+klass = FeatureX::Adapters::Base
+
+RSpec.shared_examples "examples for interface method" do |fn_name, *args|
+  it "raises an unimplemented error for `#{fn_name}`" do
     expect do
-      FeatureX::Adapters::Base.public_send(fn_name)
-    end.to raise_error(FeatureX::Error) do |err|
+      klass.public_send(fn_name, *args)
+    end.to raise_error(FeatureX::UnimplementedError) do |err|
       expect(err.message).to eq("not implemented")
     end
   end
 end
 
-RSpec.describe FeatureX::Adapters::Base do
+RSpec.describe klass do
   context "methods providing an interface for descendent classes to implement" do
-    describe ".setup" do
-      include_examples "examples for interface method", :setup
-    end
+    include_examples "examples for interface method", :setup
+    include_examples "examples for interface method", :enabled?, :some_flag_name
   end
 end
