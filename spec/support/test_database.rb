@@ -3,4 +3,5 @@ ActiveRecord::Base.establish_connection(
   database: "memory"
 )
 
-require_relative './schema.rb'
+class FlipperFeature < ActiveRecord::Base; end
+class FlipperGate < ActiveRecord::Base; end

@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "feature_x"
+require 'pry'
 
 require_relative "support/test_database.rb"
 
