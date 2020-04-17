@@ -3,7 +3,7 @@ require "flipper/adapters/active_record"
 
 module FeatureX
   module Adapters
-    module Flipper
+    class FlipperAdapter < BaseAdapter
 
       # Alias the toplevel constant from the gem
       FLIPPER = ::Flipper

@@ -3,6 +3,7 @@ require "feature_x"
 require 'pry'
 
 require_relative "support/test_database.rb"
+require_relative "support/fake_adapter.rb"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

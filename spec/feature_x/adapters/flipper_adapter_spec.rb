@@ -1,4 +1,4 @@
-klass = FeatureX::Adapters::Flipper
+klass = FeatureX::Adapters::FlipperAdapter
 
 RSpec.describe klass do
 
