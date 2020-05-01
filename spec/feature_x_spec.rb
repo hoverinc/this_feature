@@ -23,13 +23,13 @@ it "has a version number" do
       new_val.each do |adapter|
         expect(adapter).to receive(:setup)
       end
-      klass.adapters = new_val
+      klass.set_adapters(new_val)
       expect(klass.adapters).to eq(new_val)
     end
     it "wont accept any adapter that doesn't inherit from BaseAdapter" do
       bad_adapter = klass::Adapters::BaseAdapter
       new_val = [bad_adapter]
-      expect { klass.adapters = new_val }.to raise_error(klass::BadAdapterError) do |err|
+      expect { klass.set_adapters(new_val) }.to raise_error(klass::BadAdapterError) do |err|
         expect(err.message).to eq(
           "adapter #{bad_adapter.name} doesn't inherit from FeatureX::Adapters::BaseAdapter"
         )
@@ -39,7 +39,10 @@ it "has a version number" do
 
   describe ".enabled?" do
     before(:all) do
-      klass.adapters = [klass::Adapters::FlipperAdapter, klass::Adapters::FakeAdapter]
+      klass.set_adapters([
+        klass::Adapters::FlipperAdapter,
+        klass::Adapters::FakeAdapter
+      ])
     end
     let(:flag_name) { "some flag" }
     context "queries each adapter until it gets a yes/no answer" do

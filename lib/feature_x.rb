@@ -7,7 +7,7 @@ class FeatureX
     @adapters || []
   end
 
-  def self.adapters=(adapters_list)
+  def self.set_adapters(adapters_list)
     adapters_list.each do |adapter|
       unless adapter < Adapters::BaseAdapter
         raise BadAdapterError.new(adapter)
@@ -18,13 +18,13 @@ class FeatureX
     @adapters = adapters_list
   end
 
-  def self.enabled?(flag_name, *args)
+  def self.enabled?(flag_name, user_or_org=nil)
     # Queries each of the adapters in order,
     # returning the first non-nil result.
     # Returns nil if none were found.
     result = nil
     adapters.each do |adapter|
-      val = adapter.enabled?(flag_name, *args)
+      val = adapter.enabled?(flag_name, *[user_or_org].compact)
       unless val.nil?
         result = val
         break
@@ -44,8 +44,8 @@ class FeatureX
 
   attr_accessor :flag_name
 
-  def enabled?(*args, &blk)
-    self.class.enabled?(flag_name, *args, &blk)
+  def enabled?(user_or_org=nil)
+    self.class.enabled?(flag_name, user_or_org)
   end
 
 end

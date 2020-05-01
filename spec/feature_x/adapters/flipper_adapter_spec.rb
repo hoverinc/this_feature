@@ -10,6 +10,10 @@ RSpec.describe klass do
 
   describe ".enabled?" do
     let(:sample_flag) { "some flag" }
+    let(:pseudo_user) { OpenStruct.new(flipper_id: "User:1") }
+    let(:pseudo_user2) { OpenStruct.new(flipper_id: "User:2") }
+    let(:pseudo_org) { OpenStruct.new(flipper_id: "Org:1") }
+    let(:pseudo_org2) { OpenStruct.new(flipper_id: "Org:2") }
 
     before(:each) { klass.setup }
 
@@ -43,8 +47,6 @@ RSpec.describe klass do
     end
 
     context "when given a flag name and a user" do
-      let(:pseudo_user) { OpenStruct.new(flipper_id: "1") }
-      let(:pseudo_user2) { OpenStruct.new(flipper_id: "2") }
       it "qualifies the search" do
         Flipper[sample_flag].enable(pseudo_user)
         expect(FlipperFeature.pluck(:key)).to eq [sample_flag]
@@ -53,6 +55,20 @@ RSpec.describe klass do
         )
         expect(klass.enabled?(sample_flag, pseudo_user)).to be true
         expect(klass.enabled?(sample_flag, pseudo_user2)).to be false
+        expect(klass.enabled?(sample_flag)).to be false
+      end
+    end
+
+    context "when given a flag name and an org" do
+      it "qualifies the search" do
+        Flipper[sample_flag].enable(pseudo_org)
+        expect(FlipperFeature.pluck(:key)).to eq [sample_flag]
+        expect(FlipperGate.pluck(:feature_key, :key, :value)).to(
+          eq [[sample_flag, "actors", pseudo_org.flipper_id]]
+        )
+        expect(klass.enabled?(sample_flag, pseudo_org)).to be true
+        expect(klass.enabled?(sample_flag, pseudo_org2)).to be false
+        expect(klass.enabled?(sample_flag, pseudo_user)).to be false
         expect(klass.enabled?(sample_flag)).to be false
       end
     end

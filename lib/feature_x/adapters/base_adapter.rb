@@ -10,7 +10,7 @@ class FeatureX
         raise UnimplementedError.new(self, __method__)
       end
 
-      def self.enabled?(flag_name)
+      def self.enabled?(flag_name, user_or_org=nil)
         raise UnimplementedError.new(self, __method__)
       end
 

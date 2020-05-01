@@ -40,10 +40,10 @@ Will update this document when more are added.
 To set it up, put this in an initializer file:
 
 ```ruby
-FeatureX.adapters = [FeatureX::Adapters::FlipperAdapter]
+FeatureX.set_adapters([FeatureX::Adapters::FlipperAdapter])
 ```
 
-This `adapters=` will internally call the `.setup` method on the FlipperAdapter, which performs the Flipper initialization.
+This `set_adapters` will internally call the `.setup` method on the FlipperAdapter, which performs the Flipper initialization.
 
 Then call `FeatureX.enabled?("flag name")` or `FeatureX["flag_name"].enabled?`
 

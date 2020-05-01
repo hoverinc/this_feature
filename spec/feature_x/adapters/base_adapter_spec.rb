@@ -1,7 +1,7 @@
 klass = FeatureX::Adapters::BaseAdapter
 
 RSpec.shared_examples "examples for interface method that must be overridden" do |fn_name, *args|
-  it "raises an unimplemented error for `#{fn_name}`" do
+  it "raises an unimplemented error for `#{fn_name}` with args #{args}`" do
     expect do
       klass.public_send(fn_name, *args)
     end.to raise_error(FeatureX::UnimplementedError) do |err|
@@ -14,5 +14,6 @@ RSpec.describe klass do
   context "methods providing an interface for descendent classes to implement" do
     include_examples "examples for interface method that must be overridden", :setup
     include_examples "examples for interface method that must be overridden", :enabled?, :some_flag_name
+    include_examples "examples for interface method that must be overridden", :enabled?, :some_flag_name, :fake_user
   end
 end
