@@ -15,8 +15,6 @@ The tests are a good reflection of the current development state.
 
 Simply run them with `rspec` after bundle installing.
 
-![](./test_status.png "Test Status")
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -47,6 +45,8 @@ FeatureX.adapters = [FeatureX::Adapters::FlipperAdapter]
 
 This `adapters=` will internally call the `.setup` method on the FlipperAdapter, which performs the Flipper initialization.
 
-Then call `FeatureX.enabled?("flag name")`
+Then call `FeatureX.enabled?("flag name")` or `FeatureX["flag_name"].enabled?`
 
 It will iterate through the adapters until one of them returns true/false.
+
+User can be passed in the arguments to `enabled?` as well.
