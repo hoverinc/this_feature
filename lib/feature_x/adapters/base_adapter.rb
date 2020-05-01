@@ -1,6 +1,10 @@
-module FeatureX
+class FeatureX
   module Adapters
     class BaseAdapter
+
+      # =======================================================
+      # Class-level API (used internally)
+      # =======================================================
 
       def self.setup
         raise UnimplementedError.new(self, __method__)

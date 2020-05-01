@@ -67,6 +67,15 @@ it "has a version number" do
         expect(klass.enabled?(flag_name, pseudo_user)).to eq(true)
       end
     end
+    context "using factory and instance-level api" do
+      let(:pseudo_user) { OpenStruct.new(flipper_id: "1") }
+      it "forwards query to flipper" do
+        expect(klass.adapters[0]).to receive(:enabled?).with(flag_name, pseudo_user).and_return true
+        expect(klass.adapters[1]).not_to receive(:enabled?)
+        expect(klass[flag_name].enabled?(pseudo_user)).to eq(true)
+      end
+    end
   end
+
 
 end

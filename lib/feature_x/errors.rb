@@ -1,4 +1,4 @@
-module FeatureX
+class FeatureX
 
   class Error < StandardError; end
 

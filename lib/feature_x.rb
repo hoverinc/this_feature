@@ -2,7 +2,7 @@ require "feature_x/version"
 require 'feature_x/adapters'
 require 'feature_x/errors'
 
-module FeatureX
+class FeatureX
   def self.adapters
     @adapters || []
   end
@@ -32,4 +32,20 @@ module FeatureX
     end
     result
   end
+
+  # =======================================================
+  # Factory method for building an instance.
+  # We're mirroring the Flipper API here for easy migration
+  # =======================================================
+
+  def self.[](flag_name)
+    new.tap { |instance| instance.flag_name = flag_name }
+  end
+
+  attr_accessor :flag_name
+
+  def enabled?(*args, &blk)
+    self.class.enabled?(flag_name, *args, &blk)
+  end
+
 end

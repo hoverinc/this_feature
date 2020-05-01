@@ -10,6 +10,7 @@ RSpec.describe klass do
 
   describe ".enabled?" do
     let(:sample_flag) { "some flag" }
+
     before(:each) { klass.setup }
 
     context "looking up a flag that doesnt exist" do

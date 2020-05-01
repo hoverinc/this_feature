@@ -1,4 +1,4 @@
-module FeatureX
+class FeatureX
   module Adapters
     class FakeAdapter < BaseAdapter
 
