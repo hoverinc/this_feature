@@ -14,8 +14,8 @@ class FeatureX
         end
       end
 
-      def self.enabled?(flag_name, user_or_org=nil)
-        Flipper[flag_name].enabled?(*[user_or_org].compact)
+      def self.enabled?(flag_name, context: nil)
+        Flipper[flag_name].enabled?(*[context].compact)
       end
 
     end
