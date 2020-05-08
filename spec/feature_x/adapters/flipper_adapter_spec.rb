@@ -53,8 +53,8 @@ RSpec.describe klass do
         expect(FlipperGate.pluck(:feature_key, :key, :value)).to(
           eq [[sample_flag, "actors", pseudo_user.flipper_id]]
         )
-        expect(klass.enabled?(sample_flag, pseudo_user)).to be true
-        expect(klass.enabled?(sample_flag, pseudo_user2)).to be false
+        expect(klass.enabled?(sample_flag, context: pseudo_user)).to be true
+        expect(klass.enabled?(sample_flag, context: pseudo_user2)).to be false
         expect(klass.enabled?(sample_flag)).to be false
       end
     end
@@ -66,9 +66,9 @@ RSpec.describe klass do
         expect(FlipperGate.pluck(:feature_key, :key, :value)).to(
           eq [[sample_flag, "actors", pseudo_org.flipper_id]]
         )
-        expect(klass.enabled?(sample_flag, pseudo_org)).to be true
-        expect(klass.enabled?(sample_flag, pseudo_org2)).to be false
-        expect(klass.enabled?(sample_flag, pseudo_user)).to be false
+        expect(klass.enabled?(sample_flag, context: pseudo_org)).to be true
+        expect(klass.enabled?(sample_flag, context: pseudo_org2)).to be false
+        expect(klass.enabled?(sample_flag, context: pseudo_user)).to be false
         expect(klass.enabled?(sample_flag)).to be false
       end
     end
