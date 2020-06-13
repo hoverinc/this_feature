@@ -18,6 +18,14 @@ class FeatureX
         Flipper[flag_name].enabled?(*[context].compact)
       end
 
+      def self.enable(flag_name, context: nil)
+        Flipper[flag_name].enable(*[context].compact)
+      end
+
+      def self.disable(flag_name, context: nil)
+        Flipper[flag_name].disable(*[context].compact)
+      end
+
     end
   end
 end

@@ -14,4 +14,10 @@ class FeatureX
     end
   end
 
+  class NoWriteAdapter < Error
+    def initialize
+      super("Use the `FeatureX.write_adapter=` setter before calling #enable or #disable")
+    end
+  end
+
 end
