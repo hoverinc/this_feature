@@ -65,7 +65,7 @@ class FeatureX
     @flag_name = flag_name
   end
 
-  def enabled?(flag_name, user_or_org=nil)
+  def enabled?(user_or_org=nil)
     self.class.enabled?(flag_name, context: user_or_org)
   end
 
