@@ -79,6 +79,6 @@ class FeatureX
     self.class.disable(flag_name, context: user_or_org)
   end
 
-  alias disable_actor enable
+  alias disable_actor disable
 
 end
