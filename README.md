@@ -1,4 +1,4 @@
-# FeatureX
+# Feature
 
 The goal here is to replace all our feature flag calls with one to this
 gem's.
@@ -20,7 +20,7 @@ Simply run them with `rspec` after bundle installing.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'feature_x'
+gem 'feature'
 ```
 
 And then execute:
@@ -29,7 +29,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install feature_x
+    $ gem install feature
 
 ## Usage
 
@@ -40,12 +40,12 @@ Will update this document when more are added.
 To set it up, put this in an initializer file:
 
 ```ruby
-FeatureX.set_adapters([FeatureX::Adapters::FlipperAdapter])
+Feature.set_adapters([Feature::Adapters::FlipperAdapter])
 ```
 
 This `set_adapters` will internally call the `.setup` method on the FlipperAdapter, which performs the Flipper initialization.
 
-Then call `FeatureX.enabled?("flag name")` or `FeatureX["flag_name"].enabled?`
+Then call `Feature.enabled?("flag name")` or `Feature["flag_name"].enabled?`
 
 It will iterate through the adapters until one of them returns true/false.
 

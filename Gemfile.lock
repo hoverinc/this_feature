@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    feature_x (0.1.3)
+    feature (0.1.3)
       flipper (~> 0.16)
       flipper-active_record (~> 0.16)
 
@@ -67,7 +67,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 2.0)
   database_cleaner-active_record
-  feature_x!
+  feature!
   pry-byebug
   rake (~> 10.0)
   rspec (~> 3.0)

@@ -1,4 +1,4 @@
-class FeatureX
+class Feature
   module Adapters
     class BaseAdapter
 

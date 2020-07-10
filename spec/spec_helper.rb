@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "feature_x"
+require "feature"
 require 'pry'
 require 'ostruct'
 require 'database_cleaner/active_record'
