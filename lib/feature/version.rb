@@ -1,3 +1,3 @@
-class FeatureX
+class Feature
   VERSION = "0.2.0"
 end

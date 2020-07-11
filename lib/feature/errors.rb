@@ -1,4 +1,4 @@
-class FeatureX
+class Feature
 
   class Error < StandardError; end
 
@@ -10,13 +10,13 @@ class FeatureX
 
   class BadAdapterError < Error
     def initialize(adapter)
-      super("adapter #{adapter.name} doesn't inherit from FeatureX::Adapters::BaseAdapter")
+      super("adapter #{adapter.name} doesn't inherit from Feature::Adapters::BaseAdapter")
     end
   end
 
   class NoWriteAdapter < Error
     def initialize
-      super("Use the `FeatureX.write_adapter=` setter before calling #enable or #disable")
+      super("Use the `Feature.write_adapter=` setter before calling #enable or #disable")
     end
   end
 

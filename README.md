@@ -1,52 +1,58 @@
-# FeatureX
+# Feature
 
-The goal here is to replace all our feature flag calls with one to this
-gem's.
-
-That will let us migrate the flags from one provider to another more easily
+The goal here is to replace all our feature flag calls with one to this gem. That will let us migrate the flags from one provider to another more easily.
 
 # Todos
 
-Add more adapters - ENV, Mixpanel, Yaml file, etc.
+Add more adapters:
+
+- Split.io
+- ENV
+- Mixpanel
+- YAML file
 
 ## Development
 
 The tests are a good reflection of the current development state.
 
-Simply run them with `rspec` after bundle installing.
+Run them with `bundle exec rspec` after bundle installing.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your application's `Gemfile`:
 
 ```ruby
-gem 'feature_x'
+gem 'feature', github: 'hoverinc/feature'
 ```
 
 And then execute:
 
-    $ bundle
+```sh
+bundle
+```
 
 Or install it yourself as:
 
-    $ gem install feature_x
+```sh
+gem install feature
+```
 
 ## Usage
 
-Currently the only available adapter is Flipper.
+Currently, the only available adapter is `Flipper`.
 
-Will update this document when more are added.
+We will update this document when more are added.
 
 To set it up, put this in an initializer file:
 
 ```ruby
-FeatureX.set_adapters([FeatureX::Adapters::FlipperAdapter])
+Feature.set_adapters([Feature::Adapters::FlipperAdapter])
 ```
 
-This `set_adapters` will internally call the `.setup` method on the FlipperAdapter, which performs the Flipper initialization.
+This `set_adapters` will internally call the `.setup` method on the `FlipperAdapter`, which performs the Flipper initialization.
 
-Then call `FeatureX.enabled?("flag name")` or `FeatureX["flag_name"].enabled?`
+Then you can call `Feature.enabled?("flag name")`.
 
-It will iterate through the adapters until one of them returns true/false.
+It will iterate through the adapters until one of them returns `true`/`false`.
 
-User can be passed in the arguments to `enabled?` as well.
+A context (`User` or `Org`) can be passed in the arguments to `enabled?` as well. `Feature.enabled?(:flag_name, Current.user)`
