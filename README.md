@@ -1,28 +1,13 @@
-# Feature
+# FFeature
 
-The goal here is to replace all our feature flag calls with one to this gem. That will let us migrate the flags from one provider to another more easily.
-
-# Todos
-
-Add more adapters:
-
-- Split.io
-- ENV
-- Mixpanel
-- YAML file
-
-## Development
-
-The tests are a good reflection of the current development state.
-
-Run them with `bundle exec rspec` after bundle installing.
+The purpose of FFeature is to have one way to use feature flags
 
 ## Installation
 
 Add this line to your application's `Gemfile`:
 
 ```ruby
-gem 'feature', github: 'hoverinc/feature'
+gem 'ffeature'
 ```
 
 And then execute:
@@ -39,8 +24,9 @@ gem install feature
 
 ## Usage
 
-Currently, the only available adapter is `Flipper`.
+### Currently
 
+Currently, the only available adapter is `Flipper`.
 We will update this document when more are added.
 
 To set it up, put this in an initializer file:
@@ -56,3 +42,24 @@ Then you can call `Feature.enabled?("flag name")`.
 It will iterate through the adapters until one of them returns `true`/`false`.
 
 A context (`User` or `Org`) can be passed in the arguments to `enabled?` as well. `Feature.enabled?(:flag_name, Current.user)`
+
+### Planned
+
+Create an initializer file in your Rails app:
+
+`/config/initializers/ffeature.rb`
+
+And set your list of adapters, _ordered by priority_. For example:
+
+```ruby
+FFeature.adapters = [SplitIO Flipper]
+```
+
+## Development
+
+The tests are a good reflection of the current development state.
+You can run the tests with these commands in your Terminal:
+
+```
+bundle install && bundle exec rspec
+```
