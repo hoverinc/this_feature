@@ -63,3 +63,7 @@ You can run the tests with these commands in your Terminal:
 ```
 bundle install && bundle exec rspec
 ```
+
+## License
+
+FFeature is released under the [MIT License](https://choosealicense.com/licenses/mit).
