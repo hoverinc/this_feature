@@ -1,6 +1,7 @@
 require 'ffeature/version'
 require 'ffeature/adapters'
 require 'ffeature/errors'
+require 'active_support/all'
 
 class FFeature
 
