@@ -1,4 +1,4 @@
-klass = Feature
+klass = FFeature
 
 RSpec.describe klass do
 
@@ -31,7 +31,7 @@ it "has a version number" do
       new_val = [bad_adapter]
       expect { klass.set_adapters(new_val) }.to raise_error(klass::BadAdapterError) do |err|
         expect(err.message).to eq(
-          "adapter #{bad_adapter.name} doesn't inherit from Feature::Adapters::BaseAdapter"
+          "adapter #{bad_adapter.name} doesn't inherit from FFeature::Adapters::BaseAdapter"
         )
       end
     end
@@ -71,6 +71,4 @@ it "has a version number" do
       end
     end
   end
-
-
 end

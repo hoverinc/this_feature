@@ -1,4 +1,4 @@
-class Feature
+class FFeature
   module Adapters
     class BaseAdapter
 

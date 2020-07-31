@@ -1,7 +1,7 @@
 require "flipper"
 require "flipper/adapters/active_record"
 
-class Feature
+class FFeature
   module Adapters
     class FlipperAdapter < BaseAdapter
 
