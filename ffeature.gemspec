@@ -24,8 +24,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "flipper", "~> 0.16"
-  spec.add_runtime_dependency "flipper-active_record", "~> 0.16"
+  spec.add_runtime_dependency 'activesupport'
 
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "pry-byebug"
@@ -33,4 +32,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "database_cleaner-active_record"
+  spec.add_development_dependency "gem-release"
 end

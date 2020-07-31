@@ -2,6 +2,8 @@ PATH
   remote: .
   specs:
     ffeature (0.3.0)
+      activesupport
+    ffeature-adapters-flipper (0.3.0)
       flipper (~> 0.16)
       flipper-active_record (~> 0.16)
 
@@ -31,6 +33,7 @@ GEM
     flipper-active_record (0.18.0)
       activerecord (>= 5.0, < 7)
       flipper (~> 0.18.0)
+    gem-release (2.1.1)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     method_source (1.0.0)
@@ -68,6 +71,8 @@ DEPENDENCIES
   bundler (~> 2.0)
   database_cleaner-active_record
   ffeature!
+  ffeature-adapters-flipper!
+  gem-release
   pry-byebug
   rake (~> 13.0)
   rspec (~> 3.0)

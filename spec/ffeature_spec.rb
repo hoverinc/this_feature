@@ -19,19 +19,19 @@ it "has a version number" do
 
   describe ".adapters= setter" do
     it "has setter which calls .setup on each adapter" do
-      new_val = [klass::Adapters::FlipperAdapter]
+      new_val = [klass::Adapters::Flipper]
       new_val.each do |adapter|
         expect(adapter).to receive(:setup)
       end
       klass.set_adapters(new_val)
       expect(klass.adapters).to eq(new_val)
     end
-    it "wont accept any adapter that doesn't inherit from BaseAdapter" do
-      bad_adapter = klass::Adapters::BaseAdapter
+    it "wont accept any adapter that doesn't inherit from Base" do
+      bad_adapter = klass::Adapters::Base
       new_val = [bad_adapter]
       expect { klass.set_adapters(new_val) }.to raise_error(klass::BadAdapterError) do |err|
         expect(err.message).to eq(
-          "adapter #{bad_adapter.name} doesn't inherit from FFeature::Adapters::BaseAdapter"
+          "adapter #{bad_adapter.name} doesn't inherit from FFeature::Adapters::Base"
         )
       end
     end
@@ -40,8 +40,8 @@ it "has a version number" do
   describe ".enabled?" do
     before(:all) do
       klass.set_adapters([
-        klass::Adapters::FlipperAdapter,
-        klass::Adapters::FakeAdapter
+        klass::Adapters::Flipper,
+        klass::Adapters::Fake
       ])
     end
     let(:flag_name) { "some flag" }
