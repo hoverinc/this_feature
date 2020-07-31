@@ -1,4 +1,4 @@
-klass = Feature
+klass = FFeature
 
 RSpec.describe klass do
 
@@ -71,6 +71,4 @@ it "has a version number" do
       end
     end
   end
-
-
 end

@@ -1,3 +1,3 @@
-class Feature
+class FFeature
   VERSION = "0.3.0"
 end

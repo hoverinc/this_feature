@@ -1,10 +1,10 @@
-klass = Feature::Adapters::BaseAdapter
+klass = FFeature::Adapters::BaseAdapter
 
 RSpec.shared_examples "examples for interface method" do |fn_name, *args|
   it "raises an unimplemented error for `#{fn_name}` with args #{args}`" do
     expect do
       klass.public_send(fn_name, *args)
-    end.to raise_error(Feature::UnimplementedError) do |err|
+    end.to raise_error(FFeature::UnimplementedError) do |err|
       expect(err.message).to eq("class #{klass.name} doesnt implement method .#{fn_name}")
     end
   end

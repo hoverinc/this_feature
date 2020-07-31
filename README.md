@@ -32,16 +32,16 @@ We will update this document when more are added.
 To set it up, put this in an initializer file:
 
 ```ruby
-Feature.set_adapters([Feature::Adapters::FlipperAdapter])
+FFeature.set_adapters([FFeature::Adapters::FlipperAdapter])
 ```
 
 This `set_adapters` will internally call the `.setup` method on the `FlipperAdapter`, which performs the Flipper initialization.
 
-Then you can call `Feature.enabled?("flag name")`.
+Then you can call `FFeature.enabled?("flag name")`.
 
 It will iterate through the adapters until one of them returns `true`/`false`.
 
-A context (`User` or `Org`) can be passed in the arguments to `enabled?` as well. `Feature.enabled?(:flag_name, Current.user)`
+A context (`User` or `Org`) can be passed in the arguments to `enabled?` as well. `FFeature.enabled?(:flag_name, Current.user)`
 
 ### Planned
 
