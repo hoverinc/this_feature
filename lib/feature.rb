@@ -1,8 +1,8 @@
-require "feature/version"
-require 'feature/adapters'
-require 'feature/errors'
+require 'ffeature/version'
+require 'ffeature/adapters'
+require 'ffeature/errors'
 
-class Feature
+class FFeature
 
   # In order to use #enable and #disable, the write_adapter needs to be specified.
   # It doesn't make sense for us to scan through all the adapters in that case.
