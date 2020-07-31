@@ -14,9 +14,9 @@ class FFeature
   end
 
   def self.set_adapters(adapters_list)
-    # Validate that the given adapters inherit from BaseAdapter
+    # Validate that the given adapters inherit from Base
     adapters_list.each do |adapter|
-      unless adapter < Adapters::BaseAdapter
+      unless adapter < Adapters::Base
         raise BadAdapterError.new(adapter)
       end
     end

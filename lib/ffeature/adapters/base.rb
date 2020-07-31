@@ -1,6 +1,6 @@
 class FFeature
   module Adapters
-    class BaseAdapter
+    class Base
 
       def self.setup
         raise UnimplementedError.new(self, __method__)
