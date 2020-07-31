@@ -1,6 +1,6 @@
 class FFeature
   module Adapters
-    class FakeAdapter < BaseAdapter
+    class Fake < Base
 
       # DONT ADD ANY FUNCTIONALITY HERE OTHER THAN THE SETUP METHOD
       # THIS ADAPTER SHOULD HAVE ALL ITS FUNCTIONALITY ADDED THROUGH STUBS.

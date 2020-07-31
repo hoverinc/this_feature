@@ -10,7 +10,7 @@ class FFeature
 
   class BadAdapterError < Error
     def initialize(adapter)
-      super("adapter #{adapter.name} doesn't inherit from FFeature::Adapters::BaseAdapter")
+      super("adapter #{adapter.name} doesn't inherit from FFeature::Adapters::Base")
     end
   end
 

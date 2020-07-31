@@ -1,7 +1,6 @@
-require_relative './adapters/base_adapter.rb'
-require_relative './adapters/flipper_adapter.rb'
+require_relative './adapters/base.rb'
 
-class Feature
+class FFeature
   module Adapters
   end
 end
