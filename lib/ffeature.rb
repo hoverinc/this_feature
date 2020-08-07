@@ -1,10 +1,23 @@
+require 'active_support/all'
 require 'ffeature/version'
 require 'ffeature/adapters'
 require 'ffeature/errors'
 require 'ffeature/configuration'
-require 'active_support/all'
+require 'ffeature/flag'
 
 class FFeature
+
+  def self.flag(flag_name, context: nil, data: {})
+    adapter = find_adapter(flag_name, context: nil, data: {})
+
+    Flag.new(flag_name, adapter: adapter, context: context, data: data)
+  end
+
+  def self.adapter_for(flag_name, context: nil, data: {})
+    adapters.find do |adapter|
+      adapter.present?(flag_name, context: context, data: data)
+    end
+  end
 
   # In order to use #enable and #disable, the write_adapter needs to be specified.
   # It doesn't make sense for us to scan through all the adapters in that case.
