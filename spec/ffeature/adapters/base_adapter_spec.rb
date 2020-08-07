@@ -13,7 +13,15 @@ end
 RSpec.describe klass do
   context "methods providing an interface for descendent classes to implement" do
     include_examples "examples for interface method", :setup
-    include_examples "examples for interface method", :enabled?, :some_flag_name
-    include_examples "examples for interface method", :enabled?, :some_flag_name, context: :fake_user
+    include_examples "examples for interface method", :on?, :some_flag_name
+    include_examples "examples for interface method", :on?, :some_flag_name, context: :fake_user, data: :stuff
+    include_examples "examples for interface method", :off?, :some_flag_name
+    include_examples "examples for interface method", :off?, :some_flag_name, context: :fake_user, data: :stuff
+    include_examples "examples for interface method", :control?, :some_flag_name
+    include_examples "examples for interface method", :control?, :some_flag_name, context: :fake_user, data: :stuff
+    include_examples "examples for interface method", :on!, :some_flag_name
+    include_examples "examples for interface method", :on!, :some_flag_name, context: :fake_user, data: :stuff
+    include_examples "examples for interface method", :off!, :some_flag_name
+    include_examples "examples for interface method", :off!, :some_flag_name, context: :fake_user, data: :stuff
   end
 end

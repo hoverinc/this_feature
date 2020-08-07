@@ -6,15 +6,23 @@ class FFeature
         raise UnimplementedError.new(self, __method__)
       end
 
-      def self.enabled?(flag_name, context: nil)
+      def self.on?(flag_name, context: nil, data: {})
         raise UnimplementedError.new(self, __method__)
       end
 
-      def self.enable(flag_name, context: nil)
+      def self.off?(flag_name, context: nil, data: {})
         raise UnimplementedError.new(self, __method__)
       end
 
-      def self.disable(flag_name, context: nil)
+      def self.control?(flag_name, context: nil, data: {})
+        raise UnimplementedError.new(self, __method__)
+      end
+
+      def self.on!(flag_name, context: nil, data: {})
+        raise UnimplementedError.new(self, __method__)
+      end
+
+      def self.off!(flag_name, context: nil, data: {})
         raise UnimplementedError.new(self, __method__)
       end
 
