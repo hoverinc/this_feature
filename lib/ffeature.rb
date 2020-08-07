@@ -1,30 +1,24 @@
 require 'ffeature/version'
 require 'ffeature/adapters'
 require 'ffeature/errors'
+require 'ffeature/configuration'
 require 'active_support/all'
 
 class FFeature
 
   # In order to use #enable and #disable, the write_adapter needs to be specified.
   # It doesn't make sense for us to scan through all the adapters in that case.
-  cattr_accessor :write_adapter
-
-  def self.adapters
-    @adapters || []
+  def self.write_adapter=(adapter) # deprecated
+    configuration.default_adapter = adapter
   end
 
-  def self.set_adapters(adapters_list)
-    # Validate that the given adapters inherit from Base
-    adapters_list.each do |adapter|
-      unless adapter < Adapters::Base
-        raise BadAdapterError.new(adapter)
-      end
-    end
+  def self.write_adapter # deprecated
+    configuration.default_adapter
+  end
 
-    # Initialize each of the adapters
-    adapters_list.each(&:setup)
-
-    @adapters = adapters_list
+  def self.set_adapters(adapters_list) # deprecated
+    configuration.adapters = adapters_list
+    configuration.init
   end
 
   def self.enabled?(flag_name, context: nil)
@@ -49,6 +43,22 @@ class FFeature
   def self.disable(flag_name, context: nil)
     raise(NoWriteAdapter.new) unless write_adapter
     write_adapter.disable(flag_name, context: context)
+  end
+
+  # Configuration
+
+  def self.configuration
+    @configuration ||= Configuration.new
+  end
+
+  def self.configure
+    yield(configuration)
+
+    configuration.init
+  end
+
+  def self.adapters
+    configuration.adapters
   end
 
   # # =======================================================
