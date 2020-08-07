@@ -2,8 +2,53 @@ klass = FFeature
 
 RSpec.describe klass do
 
-it "has a version number" do
+  it "has a version number" do
     expect(klass::VERSION).not_to be nil
+  end
+
+  describe '.adapter_for' do
+    subject(:returned_adapter) { described_class.adapter_for(flag_name) }
+
+    let(:fake_adapter) { described_class::Adapters::Fake }
+    let(:flipper_adapter) { described_class::Adapters::Flipper }
+
+    let(:flag_name) { :made_up_flag }
+
+    let(:adapters) { [fake_adapter] }
+
+    let(:fake_adapter_presence) { false }
+    let(:flipper_adapter_presence) { true }
+
+    before do
+      described_class.configure do |configuration|
+        configuration.adapters = adapters
+      end
+
+      allow(fake_adapter).to receive(:present?).and_return(fake_adapter_presence)
+      allow(flipper_adapter).to receive(:present?).and_return(flipper_adapter_presence)
+    end
+
+    it 'returns default adapter if no matching adapter is found' do
+      expect(subject).to eq(fake_adapter)
+    end
+
+    context 'with single matching adapter' do
+      let(:adapters) { [fake_adapter, flipper_adapter] }
+
+      it 'returns the matching adapter' do
+        expect(subject).to eq(flipper_adapter)
+      end
+    end
+
+    context 'with multiple matching adapters' do
+      let(:adapters) { [fake_adapter, flipper_adapter] }
+
+      let(:fake_adapter_presence) { true }
+
+      it 'returns first matching adapter when multiple matches' do
+        expect(subject).to eq(fake_adapter)
+      end
+    end
   end
 
   describe ".adapters= setter" do

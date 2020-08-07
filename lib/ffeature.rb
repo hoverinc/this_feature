@@ -6,18 +6,37 @@ require 'ffeature/configuration'
 require 'ffeature/flag'
 
 class FFeature
-
   def self.flag(flag_name, context: nil, data: {})
-    adapter = find_adapter(flag_name, context: nil, data: {})
+    adapter = adapter_for(flag_name, context: nil, data: {})
 
     Flag.new(flag_name, adapter: adapter, context: context, data: data)
   end
 
   def self.adapter_for(flag_name, context: nil, data: {})
-    adapters.find do |adapter|
+    matching_adapter = adapters.find do |adapter|
       adapter.present?(flag_name, context: context, data: data)
     end
+
+    matching_adapter || configuration.default_adapter
   end
+
+  # Configuration
+
+  def self.configuration
+    @configuration ||= Configuration.new
+  end
+
+  def self.configure
+    yield(configuration)
+
+    configuration.init
+  end
+
+  def self.adapters
+    configuration.adapters
+  end
+
+  # LEGACY API
 
   # In order to use #enable and #disable, the write_adapter needs to be specified.
   # It doesn't make sense for us to scan through all the adapters in that case.
@@ -58,22 +77,6 @@ class FFeature
     write_adapter.disable(flag_name, context: context)
   end
 
-  # Configuration
-
-  def self.configuration
-    @configuration ||= Configuration.new
-  end
-
-  def self.configure
-    yield(configuration)
-
-    configuration.init
-  end
-
-  def self.adapters
-    configuration.adapters
-  end
-
   # # =======================================================
   # # Factory method for building an instance.
   # # We're mirroring the Flipper API here for easy migration
@@ -104,5 +107,4 @@ class FFeature
   end
 
   alias disable_actor disable
-
 end
