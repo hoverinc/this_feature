@@ -1,5 +1,7 @@
 class FFeature
   class Flag
+    attr_reader :flag_name, :context, :data, :adapter
+
     def initialize(flag_name, adapter:, context: nil, data: {})
       @flag_name = flag_name
       @adapter = adapter
@@ -26,9 +28,5 @@ class FFeature
     def off!
       adapter.off!(flag_name, context: context, data: data)
     end
-
-    private
-
-    attr_reader :flag_name, :context, :data, :adapter
   end
 end
