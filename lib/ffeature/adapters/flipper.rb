@@ -28,10 +28,12 @@ class FFeature
         flipper[flag_name].enabled?(*[context].compact)
       end
 
-      def self.off?(...)
-        return if on?(...).nil?
+      def self.off?(flag_name, context: nil, data: {})
+        on_result = on?(flag_name, context: context)
 
-        !on?(...)
+        return if on_result.nil?
+
+        !on_result
       end
 
       def self.on!(flag_name, context: nil, data: {})
