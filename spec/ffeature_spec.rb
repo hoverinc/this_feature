@@ -6,17 +6,6 @@ it "has a version number" do
     expect(klass::VERSION).not_to be nil
   end
 
-  describe ".adapters getter" do
-    it "returns value of class-level instance variable" do
-      klass.instance_variable_set "@adapters", 123
-      expect(klass.adapters).to eq(123)
-    end
-    it "has a default return value" do
-      klass.instance_variable_set "@adapters", nil
-      expect(klass.adapters).to eq([])
-    end
-  end
-
   describe ".adapters= setter" do
     it "has setter which calls .setup on each adapter" do
       new_val = [klass::Adapters::Flipper]
