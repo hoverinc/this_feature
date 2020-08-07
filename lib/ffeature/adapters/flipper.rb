@@ -5,7 +5,11 @@ class FFeature
   module Adapters
     class Flipper < Base
 
-      def self.setup
+      def self.setup(flipper = nil)
+        return @flipper = flipper unless flipper.nil?
+
+        @flipper = ::Flipper
+
         ::Flipper.configure do |config|
           config.default do
             adapter = ::Flipper::Adapters::ActiveRecord.new
@@ -14,18 +18,35 @@ class FFeature
         end
       end
 
-      def self.enabled?(flag_name, context: nil)
-        ::Flipper[flag_name].enabled?(*[context].compact)
+      def self.present?(flag_name)
+        flipper[flag_name].exist?
       end
 
-      def self.enable(flag_name, context: nil)
-        ::Flipper[flag_name].enable(*[context].compact)
+      def self.on?(flag_name, context: nil, data: {})
+        return unless present?(flag_name)
+
+        flipper[flag_name].enabled?(*[context].compact)
       end
 
-      def self.disable(flag_name, context: nil)
-        ::Flipper[flag_name].disable(*[context].compact)
+      def self.off?(flag_name, context: nil, data: {})
+        on_result = on?(flag_name, context: context)
+
+        return if on_result.nil?
+
+        !on_result
       end
 
+      def self.on!(flag_name, context: nil, data: {})
+        flipper[flag_name].enable(*[context].compact)
+      end
+
+      def self.off!(flag_name, context: nil, data: {})
+        flipper[flag_name].disable(*[context].compact)
+      end
+
+      def self.flipper
+        @flipper
+      end
     end
   end
 end
