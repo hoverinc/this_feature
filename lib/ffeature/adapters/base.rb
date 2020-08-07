@@ -6,7 +6,7 @@ class FFeature
         raise UnimplementedError.new(self, __method__)
       end
 
-      def self.present?(flag_name, context: nil, data: {})
+      def self.present?(flag_name)
         raise UnimplementedError.new(self, __method__)
       end
 
