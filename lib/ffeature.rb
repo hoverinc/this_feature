@@ -1,4 +1,3 @@
-require 'active_support/all'
 require 'ffeature/version'
 require 'ffeature/adapters'
 require 'ffeature/errors'
