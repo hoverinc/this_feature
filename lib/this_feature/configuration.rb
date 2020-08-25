@@ -1,5 +1,5 @@
 
-class FFeature
+class ThisFeature
   class Configuration
     attr_writer :adapters, :default_adapter
 

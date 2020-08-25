@@ -1,4 +1,4 @@
-class FFeature
+class ThisFeature
 
   class Error < StandardError; end
 
@@ -10,13 +10,13 @@ class FFeature
 
   class BadAdapterError < Error
     def initialize(adapter)
-      super("adapter #{adapter.name} doesn't inherit from FFeature::Adapters::Base")
+      super("adapter #{adapter.name} doesn't inherit from ThisFeature::Adapters::Base")
     end
   end
 
   class NoWriteAdapter < Error
     def initialize
-      super("Use the `FFeature.write_adapter=` setter before calling #enable or #disable")
+      super("Use the `ThisFeature.write_adapter=` setter before calling #enable or #disable")
     end
   end
 

@@ -2,11 +2,11 @@
 
 $:.unshift File.expand_path('../lib', __FILE__)
 
-require 'ffeature/version'
+require 'this_feature/version'
 
 Gem::Specification.new do |s|
-  s.name          = 'ffeature-adapters-flipper'
-  s.version       = FFeature::VERSION
+  s.name          = 'this_feature-adapters-flipper'
+  s.version       = ThisFeature::VERSION
   s.authors       = ['Max Pleaner']
   s.email         = ['maxpleaner@gmail.com']
   s.homepage      = 'http://hover.to'

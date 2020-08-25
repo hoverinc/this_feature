@@ -1,4 +1,4 @@
-class FFeature
+class ThisFeature
   module Adapters
     class Memory < Base
 

@@ -1,5 +1,5 @@
-RSpec.describe FFeature::Flag do
-  let(:fake_adapter) { FFeature::Adapters::Fake }
+RSpec.describe ThisFeature::Flag do
+  let(:fake_adapter) { ThisFeature::Adapters::Fake }
   let(:flag_name) { 'a_flag' }
   let(:context) { 'foo' }
   let(:data) { 'bar' }
