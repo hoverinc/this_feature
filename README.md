@@ -22,38 +22,64 @@ Or install it yourself as:
 gem install feature
 ```
 
+## Configuration
+
+```ruby
+# config/initializers/this_feature.rb
+require 'this_feature'
+
+ThisFeature.configure do |config|
+  config.adapters = [ThisFeature::Adapters::Memory]
+  config.default_adapter = config.adapters.first
+end
+```
+
+**NOTE**: When searching for the presence of a flag, adapters are queried in order. The default adapter is the fallback adapter used when a flag isn't present in any of the adapters.
+
+
+### With Flipper
+
+```ruby
+# config/initializers/this_feature.rb
+require 'this_feature/adapters/flipper'
+
+ThisFeature.configure do |config|
+  config.adapters = [ThisFeature::Adapters::Flipper]
+  config.default_adapter = config.adapters.first
+end
+```
+
+
+
 ## Usage
 
-### Currently
-
-Currently, the only available adapter is `Flipper`.
-We will update this document when more are added.
-
-To set it up, put this in an initializer file:
-
+### Flags
 ```ruby
-ThisFeature.set_adapters([ThisFeature::Adapters::FlipperAdapter])
+ThisFeature.flag('flag_name').on? # check if flag is turned on
+ThisFeature.flag('flag_name').off? # check if flag is turned off
+ThisFeature.flag('flag_name').control? # see if the adapter is using the control
+ThisFeature.flag('flag_name').on! # turn on the flagy
+ThisFeature.flag('flag_name').off! # turn off the flagy
 ```
 
-This `set_adapters` will internally call the `.setup` method on the `FlipperAdapter`, which performs the Flipper initialization.
+### Context
 
-Then you can call `ThisFeature.enabled?("flag name")`.
-
-It will iterate through the adapters until one of them returns `true`/`false`.
-
-A context (`User` or `Org`) can be passed in the arguments to `enabled?` as well. `ThisFeature.enabled?(:flag_name, Current.user)`
-
-### Planned
-
-Create an initializer file in your Rails app:
-
-`/config/initializers/this_feature.rb`
-
-And set your list of adapters, _ordered by priority_. For example:
+You can also pass a context to the flag, many feature flagging systems support this.
 
 ```ruby
-ThisFeature.adapters = [SplitIO Flipper]
+ThisFeature.flag('flag_name', context: current_user).on?
 ```
+
+### Data
+
+In case context is not sufficient, you can also pass a data hash.
+
+```ruby
+ThisFeature.flag('flag_name', context: context, data: { org_id: 1 }).on?
+```
+
+## TODO: Write documentation for the adapters (creating adapters, using memory adapter, using flipper adapter)
+
 
 ## Development
 
