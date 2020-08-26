@@ -1,7 +1,7 @@
 require_relative './adapters/base.rb'
 require_relative './adapters/memory.rb'
 
-class FFeature
+class ThisFeature
   module Adapters
   end
 end

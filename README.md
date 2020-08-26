@@ -1,13 +1,13 @@
-# FFeature
+# ThisFeature
 
-The purpose of FFeature is to have one way to use feature flags
+The purpose of ThisFeature is to have one way to use feature flags
 
 ## Installation
 
 Add this line to your application's `Gemfile`:
 
 ```ruby
-gem 'ffeature'
+gem 'this_feature'
 ```
 
 And then execute:
@@ -32,27 +32,27 @@ We will update this document when more are added.
 To set it up, put this in an initializer file:
 
 ```ruby
-FFeature.set_adapters([FFeature::Adapters::FlipperAdapter])
+ThisFeature.set_adapters([ThisFeature::Adapters::FlipperAdapter])
 ```
 
 This `set_adapters` will internally call the `.setup` method on the `FlipperAdapter`, which performs the Flipper initialization.
 
-Then you can call `FFeature.enabled?("flag name")`.
+Then you can call `ThisFeature.enabled?("flag name")`.
 
 It will iterate through the adapters until one of them returns `true`/`false`.
 
-A context (`User` or `Org`) can be passed in the arguments to `enabled?` as well. `FFeature.enabled?(:flag_name, Current.user)`
+A context (`User` or `Org`) can be passed in the arguments to `enabled?` as well. `ThisFeature.enabled?(:flag_name, Current.user)`
 
 ### Planned
 
 Create an initializer file in your Rails app:
 
-`/config/initializers/ffeature.rb`
+`/config/initializers/this_feature.rb`
 
 And set your list of adapters, _ordered by priority_. For example:
 
 ```ruby
-FFeature.adapters = [SplitIO Flipper]
+ThisFeature.adapters = [SplitIO Flipper]
 ```
 
 ## Development
@@ -66,4 +66,4 @@ bundle install && bundle exec rspec
 
 ## License
 
-FFeature is released under the [MIT License](https://choosealicense.com/licenses/mit).
+ThisFeature is released under the [MIT License](https://choosealicense.com/licenses/mit).

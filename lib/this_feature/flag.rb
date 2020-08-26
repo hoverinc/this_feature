@@ -1,4 +1,4 @@
-class FFeature
+class ThisFeature
   class Flag
     attr_reader :flag_name, :context, :data, :adapter
 

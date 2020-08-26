@@ -1,10 +1,10 @@
-require 'ffeature/version'
-require 'ffeature/adapters'
-require 'ffeature/errors'
-require 'ffeature/configuration'
-require 'ffeature/flag'
+require 'this_feature/version'
+require 'this_feature/adapters'
+require 'this_feature/errors'
+require 'this_feature/configuration'
+require 'this_feature/flag'
 
-class FFeature
+class ThisFeature
   def self.flag(flag_name, context: nil, data: {})
     adapter = adapter_for(flag_name, context: nil, data: {})
 

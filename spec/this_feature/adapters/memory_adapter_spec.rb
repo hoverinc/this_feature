@@ -1,4 +1,4 @@
-RSpec.describe FFeature::Adapters::Memory do
+RSpec.describe ThisFeature::Adapters::Memory do
   let(:flag_name) { 'a_flag' }
 
   let(:context) { nil }

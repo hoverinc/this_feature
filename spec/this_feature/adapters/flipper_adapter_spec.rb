@@ -1,5 +1,5 @@
 
-RSpec.describe FFeature::Adapters::Flipper do
+RSpec.describe ThisFeature::Adapters::Flipper do
   let(:flag_name) { 'a_flag' }
 
   let(:context) { nil }

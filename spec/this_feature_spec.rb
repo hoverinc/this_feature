@@ -1,4 +1,4 @@
-RSpec.describe FFeature do
+RSpec.describe ThisFeature do
 
   let(:fake_adapter) { described_class::Adapters::Fake }
   let(:flipper_adapter) { described_class::Adapters::Flipper }
@@ -67,7 +67,7 @@ RSpec.describe FFeature do
         end
       end.to raise_error(described_class::BadAdapterError) do |err|
         expect(err.message).to eq(
-          "adapter #{bad_adapter.name} doesn't inherit from FFeature::Adapters::Base"
+          "adapter #{bad_adapter.name} doesn't inherit from ThisFeature::Adapters::Base"
         )
       end
     end

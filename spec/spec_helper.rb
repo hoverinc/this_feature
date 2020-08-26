@@ -1,5 +1,5 @@
 require 'bundler/setup'
-require 'ffeature'
+require 'this_feature'
 require 'ostruct'
 require 'database_cleaner/active_record'
 require 'pry-byebug'
@@ -8,7 +8,7 @@ require_relative 'support/test_database.rb'
 require_relative 'support/schema.rb'
 require_relative 'support/fake.rb'
 
-require 'ffeature/adapters/flipper'
+require 'this_feature/adapters/flipper'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
