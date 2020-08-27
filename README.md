@@ -19,7 +19,7 @@ bundle
 Or install it yourself as:
 
 ```sh
-gem install feature
+gem install this_feature
 ```
 
 ## Configuration
