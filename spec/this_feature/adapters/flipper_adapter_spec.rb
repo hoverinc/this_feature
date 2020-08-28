@@ -118,6 +118,24 @@ RSpec.describe ThisFeature::Adapters::Flipper do
     end
   end
 
+  describe ".control?" do
+    subject(:control?) { described_class.control?(flag_name) }
+
+    it { is_expected.to be(true) }
+
+    context 'when flag is enabled' do
+      before { Flipper[flag_name].enable }
+
+      it { is_expected.to be(false) }
+    end
+
+    context 'when flag is disabled' do
+      before { Flipper[flag_name].disable }
+
+      it { is_expected.to be(false) }
+    end
+  end
+
   describe '.on!' do
     subject(:on!) { described_class.on!(flag_name) }
 
