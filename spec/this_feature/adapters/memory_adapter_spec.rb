@@ -45,6 +45,23 @@ RSpec.describe ThisFeature::Adapters::Memory do
         expect(ThisFeature.flag(flag_name, context: pseudo_user).on?).to be true
       end
     end
+
+    context "when specifying context_key_method" do
+      let(:pseudo_user) { OpenStruct.new(name: 'user_1', id: "User:1") }
+      let(:pseudo_user2) { OpenStruct.new(name: 'user_2', id: "User:1") }
+      let(:pseudo_user3) { OpenStruct.new(name: 'user_1', id: "User:3") }
+      let(:context_key_method) { :id }
+
+      let(:adapter) { described_class.new(context_key_method: context_key_method) }
+
+      it 'uses the context key method to look up the flag status' do
+        adapter.on!(flag_name, context: pseudo_user)
+        expect(ThisFeature.flag(flag_name).on?).to be false
+        expect(ThisFeature.flag(flag_name, context: pseudo_user).on?).to be true
+        expect(ThisFeature.flag(flag_name, context: pseudo_user2).on?).to be true
+        expect(ThisFeature.flag(flag_name, context: pseudo_user3).on?).to be false
+      end
+    end
   end
 
   describe "off?" do
@@ -75,6 +92,36 @@ RSpec.describe ThisFeature::Adapters::Memory do
         expect(ThisFeature.flag(flag_name, context: pseudo_user2).off?).to be true
         expect(ThisFeature.flag(flag_name, context: pseudo_user).off?).to be false
       end
+    end
+
+    context "when specifying context_key_method" do
+      let(:pseudo_user) { OpenStruct.new(name: 'user_1', id: "User:1") }
+      let(:pseudo_user2) { OpenStruct.new(name: 'user_2', id: "User:1") }
+      let(:pseudo_user3) { OpenStruct.new(name: 'user_1', id: "User:3") }
+      let(:context_key_method) { :id }
+
+      let(:adapter) { described_class.new(context_key_method: context_key_method) }
+
+      context 'when the flag is on for a user' do
+        it 'uses the context key method to look up the flag status' do
+          adapter.on!(flag_name, context: pseudo_user)
+          expect(ThisFeature.flag(flag_name).off?).to be true
+          expect(ThisFeature.flag(flag_name, context: pseudo_user).off?).to be false
+          expect(ThisFeature.flag(flag_name, context: pseudo_user2).off?).to be false
+          expect(ThisFeature.flag(flag_name, context: pseudo_user3).off?).to be true
+        end
+      end
+
+      context 'when the flag is off for a user' do
+        it 'uses the context key method to look up the flag status' do
+          adapter.off!(flag_name, context: pseudo_user)
+          expect(ThisFeature.flag(flag_name).off?).to be true
+          expect(ThisFeature.flag(flag_name, context: pseudo_user).off?).to be true
+          expect(ThisFeature.flag(flag_name, context: pseudo_user2).off?).to be true
+          expect(ThisFeature.flag(flag_name, context: pseudo_user3).off?).to be true
+        end
+      end
+
     end
   end
 
