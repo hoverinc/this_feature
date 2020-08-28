@@ -10,17 +10,25 @@ RSpec.describe ThisFeature::Adapters::Flipper do
   let(:pseudo_org) { OpenStruct.new(flipper_id: "Org:1") }
   let(:pseudo_org2) { OpenStruct.new(flipper_id: "Org:2") }
 
-  # before(:each) { described_class.setup }
-
-  # describe ".setup" do
-  #   it "doesnt raise an error" do
-  #     described_class.setup
-  #   end
-  # end
-
   let(:adapter) { described_class.new }
 
-  describe ".on?" do
+  describe("#initialize") do
+    context "when passed a custom client" do
+      let(:fake_client) { "my fake client" }
+      let(:adapter) { described_class.new(client: fake_client) }
+      it "uses that custom client" do
+        expect(adapter.client).to eq(fake_client)
+      end
+    end
+    context "when not passed a custom client" do
+      let(:adapter) { described_class.new }
+      it "uses a default client" do
+        expect(adapter.client).to eq(::Flipper)
+      end
+    end
+  end
+
+  describe "#on?" do
     subject(:on?) { adapter.on?(flag_name, context: context, data: data) }
 
     context "looking up a flag that doesnt exist" do
@@ -60,7 +68,7 @@ RSpec.describe ThisFeature::Adapters::Flipper do
     end
   end
 
-  describe ".off?" do
+  describe "#off?" do
     subject(:off?) { adapter.off?(flag_name, context: context, data: data) }
 
     context "looking up a flag that doesnt exist" do
@@ -102,7 +110,7 @@ RSpec.describe ThisFeature::Adapters::Flipper do
     end
   end
 
-  describe '.present?' do
+  describe '#present?' do
     subject(:present?) { adapter.present?(flag_name) }
 
     it { is_expected.to be(false) }
@@ -120,7 +128,7 @@ RSpec.describe ThisFeature::Adapters::Flipper do
     end
   end
 
-  describe ".control?" do
+  describe "#control?" do
     subject(:control?) { adapter.control?(flag_name) }
 
     it { is_expected.to be(true) }
@@ -138,7 +146,7 @@ RSpec.describe ThisFeature::Adapters::Flipper do
     end
   end
 
-  # describe '.on!' do
+  # describe '#on!' do
   #   subject(:on!) { adapter.on!(flag_name) }
 
   #   it 'turns on the flag' do
@@ -176,7 +184,7 @@ RSpec.describe ThisFeature::Adapters::Flipper do
   #   end
   # end
 
-  # describe '.off!' do
+  # describe '#off!' do
   #   subject(:off!) { adapter.off!(flag_name) }
 
   #   it 'turns off the flag' do
