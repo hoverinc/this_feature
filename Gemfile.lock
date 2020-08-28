@@ -5,8 +5,10 @@ PATH
     this_feature-adapters-flipper (0.4.0)
       flipper (~> 0.16)
       flipper-active_record (~> 0.16)
+      this_feature
     this_feature-adapters-split_io (0.4.0)
       splitclient-rb
+      this_feature
 
 GEM
   remote: https://rubygems.org/

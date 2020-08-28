@@ -18,5 +18,6 @@ Gem::Specification.new do |s|
   s.platform      = Gem::Platform::RUBY
   s.require_paths = ['lib']
 
+  s.add_runtime_dependency "this_feature"
   s.add_runtime_dependency "splitclient-rb"
 end
