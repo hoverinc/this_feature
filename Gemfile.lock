@@ -1,10 +1,12 @@
 PATH
   remote: .
   specs:
-    this_feature (0.3.0)
-    this_feature-adapters-flipper (0.3.0)
+    this_feature (0.4.0)
+    this_feature-adapters-flipper (0.4.0)
       flipper (~> 0.16)
       flipper-active_record (~> 0.16)
+    this_feature-adapters-split_io (0.4.0)
+      splitclient-rb
 
 GEM
   remote: https://rubygems.org/
@@ -23,20 +25,30 @@ GEM
     byebug (11.1.2)
     coderay (1.1.2)
     concurrent-ruby (1.1.6)
+    connection_pool (2.2.3)
     database_cleaner (1.8.4)
     database_cleaner-active_record (1.8.0)
       activerecord
       database_cleaner (~> 1.8.0)
     diff-lcs (1.3)
+    faraday (1.0.1)
+      multipart-post (>= 1.2, < 3)
     flipper (0.18.0)
     flipper-active_record (0.18.0)
       activerecord (>= 5.0, < 7)
       flipper (~> 0.18.0)
     gem-release (2.1.1)
+    hitimes (1.3.1)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
+    json (2.3.1)
+    jwt (2.2.2)
+    lru_redux (1.1.0)
     method_source (1.0.0)
     minitest (5.14.1)
+    multipart-post (2.1.1)
+    net-http-persistent (4.0.0)
+      connection_pool (~> 2.2)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -44,6 +56,7 @@ GEM
       byebug (~> 11.0)
       pry (~> 0.13.0)
     rake (13.0.1)
+    redis (4.2.1)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
@@ -57,6 +70,18 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
     rspec-support (3.9.2)
+    socketry (0.5.1)
+      hitimes (~> 1.2)
+    splitclient-rb (7.1.3)
+      concurrent-ruby (~> 1.0)
+      faraday (>= 0.8)
+      json (>= 1.8)
+      jwt (>= 2.2.1)
+      lru_redux
+      net-http-persistent (>= 2.9)
+      redis (>= 3.2)
+      socketry (~> 0.5.1)
+      thread_safe (>= 0.3)
     sqlite3 (1.4.2)
     thread_safe (0.3.6)
     tzinfo (1.2.7)
@@ -76,6 +101,7 @@ DEPENDENCIES
   sqlite3
   this_feature!
   this_feature-adapters-flipper!
+  this_feature-adapters-split_io!
 
 BUNDLED WITH
    2.1.4

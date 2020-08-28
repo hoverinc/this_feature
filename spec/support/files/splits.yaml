@@ -1,0 +1,14 @@
+- on_feature:
+    treatment: 'on'
+    keys:
+    config: {'desc': 'this applies only to ON treatment'}
+
+- partially_on_feature:
+    treatment: 'on'
+    keys: '1'
+    config: {'desc': 'this applies only to ON and only for org 1. The rest will receive OFF'}
+
+- off_feature:
+    treatment: 'off'
+    keys:
+    config: {'desc': 'this applies only to OFF treatment'}
