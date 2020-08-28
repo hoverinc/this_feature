@@ -13,15 +13,19 @@ RSpec.describe ThisFeature::Adapters::Flipper do
   let(:adapter) { described_class.new }
 
   describe("#initialize") do
+
     context "when passed a custom client" do
       let(:fake_client) { "my fake client" }
       let(:adapter) { described_class.new(client: fake_client) }
+
       it "uses that custom client" do
         expect(adapter.client).to eq(fake_client)
       end
     end
+
     context "when not passed a custom client" do
       let(:adapter) { described_class.new }
+
       it "uses a default client" do
         expect(adapter.client).to eq(::Flipper)
       end
