@@ -29,12 +29,22 @@ RSpec.describe ThisFeature::Adapters::Memory do
       before { adapter.on!(flag_name) }
 
       it { is_expected.to be(true) }
+
+      it 'is on for a specific user' do
+        expect(ThisFeature.flag(flag_name, context: pseudo_user).on?).to be true
+        expect(ThisFeature.flag(flag_name, context: pseudo_user).off?).to be false
+      end
     end
 
     context "looking up a flag that is set to off" do
       before { adapter.off!(flag_name) }
 
       it { is_expected.to be(false) }
+
+      it 'is off for a specific user' do
+        expect(ThisFeature.flag(flag_name, context: pseudo_user).off?).to be true
+        expect(ThisFeature.flag(flag_name, context: pseudo_user).on?).to be false
+      end
     end
 
     context "when given a flag name and a user" do
@@ -130,14 +140,26 @@ RSpec.describe ThisFeature::Adapters::Memory do
 
     it { is_expected.to be(false) }
 
-    context 'when flag is enabled' do
+    context 'when flag is enabled globally' do
       before { adapter.on!(flag_name) }
 
       it { is_expected.to be(true) }
     end
 
-    context 'when flag is disabled' do
+    context 'when flag is enabled for a specific context' do
+      before { adapter.on!(flag_name, context: pseudo_user) }
+
+      it { is_expected.to be(true) }
+    end
+
+    context 'when flag is disabled globally' do
       before { adapter.off!(flag_name) }
+
+      it { is_expected.to be(true) }
+    end
+
+    context 'when flag is disabled for a specific context' do
+      before { adapter.off!(flag_name, context: pseudo_user) }
 
       it { is_expected.to be(true) }
     end
