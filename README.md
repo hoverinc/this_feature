@@ -58,8 +58,8 @@ end
 ThisFeature.flag('flag_name').on? # check if flag is turned on
 ThisFeature.flag('flag_name').off? # check if flag is turned off
 ThisFeature.flag('flag_name').control? # see if the adapter is using the control
-ThisFeature.flag('flag_name').on! # turn on the flagy
-ThisFeature.flag('flag_name').off! # turn off the flagy
+ThisFeature.flag('flag_name').on! # turn on the flag
+ThisFeature.flag('flag_name').off! # turn off the flag
 ```
 
 ### Context
