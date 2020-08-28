@@ -16,10 +16,10 @@ RSpec.describe ThisFeature::Adapters::Base do
     include_examples "examples for interface method", :on?, :some_flag_name, context: :fake_user, data: :stuff
     include_examples "examples for interface method", :off?, :some_flag_name
     include_examples "examples for interface method", :off?, :some_flag_name, context: :fake_user, data: :stuff
-    include_examples "examples for interface method", :on!, :some_flag_name
-    include_examples "examples for interface method", :on!, :some_flag_name, context: :fake_user, data: :stuff
-    include_examples "examples for interface method", :off!, :some_flag_name
-    include_examples "examples for interface method", :off!, :some_flag_name, context: :fake_user, data: :stuff
+    # include_examples "examples for interface method", :on!, :some_flag_name
+    # include_examples "examples for interface method", :on!, :some_flag_name, context: :fake_user, data: :stuff
+    # include_examples "examples for interface method", :off!, :some_flag_name
+    # include_examples "examples for interface method", :off!, :some_flag_name, context: :fake_user, data: :stuff
 
     it 'implements #control? and returns false by default' do
       expect(described_class.new.control?(:some_flag_name)).to eq(false)
