@@ -2,8 +2,8 @@ class ThisFeature
   module Adapters
     class Memory < Base
 
-      def initialize(context_id_method: :id)
-        @context_id_method = context_id_method
+      def initialize(context_key_method: nil)
+        @context_key_method = context_key_method
       end
 
       def clear
@@ -24,7 +24,7 @@ class ThisFeature
 
         flag_data[:contexts] ||= {}
 
-        !!flag_data[:contexts][context.send(@context_id_method)]
+        !!flag_data[:contexts][context_key(context)]
       end
 
       def off?(flag_name, context: nil, data: {})
@@ -41,7 +41,7 @@ class ThisFeature
         return storage[flag_name][:global] = true if context.nil?
 
         storage[flag_name][:contexts] ||= {}
-        storage[flag_name][:contexts][context.send(@context_id_method)] = true
+        storage[flag_name][:contexts][context_key(context)] = true
       end
 
       def off!(flag_name, context: nil, data: {})
@@ -50,11 +50,21 @@ class ThisFeature
         return storage[flag_name][:global] = false if context.nil?
 
         storage[flag_name][:contexts] ||= {}
-        storage[flag_name][:contexts][context.send(@context_id_method)] = false
+        storage[flag_name][:contexts][context_key(context)] = false
       end
 
       def storage
         @storage ||= {}
+      end
+
+      private
+
+      attr_reader :context_key_method
+
+      def context_key(context)
+        return context if context_key_method.nil?
+
+        context.send(context_key_method)
       end
     end
   end

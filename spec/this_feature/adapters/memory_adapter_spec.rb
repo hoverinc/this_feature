@@ -29,12 +29,22 @@ RSpec.describe ThisFeature::Adapters::Memory do
       before { adapter.on!(flag_name) }
 
       it { is_expected.to be(true) }
+
+      it 'is on for a specific user' do
+        expect(ThisFeature.flag(flag_name, context: pseudo_user).on?).to be true
+        expect(ThisFeature.flag(flag_name, context: pseudo_user).off?).to be false
+      end
     end
 
     context "looking up a flag that is set to off" do
       before { adapter.off!(flag_name) }
 
       it { is_expected.to be(false) }
+
+      it 'is off for a specific user' do
+        expect(ThisFeature.flag(flag_name, context: pseudo_user).off?).to be true
+        expect(ThisFeature.flag(flag_name, context: pseudo_user).on?).to be false
+      end
     end
 
     context "when given a flag name and a user" do
@@ -43,6 +53,23 @@ RSpec.describe ThisFeature::Adapters::Memory do
         expect(ThisFeature.flag(flag_name).on?).to be false
         expect(ThisFeature.flag(flag_name, context: pseudo_user2).on?).to be false
         expect(ThisFeature.flag(flag_name, context: pseudo_user).on?).to be true
+      end
+    end
+
+    context "when specifying context_key_method" do
+      let(:pseudo_user) { OpenStruct.new(name: 'user_1', id: "User:1") }
+      let(:pseudo_user2) { OpenStruct.new(name: 'user_2', id: "User:1") }
+      let(:pseudo_user3) { OpenStruct.new(name: 'user_1', id: "User:3") }
+      let(:context_key_method) { :id }
+
+      let(:adapter) { described_class.new(context_key_method: context_key_method) }
+
+      it 'uses the context key method to look up the flag status' do
+        adapter.on!(flag_name, context: pseudo_user)
+        expect(ThisFeature.flag(flag_name).on?).to be false
+        expect(ThisFeature.flag(flag_name, context: pseudo_user).on?).to be true
+        expect(ThisFeature.flag(flag_name, context: pseudo_user2).on?).to be true
+        expect(ThisFeature.flag(flag_name, context: pseudo_user3).on?).to be false
       end
     end
   end
@@ -76,6 +103,36 @@ RSpec.describe ThisFeature::Adapters::Memory do
         expect(ThisFeature.flag(flag_name, context: pseudo_user).off?).to be false
       end
     end
+
+    context "when specifying context_key_method" do
+      let(:pseudo_user) { OpenStruct.new(name: 'user_1', id: "User:1") }
+      let(:pseudo_user2) { OpenStruct.new(name: 'user_2', id: "User:1") }
+      let(:pseudo_user3) { OpenStruct.new(name: 'user_1', id: "User:3") }
+      let(:context_key_method) { :id }
+
+      let(:adapter) { described_class.new(context_key_method: context_key_method) }
+
+      context 'when the flag is on for a user' do
+        it 'uses the context key method to look up the flag status' do
+          adapter.on!(flag_name, context: pseudo_user)
+          expect(ThisFeature.flag(flag_name).off?).to be true
+          expect(ThisFeature.flag(flag_name, context: pseudo_user).off?).to be false
+          expect(ThisFeature.flag(flag_name, context: pseudo_user2).off?).to be false
+          expect(ThisFeature.flag(flag_name, context: pseudo_user3).off?).to be true
+        end
+      end
+
+      context 'when the flag is off for a user' do
+        it 'uses the context key method to look up the flag status' do
+          adapter.off!(flag_name, context: pseudo_user)
+          expect(ThisFeature.flag(flag_name).off?).to be true
+          expect(ThisFeature.flag(flag_name, context: pseudo_user).off?).to be true
+          expect(ThisFeature.flag(flag_name, context: pseudo_user2).off?).to be true
+          expect(ThisFeature.flag(flag_name, context: pseudo_user3).off?).to be true
+        end
+      end
+
+    end
   end
 
   describe '#present?' do
@@ -83,14 +140,26 @@ RSpec.describe ThisFeature::Adapters::Memory do
 
     it { is_expected.to be(false) }
 
-    context 'when flag is enabled' do
+    context 'when flag is enabled globally' do
       before { adapter.on!(flag_name) }
 
       it { is_expected.to be(true) }
     end
 
-    context 'when flag is disabled' do
+    context 'when flag is enabled for a specific context' do
+      before { adapter.on!(flag_name, context: pseudo_user) }
+
+      it { is_expected.to be(true) }
+    end
+
+    context 'when flag is disabled globally' do
       before { adapter.off!(flag_name) }
+
+      it { is_expected.to be(true) }
+    end
+
+    context 'when flag is disabled for a specific context' do
+      before { adapter.off!(flag_name, context: pseudo_user) }
 
       it { is_expected.to be(true) }
     end
