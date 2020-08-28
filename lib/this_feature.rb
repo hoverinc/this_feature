@@ -13,7 +13,7 @@ class ThisFeature
 
   def self.adapter_for(flag_name, context: nil, data: {})
     matching_adapter = adapters.find do |adapter|
-      adapter.present?(flag_name, context: context, data: data)
+      adapter.present?(flag_name)
     end
 
     matching_adapter || configuration.default_adapter
@@ -24,6 +24,8 @@ class ThisFeature
   end
 
   def self.configure
+    @configuration = Configuration.new
+
     yield(configuration)
 
     configuration.init
