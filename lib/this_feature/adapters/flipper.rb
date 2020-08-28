@@ -32,14 +32,6 @@ class ThisFeature
         !on_result
       end
 
-      # def on!(flag_name, context: nil, data: {})
-      #   client[flag_name].enable(*[context].compact)
-      # end
-
-      # def off!(flag_name, context: nil, data: {})
-      #   client[flag_name].disable(*[context].compact)
-      # end
-
       private
 
       def default_flipper_adapter
