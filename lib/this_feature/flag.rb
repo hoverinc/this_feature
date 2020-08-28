@@ -21,12 +21,12 @@ class ThisFeature
       adapter.control?(flag_name, context: context, data: data)
     end
 
-    def on!
-      adapter.on!(flag_name, context: context, data: data)
-    end
+    # def on!
+    #   adapter.on!(flag_name, context: context, data: data)
+    # end
 
-    def off!
-      adapter.off!(flag_name, context: context, data: data)
-    end
+    # def off!
+    #   adapter.off!(flag_name, context: context, data: data)
+    # end
   end
 end
