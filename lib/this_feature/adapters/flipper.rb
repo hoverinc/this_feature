@@ -22,7 +22,7 @@ class ThisFeature
           flipper[flag_name].exist?
         end
 
-        def control?(flag_name)
+        def control?(flag_name, **kwargs)
           !present?(flag_name)
         end
 
