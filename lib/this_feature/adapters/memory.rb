@@ -15,7 +15,6 @@ class ThisFeature
       end
 
       def on?(flag_name, context: nil, data: {})
-        # binding.pry
         return unless present?(flag_name)
 
         flag_data = storage[flag_name]

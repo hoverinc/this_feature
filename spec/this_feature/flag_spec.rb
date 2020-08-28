@@ -37,24 +37,4 @@ RSpec.describe ThisFeature::Flag do
 
     it { is_expected.to be(expected_return) }
   end
-
-  # describe '#on!' do
-  #   subject { flag.on! }
-
-  #   before do
-  #     expect(fake_adapter).to receive(:on!).with(flag_name, data: data, context: context).and_return(expected_return)
-  #   end
-
-  #   it { is_expected.to be(expected_return) }
-  # end
-
-  # describe '#off!' do
-  #   subject { flag.off! }
-
-  #   before do
-  #     expect(fake_adapter).to receive(:off!).with(flag_name, data: data, context: context).and_return(expected_return)
-  #   end
-
-  #   it { is_expected.to be(expected_return) }
-  # end
 end
