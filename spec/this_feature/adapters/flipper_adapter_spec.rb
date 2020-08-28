@@ -11,8 +11,15 @@ RSpec.describe ThisFeature::Adapters::Flipper do
   let(:pseudo_org2) { OpenStruct.new(flipper_id: "Org:2") }
 
   let(:adapter) { described_class.new }
+  let(:flag) { ThisFeature.flag(flag_name, context: context, data: data) }
 
-  describe("#initialize") do
+  before do
+    ThisFeature.configure do |config|
+      config.adapters = [adapter]
+    end
+  end
+
+  describe "#initialize" do
 
     context "when passed a custom client" do
       let(:fake_client) { "my fake client" }
@@ -32,8 +39,26 @@ RSpec.describe ThisFeature::Adapters::Flipper do
     end
   end
 
-  describe "#on?" do
-    subject(:on?) { adapter.on?(flag_name, context: context, data: data) }
+  describe "#present?" do
+    subject(:present?) { adapter.present?(flag_name) }
+
+    it { is_expected.to be(false) }
+
+    context 'when flag is enabled' do
+      before { Flipper[flag_name].enable }
+
+      it { is_expected.to be(true) }
+    end
+
+    context 'when flag is disabled' do
+      before { Flipper[flag_name].disable }
+
+      it { is_expected.to be(true) }
+    end
+  end
+
+  describe "on?" do
+    subject(:on?) { flag.on? }
 
     context "looking up a flag that doesnt exist" do
       it { is_expected.to be_nil }
@@ -72,8 +97,8 @@ RSpec.describe ThisFeature::Adapters::Flipper do
     end
   end
 
-  describe "#off?" do
-    subject(:off?) { adapter.off?(flag_name, context: context, data: data) }
+  describe "off?" do
+    subject(:off?) { flag.off? }
 
     context "looking up a flag that doesnt exist" do
       it "returns nil" do
@@ -114,26 +139,8 @@ RSpec.describe ThisFeature::Adapters::Flipper do
     end
   end
 
-  describe '#present?' do
-    subject(:present?) { adapter.present?(flag_name) }
-
-    it { is_expected.to be(false) }
-
-    context 'when flag is enabled' do
-      before { Flipper[flag_name].enable }
-
-      it { is_expected.to be(true) }
-    end
-
-    context 'when flag is disabled' do
-      before { Flipper[flag_name].disable }
-
-      it { is_expected.to be(true) }
-    end
-  end
-
-  describe "#control?" do
-    subject(:control?) { adapter.control?(flag_name) }
+  describe "control?" do
+    subject(:control?) { flag.control? }
 
     it { is_expected.to be(true) }
 
