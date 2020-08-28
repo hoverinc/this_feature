@@ -1,25 +1,16 @@
 # ThisFeature
 
-The purpose of ThisFeature is to have one way to use feature flags
+**A common interface to interact with many feature flag providers.**
+
+Can be used to more easily migrate among providers.
+
+If your code uses ThisFeature,
+then you can just swap out the adapter without having to do a bunch of find-and-replace.
 
 ## Installation
 
-Add this line to your application's `Gemfile`:
-
 ```ruby
 gem 'this_feature'
-```
-
-And then execute:
-
-```sh
-bundle
-```
-
-Or install it yourself as:
-
-```sh
-gem install this_feature
 ```
 
 ## Configuration
@@ -29,37 +20,21 @@ gem install this_feature
 require 'this_feature'
 
 ThisFeature.configure do |config|
-  config.adapters = [ThisFeature::Adapters::Memory]
+  config.adapters = [ThisFeature::Adapters::Memory.new]
   config.default_adapter = config.adapters.first
 end
 ```
 
 **NOTE**: When searching for the presence of a flag, adapters are queried in order. The default adapter is the fallback adapter used when a flag isn't present in any of the adapters.
 
-
-### With Flipper
-
-```ruby
-# config/initializers/this_feature.rb
-require 'this_feature/adapters/flipper'
-
-ThisFeature.configure do |config|
-  config.adapters = [ThisFeature::Adapters::Flipper]
-  config.default_adapter = config.adapters.first
-end
-```
-
-
-
 ## Usage
 
 ### Flags
 ```ruby
-ThisFeature.flag('flag_name').on? # check if flag is turned on
-ThisFeature.flag('flag_name').off? # check if flag is turned off
-ThisFeature.flag('flag_name').control? # see if the adapter is using the control
-ThisFeature.flag('flag_name').on! # turn on the flag
-ThisFeature.flag('flag_name').off! # turn off the flag
+ThisFeature.flag('flag_name').on?      # is the flag is turned on?
+ThisFeature.flag('flag_name').off?     # is the flag is turned off?
+ThisFeature.flag('flag_name').control? # is the adapter is using the control?
+ThisFeature.flag('flag_name').present? # is the flag set at all?
 ```
 
 ### Context
@@ -78,8 +53,11 @@ In case context is not sufficient, you can also pass a data hash.
 ThisFeature.flag('flag_name', context: context, data: { org_id: 1 }).on?
 ```
 
-## TODO: Write documentation for the adapters (creating adapters, using memory adapter, using flipper adapter)
+## Available Adapters
 
+- [Flipper](./docs/flipper.md)
+- [Split.io](./docs/splitio.md)
+- [Memory](./docs/memory.md) - **very helpful to use in tests**
 
 ## Development
 
@@ -90,6 +68,11 @@ You can run the tests with these commands in your Terminal:
 bundle install && bundle exec rspec
 ```
 
+To write a new adapter, check the [Guide](./docs/writing_an_adapter.md).
+
 ## License
 
 ThisFeature is released under the [MIT License](https://choosealicense.com/licenses/mit).
+
+
+
