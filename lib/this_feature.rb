@@ -19,8 +19,6 @@ class ThisFeature
     matching_adapter || configuration.default_adapter
   end
 
-  # Configuration
-
   def self.configuration
     @configuration ||= Configuration.new
   end
@@ -34,5 +32,4 @@ class ThisFeature
   def self.adapters
     configuration.adapters
   end
-
 end
