@@ -10,7 +10,7 @@ class ThisFeature
 
   class BadAdapterError < Error
     def initialize(adapter)
-      super("adapter #{adapter.name} doesn't inherit from ThisFeature::Adapters::Base")
+      super("adapter #{adapter.class.name} doesn't inherit from ThisFeature::Adapters::Base")
     end
   end
 

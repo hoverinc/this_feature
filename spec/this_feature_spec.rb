@@ -1,7 +1,7 @@
 RSpec.describe ThisFeature do
 
-  let(:fake_adapter) { described_class::Adapters::Fake }
-  let(:flipper_adapter) { described_class::Adapters::Flipper }
+  let(:fake_adapter) { described_class::Adapters::Fake.new }
+  let(:flipper_adapter) { described_class::Adapters::Flipper.new }
   let(:adapters) { [fake_adapter] }
   let(:flag_name) { :made_up_flag }
 
@@ -49,17 +49,8 @@ RSpec.describe ThisFeature do
 
   describe ".configure" do
     let(:adapters) { [fake_adapter, flipper_adapter] }
-    let(:bad_adapter) { described_class::Adapters::Base }
+    let(:bad_adapter) { described_class::Adapters::Base.new }
     let(:bad_adapters) { [bad_adapter] }
-    it "has setter which calls .setup on each adapter" do
-      adapters.each do |adapter|
-        expect(adapter).to receive(:setup)
-      end
-      described_class.configure do |configuration|
-        configuration.adapters = adapters
-      end
-      expect(described_class.adapters).to eq(adapters)
-    end
     it "wont accept any adapter that doesn't inherit from Base" do
       expect do
         described_class.configure do |configuration|
@@ -67,7 +58,7 @@ RSpec.describe ThisFeature do
         end
       end.to raise_error(described_class::BadAdapterError) do |err|
         expect(err.message).to eq(
-          "adapter #{bad_adapter.name} doesn't inherit from ThisFeature::Adapters::Base"
+          "adapter #{bad_adapter.class.name} doesn't inherit from ThisFeature::Adapters::Base"
         )
       end
     end
