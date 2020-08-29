@@ -7,8 +7,8 @@ require 'this_feature/version'
 Gem::Specification.new do |s|
   s.name          = 'this_feature-adapters-split_io'
   s.version       = ThisFeature::VERSION
-  s.authors       = ['Max Pleaner']
-  s.email         = ['maxpleaner@gmail.com']
+  s.authors       = ['Max Pleaner', 'Matt Fong']
+  s.email         = ['maxpleaner@gmail.com', 'matthewjf@gmail.com']
   s.homepage      = 'http://hover.to'
   s.licenses      = ['MIT']
   s.summary       = '[summary]'
