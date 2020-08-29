@@ -5,11 +5,10 @@ class ThisFeature
     class SplitIo < Base
       UNDEFINED_KEY = 'undefined_key'
 
-      def initialize(client:)
-        @client = client
+      def initialize(client: nil)
+        @client = client || default_split_client
+
         client.block_until_ready
-      rescue SplitIoClient::SDKBlockerTimeoutExpiredException
-        raise 'Split SDK is not ready. Abort execution.'
       end
 
       def present?(flag_name)
@@ -42,6 +41,10 @@ class ThisFeature
         end
 
         client.get_treatment(key, flag_name, data)
+      end
+
+      def default_split_client
+        SplitIoClient::SplitFactory.new(ENV['SPLIT_IO_AUTH_KEY']).client
       end
     end
   end
