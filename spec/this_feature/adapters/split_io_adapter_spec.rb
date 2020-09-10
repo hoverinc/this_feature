@@ -91,10 +91,8 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
   context 'without split client provided' do
     let(:adapter) { described_class.new }
     let(:client_double) { instance_double( SplitIoClient::SplitClient) }
-    let(:split_io_key) { SecureRandom.hex }
 
     before do
-      allow(ENV).to receive(:fetch).with('SPLIT_IO_AUTH_KEY').and_return(split_io_key)
       allow_any_instance_of(described_class).to receive(:default_split_client).and_return(client_double)
       allow(client_double).to receive(:block_until_ready)
 
