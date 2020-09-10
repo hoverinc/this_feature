@@ -3,12 +3,13 @@ require 'splitclient-rb'
 class ThisFeature
   module Adapters
     class SplitIo < Base
+      # used as treatment key when none is given, it's required by split
       UNDEFINED_KEY = 'undefined_key'
 
       def initialize(client: nil)
         @client = client || default_split_client
 
-        client.block_until_ready
+        @client.block_until_ready
       end
 
       def present?(flag_name)
@@ -44,7 +45,7 @@ class ThisFeature
       end
 
       def default_split_client
-        SplitIoClient::SplitFactory.new(ENV['SPLIT_IO_AUTH_KEY']).client
+        SplitIoClient::SplitFactory.new(ENV.fetch('SPLIT_IO_AUTH_KEY')).client
       end
     end
   end
