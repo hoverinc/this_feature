@@ -9,6 +9,7 @@ require_relative 'support/schema.rb'
 require_relative 'support/fake.rb'
 
 require 'this_feature/adapters/flipper'
+require 'this_feature/adapters/split_io'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

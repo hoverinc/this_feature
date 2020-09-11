@@ -5,10 +5,10 @@ $:.unshift File.expand_path('../lib', __FILE__)
 require 'this_feature/version'
 
 Gem::Specification.new do |s|
-  s.name          = 'this_feature-adapters-flipper'
+  s.name          = 'this_feature-adapters-split_io'
   s.version       = ThisFeature::VERSION
-  s.authors       = ['Max Pleaner']
-  s.email         = ['maxpleaner@gmail.com']
+  s.authors       = ['Max Pleaner', 'Matt Fong']
+  s.email         = ['maxpleaner@gmail.com', 'matthewjf@gmail.com']
   s.homepage      = 'http://hover.to'
   s.licenses      = ['MIT']
   s.summary       = '[summary]'
@@ -19,6 +19,5 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.add_runtime_dependency "this_feature"
-  s.add_runtime_dependency "flipper", "~> 0.16"
-  s.add_runtime_dependency "flipper-active_record", "~> 0.16"
+  s.add_runtime_dependency "splitclient-rb"
 end
