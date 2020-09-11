@@ -17,7 +17,7 @@ class ThisFeature
       end
 
       def control?(flag_name, context: UNDEFINED_KEY, data: {})
-        treatment(flag_name, context: context, data: data).eql?('control_treatment')
+        treatment(flag_name, context: context, data: data).include?('control')
       end
 
       def on?(flag_name, context: UNDEFINED_KEY, data: {})
