@@ -1,12 +1,12 @@
 PATH
   remote: .
   specs:
-    this_feature (0.4.0)
-    this_feature-adapters-flipper (0.4.0)
+    this_feature (0.4.1)
+    this_feature-adapters-flipper (0.4.1)
       flipper (~> 0.16)
       flipper-active_record (~> 0.16)
       this_feature
-    this_feature-adapters-split_io (0.4.0)
+    this_feature-adapters-split_io (0.4.1)
       splitclient-rb
       this_feature
 
@@ -58,7 +58,7 @@ GEM
       byebug (~> 11.0)
       pry (~> 0.13.0)
     rake (13.0.1)
-    redis (4.2.1)
+    redis (4.2.2)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
