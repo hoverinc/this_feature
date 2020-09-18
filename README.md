@@ -24,19 +24,6 @@ gem install this_feature
 
 ## Configuration
 
-```ruby
-# config/initializers/this_feature.rb
-require 'this_feature'
-
-ThisFeature.configure do |config|
-  config.adapters = [ThisFeature::Adapters::Memory]
-  config.default_adapter = config.adapters.first
-end
-```
-
-**NOTE**: When searching for the presence of a flag, adapters are queried in order. The default adapter is the fallback adapter used when a flag isn't present in any of the adapters.
-
-
 ### With Flipper
 
 ```ruby
@@ -44,12 +31,13 @@ end
 require 'this_feature/adapters/flipper'
 
 ThisFeature.configure do |config|
-  config.adapters = [ThisFeature::Adapters::Flipper]
-  config.default_adapter = config.adapters.first
+  flipper_adapter = ThisFeature::Adapters::Flipper.new
+  config.adapters = [flipper_adapter]
+  config.default_adapter = flipper_adapter
 end
 ```
 
-
+**NOTE**: When searching for the presence of a flag, adapters are queried in order. The default adapter is the fallback adapter used when a flag isn't present in any of the adapters.
 
 ## Usage
 
