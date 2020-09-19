@@ -41,8 +41,6 @@ ThisFeature.flag('flag_name').present? # is the flag set at all?
 ThisFeature.default_adapter            # access the default adapter directly if needed
 ```
 
-See more info in the documentation for the individual adapters below
-
 ### Context
 
 You can also pass a context to the flag, many feature flagging systems support this.
@@ -61,9 +59,11 @@ ThisFeature.flag('flag_name', context: context, data: { org_id: 1 }).on?
 
 ## Available Adapters
 
-- [Flipper](./docs/flipper.md)
-- [Split.io](./docs/splitio.md)
-- [Memory](./docs/memory.md) - **very helpful to use in tests**
+These adapters do behave slightly differently, so make sure to read the following docs:
+
+- [Flipper adapter](./docs/flipper.md)
+- [Split.io adapter](./docs/splitio.md)
+- [Memory adapter](./docs/memory.md) - **very helpful to use in tests**
 
 ## Development
 
