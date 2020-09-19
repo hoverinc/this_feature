@@ -18,6 +18,7 @@ gem 'this_feature'
 ```ruby
 # config/initializers/this_feature.rb
 require 'this_feature'
+require 'this_feature/adapters/memory'
 
 ThisFeature.configure do |config|
   adapter = ThisFeature::Adapters::Memory.new
