@@ -20,8 +20,9 @@ gem 'this_feature'
 require 'this_feature'
 
 ThisFeature.configure do |config|
-  config.adapters = [ThisFeature::Adapters::Memory.new]
-  config.default_adapter = config.adapters.first
+  adapter = ThisFeature::Adapters::Memory.new
+  config.adapters = [adapter]
+  config.default_adapter = adapter
 end
 ```
 
@@ -30,12 +31,16 @@ end
 ## Usage
 
 ### Flags
+
 ```ruby
 ThisFeature.flag('flag_name').on?      # is the flag is turned on?
 ThisFeature.flag('flag_name').off?     # is the flag is turned off?
 ThisFeature.flag('flag_name').control? # is the adapter is using the control?
 ThisFeature.flag('flag_name').present? # is the flag set at all?
+ThisFeature.default_adapter            # access the default adapter directly if needed
 ```
+
+See more info in the documentation for the individual adapters below
 
 ### Context
 
