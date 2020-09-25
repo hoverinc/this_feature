@@ -12,8 +12,6 @@ class ThisFeature
   end
 
   def self.adapter_for(flag_name, context: nil, data: {})
-    return configuration.test_adapter if configuration.test_adapter
-
     matching_adapter = adapters.find do |adapter|
       adapter.present?(flag_name)
     end

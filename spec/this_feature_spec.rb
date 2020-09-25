@@ -9,6 +9,13 @@ RSpec.describe ThisFeature do
     expect(described_class::VERSION).not_to be nil
   end
 
+  describe '.test_adapter' do
+    it "delegates to configuration.test_adapter" do
+      described_class.configuration.test_adapter = double("adapter")
+      expect(described_class.test_adapter).to eq(described_class.configuration.test_adapter)
+    end
+  end
+
   describe '.adapter_for' do
     subject(:returned_adapter) { described_class.adapter_for(flag_name) }
 
@@ -60,6 +67,25 @@ RSpec.describe ThisFeature do
         expect(err.message).to eq(
           "adapter #{bad_adapter.class.name} doesn't inherit from ThisFeature::Adapters::Base"
         )
+      end
+    end
+    context "test_adapter" do
+      it "defaults to a memory adapter" do
+        described_class.configure do |config|
+          config.test_adapter = nil # wipe out the value
+          config.adapters = [config.test_adapter] # so the custom reader logic is used
+        end
+        expect(described_class.configuration.test_adapter).to be_a(
+          described_class::Adapters::Memory
+        )
+      end
+      it "can be set to a custom value" do
+        adapter = described_class::Adapters::Memory.new
+        described_class.configure do |config|
+          config.test_adapter = adapter
+          config.adapters = [adapter]
+        end
+        expect(described_class.configuration.test_adapter).to eq(adapter)
       end
     end
   end
