@@ -34,4 +34,8 @@ class ThisFeature
   def self.adapters
     configuration.adapters
   end
+
+  def self.test_adapter
+    configuration.test_adapter
+  end
 end

@@ -1,11 +1,6 @@
 class ThisFeature
   module Adapters
     class Base
-
-      def setup
-        raise UnimplementedError.new(self, __method__)
-      end
-
       def present?(flag_name)
         raise UnimplementedError.new(self, __method__)
       end
