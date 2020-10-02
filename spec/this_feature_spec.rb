@@ -58,6 +58,15 @@ RSpec.describe ThisFeature do
     let(:adapters) { [fake_adapter, flipper_adapter] }
     let(:bad_adapter) { described_class::Adapters::Base.new }
     let(:bad_adapters) { [bad_adapter] }
+
+    it "raises an error if no adapters are given" do
+      expect do
+        described_class.configure { }
+      end.to raise_error(described_class::NoAdaptersError) do |err|
+        expect(err.message).to eq("No adapters configured.")
+      end
+    end
+
     it "wont accept any adapter that doesn't inherit from Base" do
       expect do
         described_class.configure do |configuration|
@@ -69,6 +78,7 @@ RSpec.describe ThisFeature do
         )
       end
     end
+
     context "test_adapter" do
       it "defaults to a memory adapter" do
         described_class.configure do |config|
@@ -79,6 +89,7 @@ RSpec.describe ThisFeature do
           described_class::Adapters::Memory
         )
       end
+
       it "can be set to a custom value" do
         adapter = described_class::Adapters::Memory.new
         described_class.configure do |config|

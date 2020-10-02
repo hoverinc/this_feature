@@ -14,9 +14,9 @@ class ThisFeature
     end
   end
 
-  class NoWriteAdapter < Error
+  class NoAdaptersError < Error
     def initialize
-      super("Use the `ThisFeature.write_adapter=` setter before calling #enable or #disable")
+      super("No adapters configured.")
     end
   end
 
