@@ -37,7 +37,7 @@ require 'this_feature/adapters/memory'
 ThisFeature.configure do |config|
   config.test_adapter = ThisFeature::Adapters::Memory.new
   config.adapters = [config.test_adapter]
-  config.default_adapter = [config.test_adapter]
+  config.default_adapter = config.test_adapter
 end
 ```
 
