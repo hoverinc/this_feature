@@ -1,5 +1,24 @@
 # ThisFeature - Memory Adapter
 
+## Synopsis
+
+Under the hood, the memory adapter stores data in a dictionary like so:
+
+```
+{
+  some_flag_name: {
+    global: false,
+    contexts: {
+      User1: true,
+      User2: false
+    }
+  }
+}
+```
+
+Since it doesn't require actual DB lookups, it's faster, and works well for use
+in test suites.
+
 ## Installation
 
 This adapter is included with the core gem:
@@ -16,9 +35,9 @@ require 'this_feature'
 require 'this_feature/adapters/memory'
 
 ThisFeature.configure do |config|
-  adapter = ThisFeature::Adapters::Memory.new
-  config.adapters = [adapter]
-  config.default_adapter = adapter
+  config.test_adapter = ThisFeature::Adapters::Memory.new
+  config.adapters = [config.test_adapter]
+  config.default_adapter = [config.test_adapter]
 end
 ```
 
@@ -26,8 +45,9 @@ The initializer takes an optional `context_key_method` argument. This is only re
 it specifies a method name which should be called on the context object to determine its identity.
 For example:
 
-```
-# Say you have this method which you want to use as the "identity" of a context object:
+```ruby
+# Say you have this method which you want to use as the "identity"
+# of a context object (e.g. imagine this module is included onto User)
 module FeatureFlaggable
   def this_feature_id
     "#{self.class}-#{self.id}"
@@ -48,7 +68,8 @@ The `context` argument is supported, but not `data`.
 
 Read the following notes as well:
 
-- **on?** / **off?**: Under the hood, calls `flipper_id` method on the `context`, if one was given.
+- **on?** / **off?**: If passed a `context` argument, uses the aformentioned logic
+(`context_key_method`) to determine how it's handled.
 
 - **control?** is not yet implemented
 
@@ -60,6 +81,6 @@ Usage example of these:
 
 ```
 # If you have configured the in-memory adapter as the default
-ThisFeature.default_adapter.on!(:flag_name, context: user) # with context
-ThisFeature.default_adapter.off!(:flag_name)               # without context
+ThisFeature.test_adapter.on!(:flag_name, context: user) # with context
+ThisFeature.test_adapter.off!(:flag_name)               # without context
 ```
