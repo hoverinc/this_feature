@@ -63,7 +63,7 @@ These adapters do behave slightly differently, so make sure to read the followin
 
 - [Flipper adapter](./docs/flipper.md)
 - [Split.io adapter](./docs/splitio.md)
-- [Memory adapter](./docs/memory.md) - **very helpful to use in tests**
+- [Memory adapter](./docs/memory.md) - **designed for use in tests**
 
 ## Development
 
