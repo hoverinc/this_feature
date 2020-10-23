@@ -4,7 +4,7 @@
 
 Under the hood, the memory adapter stores data in a dictionary like so:
 
-```
+```json
 {
   some_flag_name: {
     global: false,
@@ -60,6 +60,8 @@ ThisFeature::Adapters::Memory.new(context_key_method: :this_feature_id)
 
 If this option is ommitted, then the context object uses its `self` as its "identity".
 
+**See below for example of how to use on! and off! from tests**
+
 ## API
 
 The Memory adapter supports the public API of `ThisFeature`.
@@ -79,7 +81,7 @@ We also support two additional methods here that aren't present on the main adap
 
 Usage example of these:
 
-```
+```ruby
 # If you have configured the in-memory adapter as the default
 ThisFeature.test_adapter.on!(:flag_name, context: user) # with context
 ThisFeature.test_adapter.off!(:flag_name)               # without context
