@@ -19,17 +19,11 @@ class ThisFeature
       end
 
       def on?(flag_name, context: nil, data: {})
-        return unless present?(flag_name)
-
         client[flag_name].enabled?(*[context].compact)
       end
 
       def off?(flag_name, context: nil, data: {})
-        on_result = on?(flag_name, context: context)
-
-        return if on_result.nil?
-
-        !on_result
+        !on?(flag_name, context: context)
       end
 
       private
