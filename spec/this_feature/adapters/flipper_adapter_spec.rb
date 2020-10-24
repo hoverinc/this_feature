@@ -61,7 +61,7 @@ RSpec.describe ThisFeature::Adapters::Flipper do
     subject(:on?) { flag.on? }
 
     context "looking up a flag that doesnt exist" do
-      it { is_expected.to be_nil }
+      it { is_expected.to be false }
     end
 
     context "looking up a flag that is set to on" do
@@ -101,8 +101,8 @@ RSpec.describe ThisFeature::Adapters::Flipper do
     subject(:off?) { flag.off? }
 
     context "looking up a flag that doesnt exist" do
-      it "returns nil" do
-        expect(subject).to be_nil
+      it "returns true" do
+        expect(subject).to be true
       end
     end
 
