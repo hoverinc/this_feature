@@ -15,7 +15,7 @@ class ThisFeature
       end
 
       def on?(flag_name, context: nil, data: {})
-        return unless present?(flag_name)
+        return false unless present?(flag_name)
 
         flag_data = storage[flag_name]
 
@@ -28,11 +28,7 @@ class ThisFeature
       end
 
       def off?(flag_name, context: nil, data: {})
-        on_result = on?(flag_name, context: context)
-
-        return if on_result.nil?
-
-        !on_result
+        !on?(flag_name, context: context, data: data)
       end
 
       def on!(flag_name, context: nil, data: {})
