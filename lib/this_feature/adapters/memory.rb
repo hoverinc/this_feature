@@ -28,7 +28,7 @@ class ThisFeature
       end
 
       def off?(flag_name, context: nil, data: {})
-        !on?(flag_name, context: context)
+        !on?(flag_name, context: context, data: data)
       end
 
       def on!(flag_name, context: nil, data: {})
