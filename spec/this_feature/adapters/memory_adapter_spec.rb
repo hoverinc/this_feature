@@ -22,7 +22,7 @@ RSpec.describe ThisFeature::Adapters::Memory do
     subject(:on?) { flag.on? }
 
     context "looking up a flag that doesnt exist" do
-      it { is_expected.to be_nil }
+      it { is_expected.to be(false) }
     end
 
     context "looking up a flag that is set to on" do
@@ -79,7 +79,7 @@ RSpec.describe ThisFeature::Adapters::Memory do
 
     context "looking up a flag that doesnt exist" do
       it "returns nil" do
-        expect(subject).to be_nil
+        expect(subject).to be(true)
       end
     end
 

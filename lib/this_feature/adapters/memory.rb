@@ -30,7 +30,7 @@ class ThisFeature
       def off?(flag_name, context: nil, data: {})
         on_result = on?(flag_name, context: context)
 
-        return if on_result.nil?
+        return true if on_result.nil?
 
         !on_result
       end
