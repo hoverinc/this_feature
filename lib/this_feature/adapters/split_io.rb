@@ -6,8 +6,9 @@ class ThisFeature
       # used as treatment key when none is given, it's required by split
       UNDEFINED_KEY = 'undefined_key'
 
-      def initialize(client: nil)
+      def initialize(client: nil, context_key_method: nil)
         @client = client || default_split_client
+        @context_key_method = context_key_method
 
         @client.block_until_ready
       end
@@ -30,18 +31,18 @@ class ThisFeature
 
       private
 
-      attr_reader :client
+      attr_reader :client, :context_key_method
 
       def treatment(flag_name, context: UNDEFINED_KEY, data: {})
-        key = if context.nil?
-          UNDEFINED_KEY
-        elsif context.respond_to?(:to_s)
-          context.to_s
-        else
-          context
-        end
+        client.get_treatment(context_key(context), flag_name, data)
+      end
 
-        client.get_treatment(key, flag_name, data)
+      def context_key(context)
+        return UNDEFINED_KEY if context.nil? || context.eql?(UNDEFINED_KEY)
+        return context.send(context_key_method) unless context_key_method.nil?
+        return context.to_s if context.respond_to?(:to_s)
+
+        context
       end
 
       def default_split_client
