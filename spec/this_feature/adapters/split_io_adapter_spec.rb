@@ -103,4 +103,47 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
       expect(adapter.send(:client)).to eq(client_double)
     end
   end
+
+  context 'with context key method' do
+    let(:adapter) { described_class.new(client: split_client, context_key_method: :context_key) }
+    let(:context) { OpenStruct.new(context_key: context_value) }
+    let(:context_value) { '1' }
+    let(:another_context) { OpenStruct.new }
+
+    let(:flag_name) { :partially_on_feature }
+
+    before(:each) do
+      ThisFeature.configure do |config|
+        config.adapters = [adapter]
+      end
+    end
+
+    context 'when turned on for specific keys' do
+      it 'is uses the context key method to look up the context key' do
+        expect(ThisFeature.flag(flag_name).on?).to be false
+        expect(ThisFeature.flag(flag_name).off?).to be false
+        expect(ThisFeature.flag(flag_name).control?).to be true
+
+        expect(ThisFeature.flag(flag_name, context: context).on?).to be true
+        expect(ThisFeature.flag(flag_name, context: context).off?).to be false
+        expect(ThisFeature.flag(flag_name, context: context).control?).to be false
+
+        expect(ThisFeature.flag(flag_name, context: another_context).on?).to be false
+        expect(ThisFeature.flag(flag_name, context: another_context).off?).to be false
+        expect(ThisFeature.flag(flag_name, context: another_context).control?).to be true
+
+        expect(ThisFeature.flag(flag_name, context: context, data: { a: :b }).on?).to be true
+        expect(ThisFeature.flag(flag_name, context: context, data: { a: :b }).off?).to be false
+        expect(ThisFeature.flag(flag_name, context: context, data: { a: :b }).control?).to be false
+      end
+    end
+
+    context "when context doesn't respond to context key method" do
+      let(:context) { 'some string' }
+
+      it 'raises an exception' do
+        expect { ThisFeature.flag(flag_name, context: context).on? }.to raise_error(NoMethodError)
+      end
+    end
+  end
 end
