@@ -118,7 +118,7 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
       end
     end
 
-   context 'when turned on for specific keys' do
+    context 'when turned on for specific keys' do
       it 'is uses the context key method to look up the context key' do
         expect(ThisFeature.flag(flag_name).on?).to be false
         expect(ThisFeature.flag(flag_name).off?).to be false
@@ -138,7 +138,7 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
       end
     end
 
-    context 'when context doesn\'t respond to context key method' do
+    context "when context doesn't respond to context key method" do
       let(:context) { 'some string' }
 
       it 'raises an exception' do
