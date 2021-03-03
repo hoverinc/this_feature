@@ -4,8 +4,8 @@ RSpec.describe ThisFeature::Adapters::Memory do
   let(:context) { nil }
   let(:data) { {} }
 
-  let(:pseudo_user) { OpenStruct.new(id: "User:1") }
-  let(:pseudo_user2) { OpenStruct.new(id: "User:2") }
+  let(:pseudo_user) { OpenStruct.new(id: 'User:1') }
+  let(:pseudo_user2) { OpenStruct.new(id: 'User:2') }
 
   let(:adapter) { described_class.new }
   let(:flag) { ThisFeature.flag(flag_name, context: context, data: data) }
@@ -18,14 +18,14 @@ RSpec.describe ThisFeature::Adapters::Memory do
     end
   end
 
-  describe "on?" do
+  describe 'on?' do
     subject(:on?) { flag.on? }
 
-    context "looking up a flag that doesnt exist" do
+    context "looking up a flag that doesn't exist" do
       it { is_expected.to be(false) }
     end
 
-    context "looking up a flag that is set to on" do
+    context 'looking up a flag that is set to on' do
       before { adapter.on!(flag_name) }
 
       it { is_expected.to be(true) }
@@ -36,7 +36,7 @@ RSpec.describe ThisFeature::Adapters::Memory do
       end
     end
 
-    context "looking up a flag that is set to off" do
+    context 'looking up a flag that is set to off' do
       before { adapter.off!(flag_name) }
 
       it { is_expected.to be(false) }
@@ -47,8 +47,8 @@ RSpec.describe ThisFeature::Adapters::Memory do
       end
     end
 
-    context "when given a flag name and a user" do
-      it "qualifies the search" do
+    context 'when given a flag name and a user' do
+      it 'qualifies the search' do
         adapter.on!(flag_name, context: pseudo_user)
         expect(ThisFeature.flag(flag_name).on?).to be false
         expect(ThisFeature.flag(flag_name, context: pseudo_user2).on?).to be false
@@ -56,10 +56,10 @@ RSpec.describe ThisFeature::Adapters::Memory do
       end
     end
 
-    context "when specifying context_key_method" do
-      let(:pseudo_user) { OpenStruct.new(name: 'user_1', id: "User:1") }
-      let(:pseudo_user2) { OpenStruct.new(name: 'user_2', id: "User:1") }
-      let(:pseudo_user3) { OpenStruct.new(name: 'user_1', id: "User:3") }
+    context 'when specifying context_key_method' do
+      let(:pseudo_user) { OpenStruct.new(name: 'user_1', id: 'User:1') }
+      let(:pseudo_user2) { OpenStruct.new(name: 'user_2', id: 'User:1') }
+      let(:pseudo_user3) { OpenStruct.new(name: 'user_1', id: 'User:3') }
       let(:context_key_method) { :id }
 
       let(:adapter) { described_class.new(context_key_method: context_key_method) }
@@ -74,10 +74,10 @@ RSpec.describe ThisFeature::Adapters::Memory do
     end
   end
 
-  describe "off?" do
+  describe 'off?' do
     subject(:off?) { flag.off? }
 
-    context "looking up a flag that doesnt exist" do
+    context "looking up a flag that doesn't exist" do
       it "returns nil" do
         expect(subject).to be(true)
       end
@@ -89,14 +89,14 @@ RSpec.describe ThisFeature::Adapters::Memory do
       it { is_expected.to be(true) }
     end
 
-    context "looking up a flag that is set to on" do
+    context 'looking up a flag that is set to on' do
       before { adapter.on!(flag_name) }
 
       it { is_expected.to be(false) }
     end
 
-    context "when given a flag name and a user" do
-      it "qualifies the search" do
+    context 'when given a flag name and a user' do
+      it 'qualifies the search' do
         adapter.on!(flag_name, context: pseudo_user)
         expect(ThisFeature.flag(flag_name).off?).to be true
         expect(ThisFeature.flag(flag_name, context: pseudo_user2).off?).to be true
@@ -104,10 +104,10 @@ RSpec.describe ThisFeature::Adapters::Memory do
       end
     end
 
-    context "when specifying context_key_method" do
-      let(:pseudo_user) { OpenStruct.new(name: 'user_1', id: "User:1") }
-      let(:pseudo_user2) { OpenStruct.new(name: 'user_2', id: "User:1") }
-      let(:pseudo_user3) { OpenStruct.new(name: 'user_1', id: "User:3") }
+    context 'when specifying context_key_method' do
+      let(:pseudo_user) { OpenStruct.new(name: 'user_1', id: 'User:1') }
+      let(:pseudo_user2) { OpenStruct.new(name: 'user_2', id: 'User:1') }
+      let(:pseudo_user3) { OpenStruct.new(name: 'user_1', id: 'User:3') }
       let(:context_key_method) { :id }
 
       let(:adapter) { described_class.new(context_key_method: context_key_method) }
@@ -132,6 +132,26 @@ RSpec.describe ThisFeature::Adapters::Memory do
         end
       end
 
+    end
+  end
+
+  describe 'control?' do
+    subject(:control?) { flag.control? }
+
+    context "when the flag doesn't exist" do
+      it 'returns true' do
+        expect(control?).to be true
+      end
+    end
+
+    context "when the flag exists" do
+      before do
+        adapter.on!(flag_name, context: pseudo_user)
+      end
+
+      it 'returns false' do
+        expect(control?).to be false
+      end
     end
   end
 
