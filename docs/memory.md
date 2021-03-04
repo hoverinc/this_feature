@@ -4,7 +4,7 @@
 
 Under the hood, the memory adapter stores data in a dictionary like so:
 
-```json
+```ruby
 {
   some_flag_name: {
     global: false,
@@ -41,7 +41,7 @@ ThisFeature.configure do |config|
 end
 ```
 
-The initializer takes an optional `context_key_method` argument. This is only relevant when using `context` - 
+The initializer takes an optional `context_key_method` argument. This is only relevant when using `context` -
 it specifies a method name which should be called on the context object to determine its identity.
 For example:
 
@@ -66,18 +66,10 @@ If this option is ommitted, then the context object uses its `self` as its "iden
 
 The Memory adapter supports the public API of `ThisFeature`.
 
-The `context` argument is supported, but not `data`.
+### **#on? / #off?**
 
-Read the following notes as well:
-
-- **on?** / **off?**: If passed a `context` argument, uses the aformentioned logic
+If passed a `context` argument, uses the aformentioned logic
 (`context_key_method`) to determine how it's handled.
-
-- **control?** is not yet implemented
-
-We also support two additional methods here that aren't present on the main adapter yet:
-
-- **on!** / **off!**
 
 Usage example of these:
 
@@ -85,4 +77,12 @@ Usage example of these:
 # If you have configured the in-memory adapter as the default
 ThisFeature.test_adapter.on!(:flag_name, context: user) # with context
 ThisFeature.test_adapter.off!(:flag_name)               # without context
+```
+
+### **#clear**
+
+Since the memory adapter stores flags in memory, it won't automatically get cleaned up in your tests. You can use this method to reset the memory adapter state.
+
+```ruby
+ThisFeature.test_adapter.clear
 ```
