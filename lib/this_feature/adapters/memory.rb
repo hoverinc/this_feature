@@ -31,6 +31,10 @@ class ThisFeature
         !on?(flag_name, context: context, data: data)
       end
 
+      def control?(flag_name, **kwargs)
+        !present?(flag_name)
+      end
+
       def on!(flag_name, context: nil, data: {})
         storage[flag_name] ||= {}
 

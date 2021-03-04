@@ -1,12 +1,12 @@
 PATH
   remote: .
   specs:
-    this_feature (0.6.0)
-    this_feature-adapters-flipper (0.6.0)
+    this_feature (0.6.1)
+    this_feature-adapters-flipper (0.6.1)
       flipper (~> 0.16)
       flipper-active_record (~> 0.16)
       this_feature
-    this_feature-adapters-split_io (0.6.0)
+    this_feature-adapters-split_io (0.6.1)
       splitclient-rb
       this_feature
 
@@ -78,7 +78,7 @@ GEM
     ruby2_keywords (0.0.4)
     socketry (0.5.1)
       hitimes (~> 1.2)
-    splitclient-rb (7.2.2)
+    splitclient-rb (7.2.3)
       concurrent-ruby (~> 1.0)
       faraday (>= 0.8)
       json (>= 1.8)
