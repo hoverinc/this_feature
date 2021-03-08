@@ -6,9 +6,10 @@ class ThisFeature
       # used as treatment key when none is given, it's required by split
       UNDEFINED_KEY = 'undefined_key'
 
-      def initialize(client: nil, context_key_method: nil)
+      def initialize(client: nil, context_key_method: nil, data_hash_method: nil)
         @client = client || default_split_client
         @context_key_method = context_key_method
+        @data_hash_method = data_hash_method
 
         @client.block_until_ready
       end
@@ -31,10 +32,10 @@ class ThisFeature
 
       private
 
-      attr_reader :client, :context_key_method
+      attr_reader :client, :context_key_method, :data_hash_method
 
       def treatment(flag_name, context: UNDEFINED_KEY, data: {})
-        client.get_treatment(context_key(context), flag_name, data)
+        client.get_treatment(context_key(context), flag_name, data_hash(data, context))
       end
 
       def context_key(context)
@@ -43,6 +44,14 @@ class ThisFeature
         return context.to_s if context.respond_to?(:to_s)
 
         context
+      end
+
+      def data_hash(data, context)
+        if context.present? && data_hash_method.present?
+          return context.send(data_hash_method).merge(data)
+        end
+
+        data
       end
 
       def default_split_client
