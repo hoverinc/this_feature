@@ -75,6 +75,16 @@ These adapters do behave slightly differently, so make sure to read the followin
 - [Split.io adapter](./docs/splitio.md)
 - [Memory adapter](./docs/memory.md) - **designed for use in tests**
 
+### Needed Adapters
+
+We'd like to add more adapters for more vendors.
+If you're using a different backend and write your own adapter,
+please submit a pull request to upstream that adaptor into this repo.
+
+- Launch Darkly
+- YAML files
+- ...
+
 ## Development
 
 The tests are a good reflection of the current development state.
