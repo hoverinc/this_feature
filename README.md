@@ -43,7 +43,7 @@ ThisFeature.default_adapter            # access the default adapter directly if 
 
 ### Context
 
-You can also pass a context to the flag, many feature flagging systems support this.
+You can also pass a `context` to the flag, many feature flagging systems support this.
 
 ```ruby
 ThisFeature.flag('flag_name', context: current_user).on?
@@ -51,7 +51,7 @@ ThisFeature.flag('flag_name', context: current_user).on?
 
 ### Data
 
-In case context is not sufficient, you can also pass a data hash.
+In case `context` is not sufficient, you can also pass a `data` hash.
 
 ```ruby
 ThisFeature.flag('flag_name', context: context, data: { org_id: 1 }).on?
