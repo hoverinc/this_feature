@@ -1,11 +1,12 @@
-# ThisFeature
+# c
 
 **A common interface to interact with many feature flag providers.**
 
-Can be used to more easily migrate among providers.
+ThisFeature can be used to more easily migrate from one feature flag service to another
 
 If your code uses ThisFeature,
-then you can just swap out the adapter without having to do a bunch of find-and-replace.
+then you can just swap out the vendor adapter without needing to do a bunch of find-and-replace in your codebase
+from one vendor's class/method signature to the another's.
 
 ## Installation
 
