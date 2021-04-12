@@ -10,12 +10,14 @@ from one vendor's class/method signature to the another's.
 
 ## Installation
 
-Add ThisFeature to your `Gemfile`, then `bundle install`.
+Add ThisFeature to your `Gemfile`:
 
 ```ruby
 # Gemfile
 gem 'this_feature'
 ```
+
+Then from your Rails app's root directory:
 
 ```sh
 bundle install
