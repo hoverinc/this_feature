@@ -10,8 +10,15 @@ from one vendor's class/method signature to the another's.
 
 ## Installation
 
+Add ThisFeature to your `Gemfile`, then `bundle install`.
+
 ```ruby
+# Gemfile
 gem 'this_feature'
+```
+
+```sh
+bundle install
 ```
 
 ## Configuration
