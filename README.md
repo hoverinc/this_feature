@@ -47,7 +47,6 @@ end
 ThisFeature.flag('flag_name').on?      # is the flag is turned on?
 ThisFeature.flag('flag_name').off?     # is the flag is turned off?
 ThisFeature.flag('flag_name').control? # is the adapter using the control?
-ThisFeature.flag('flag_name').present? # is the flag set at all?
 ThisFeature.default_adapter            # access the default adapter directly if needed
 ```
 
