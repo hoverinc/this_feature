@@ -86,8 +86,8 @@ please submit a pull request to upstream that adaptor into this repo.
 
 ### Avoid Pitfalls
 
-1. If your flag has context-specific rules (e.g. on for some orgs, off for others), make sure that the code does a context-specific check. `ThisFeature.flag(:foo).on?` may return true, while `ThisFeature.flag(:foo, context: Org.first)` would return false. 
-2. Related to the previous bullet point, if you are checking whether a flag is "globally enabled" (and thus may be removed from the codebase), do not just use `ThisFeature.flag(:foo).on?`, it won't tell you the whole story.  Go to the vendor console and check whether there are context-specific rules enabled.
+1. If your flag has context-specific rules (e.g. on for some orgs, off for others), make sure that the code does a context-specific check. `ThisFeature.flag("foo").on?` may return true, while `ThisFeature.flag("foo", context: Org.first)` would return false. 
+2. Related to the previous bullet point, if you are checking whether a flag is "globally enabled" (and thus may be removed from the codebase), do not just use `ThisFeature.flag("foo").on?`, it won't tell you the whole story.  Go to the vendor console and check whether there are context-specific rules enabled.
 
 ## Development
 
