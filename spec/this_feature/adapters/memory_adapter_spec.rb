@@ -102,6 +102,30 @@ RSpec.describe ThisFeature::Adapters::Memory do
         expect(ThisFeature.flag(flag_name, context: pseudo_user2).off?).to be true
         expect(ThisFeature.flag(flag_name, context: pseudo_user).off?).to be false
       end
+
+      context "when the flag is globally on but turned off for a specific user" do
+        before do
+          adapter.on!(flag_name)
+          adapter.off!(flag_name, context: pseudo_user)
+        end
+
+        it "returns off when queried with that user as context" do
+          expect(ThisFeature.flag(flag_name).on?).to be true
+          expect(ThisFeature.flag(flag_name, context: pseudo_user).on?).to be false
+        end
+      end
+
+      context "when the flag is globally off but turned on for a specific user" do
+        before do
+          adapter.off!(flag_name)
+          adapter.on!(flag_name, context: pseudo_user)
+        end
+
+        it "returns off when queried with that user as context" do
+          expect(ThisFeature.flag(flag_name).on?).to be false
+          expect(ThisFeature.flag(flag_name, context: pseudo_user).on?).to be true
+        end
+      end
     end
 
     context 'when specifying context_key_method' do

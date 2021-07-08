@@ -19,11 +19,12 @@ class ThisFeature
 
         flag_data = storage[flag_name]
 
-        return true if flag_data[:global]
+        context_registered = flag_data[:contexts]&.key?(context_key(context))
+
+        return true if flag_data[:global] && (!context || (context && !context_registered))
         return false if context.nil?
 
         flag_data[:contexts] ||= {}
-
         !!flag_data[:contexts][context_key(context)]
       end
 
@@ -62,6 +63,7 @@ class ThisFeature
       attr_reader :context_key_method
 
       def context_key(context)
+        return nil unless context
         return context if context_key_method.nil?
 
         context.send(context_key_method)
