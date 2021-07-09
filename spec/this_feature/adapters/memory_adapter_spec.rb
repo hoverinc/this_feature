@@ -121,7 +121,7 @@ RSpec.describe ThisFeature::Adapters::Memory do
           adapter.on!(flag_name, context: pseudo_user)
         end
 
-        it "returns off when queried with that user as context" do
+        it "returns on when queried with that user as context" do
           expect(ThisFeature.flag(flag_name).on?).to be false
           expect(ThisFeature.flag(flag_name, context: pseudo_user).on?).to be true
         end
