@@ -21,8 +21,7 @@ class ThisFeature
 
         context_registered = flag_data[:contexts]&.key?(context_key(context))
 
-        return true if flag_data[:global] && (!context || (context && !context_registered))
-        return false if context.nil?
+        return !!flag_data[:global] if !context || (context && !context_registered)
 
         flag_data[:contexts] ||= {}
         !!flag_data[:contexts][context_key(context)]
