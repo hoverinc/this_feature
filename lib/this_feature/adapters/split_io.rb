@@ -3,8 +3,9 @@ require 'splitclient-rb'
 class ThisFeature
   module Adapters
     class SplitIo < Base
-      # used as treatment key when none is given, it's required by split
-      UNDEFINED_KEY = 'undefined_key'
+      # Used as the context key when none is given. This arg is required by
+      # Split, but it's nice not to have to pass it when the context is empty.
+      EMPTY_CONTEXT = 'undefined_key'
 
       def initialize(client: nil, context_key_method: nil)
         @client = client || default_split_client
@@ -17,15 +18,15 @@ class ThisFeature
         !control?(flag_name)
       end
 
-      def control?(flag_name, context: UNDEFINED_KEY, data: {})
+      def control?(flag_name, context: EMPTY_CONTEXT, data: {})
         treatment(flag_name, context: context, data: data).include?('control')
       end
 
-      def on?(flag_name, context: UNDEFINED_KEY, data: {})
+      def on?(flag_name, context: EMPTY_CONTEXT, data: {})
         treatment(flag_name, context: context, data: data).eql?('on')
       end
 
-      def off?(flag_name, context: UNDEFINED_KEY, data: {})
+      def off?(flag_name, context: EMPTY_CONTEXT, data: {})
         treatment(flag_name, context: context, data: data).eql?('off')
       end
 
@@ -33,12 +34,12 @@ class ThisFeature
 
       attr_reader :client, :context_key_method
 
-      def treatment(flag_name, context: UNDEFINED_KEY, data: {})
+      def treatment(flag_name, context: EMPTY_CONTEXT, data: {})
         client.get_treatment(context_key(context), flag_name, data)
       end
 
       def context_key(context)
-        return UNDEFINED_KEY if context.nil? || context.eql?(UNDEFINED_KEY)
+        return EMPTY_CONTEXT if context.nil? || context.eql?(EMPTY_CONTEXT)
         return context.send(context_key_method) unless context_key_method.nil?
         return context.to_s if context.respond_to?(:to_s)
 
