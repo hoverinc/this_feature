@@ -1,8 +1,8 @@
 
-RSpec.shared_examples "examples for interface method" do |fn_name, *args|
+RSpec.shared_examples "examples for interface method" do |fn_name, args|
   it "raises an unimplemented error for `#{fn_name}` with args #{args}`" do
     expect do
-      described_class.new.public_send(fn_name, *args)
+      described_class.new.public_send(fn_name, args)
     end.to raise_error(ThisFeature::UnimplementedError) do |err|
       expect(err.message).to eq("class #{described_class.name} doesnt implement method .#{fn_name}")
     end
