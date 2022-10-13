@@ -14,7 +14,7 @@ class ThisFeature
         !storage[flag_name].nil?
       end
 
-      def on?(flag_name, context: nil, data: {})
+      def on?(flag_name, context: nil, data: {}, record: nil)
         return false unless present?(flag_name)
 
         flag_data = storage[flag_name]
@@ -27,7 +27,7 @@ class ThisFeature
         !!flag_data[:contexts][context_key(context)]
       end
 
-      def off?(flag_name, context: nil, data: {})
+      def off?(flag_name, context: nil, data: {}, record: nil)
         !on?(flag_name, context: context, data: data)
       end
 

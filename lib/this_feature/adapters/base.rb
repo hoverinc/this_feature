@@ -5,11 +5,11 @@ class ThisFeature
         raise UnimplementedError.new(self, __method__)
       end
 
-      def on?(flag_name, context: nil, data: {})
+      def on?(flag_name, context: nil, data: {}, record: nil)
         raise UnimplementedError.new(self, __method__)
       end
 
-      def off?(flag_name, context: nil, data: {})
+      def off?(flag_name, context: nil, data: {}, record: nil)
         raise UnimplementedError.new(self, __method__)
       end
 
