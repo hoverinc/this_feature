@@ -6,12 +6,12 @@ require 'this_feature/flag'
 
 class ThisFeature
   def self.flag(flag_name, context: nil, data: {}, record: nil)
-    adapter = adapter_for(flag_name)
+    adapter = adapter_for(flag_name, context: nil, data: {})
 
     Flag.new(flag_name, adapter: adapter, context: context, data: data, record: record)
   end
 
-  def self.adapter_for(flag_name)
+  def self.adapter_for(flag_name, context: nil, data: {})
     matching_adapter = adapters.find do |adapter|
       adapter.present?(flag_name)
     end
