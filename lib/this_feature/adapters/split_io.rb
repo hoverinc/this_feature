@@ -35,7 +35,7 @@ class ThisFeature
       attr_reader :client, :context_key_method
 
       def treatment(flag_name, context: EMPTY_CONTEXT, data: {}, record: nil)
-        base_data = ThisFeature.base_data_lambda.call(record)
+        base_data = record ? ThisFeature.base_data_lambda.call(record) : {}
         client.get_treatment(context_key(context), flag_name, base_data.merge(data))
       end
 
