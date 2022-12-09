@@ -1,18 +1,10 @@
 RSpec.describe ThisFeature::Adapters::SplitIo do
-  let(:flag_name) { 'a_flag' }
-
-  let(:context) { nil }
-  let(:data) { {} }
-
   let(:org_id) { 1 }
   let(:another_org_id) { 5 }
 
   let(:split_file_path) { File.expand_path(File.join('spec', 'support', 'files', 'splits.yaml')) }
-
   let(:split_client) { SplitIoClient::SplitFactoryBuilder.build('localhost', split_file: split_file_path).client }
-
   let(:adapter) { described_class.new(client: split_client) }
-  let(:flag) { ThisFeature.flag(flag_name, context: context, data: data) }
 
   context 'with split client provided' do
     before(:each) do
@@ -143,6 +135,60 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
 
       it 'raises an exception' do
         expect { ThisFeature.flag(flag_name, context: context).on? }.to raise_error(NoMethodError)
+      end
+    end
+  end
+
+  context 'with record and base_data_lambda' do
+    # The Split localhost mode only supports using the key/context and not
+    # additional attributes/data. That's why these tests just check that the
+    # receiver gets the expected values while the above tests verify outcome.
+    let(:flag_name) { :partially_on_feature }
+    let(:record) { OpenStruct.new(id: 123, org_id: 99) }
+
+    before(:each) do
+      ThisFeature.configure { |config| config.adapters = [adapter] }
+      allow(ThisFeature).to receive(:adapter_for).and_return(adapter)
+      allow(ThisFeature).to receive(:base_data_lambda).and_return(
+        -> (record) do
+          {
+            org_id: record.org_id.to_s,
+            user_id: record.id.to_s
+          }
+        end
+      )
+    end
+
+    context 'with only record provided' do
+      it 'sends record attributes in data hash' do
+        [:on?, :off?, :control?].each do |method|
+          expect(split_client).to receive(:get_treatment).with(
+            'undefined_key', flag_name, { org_id: '99', user_id: '123' }
+          ).and_call_original
+          ThisFeature.flag(flag_name, record: record).public_send(method)
+        end
+      end
+    end
+
+    context 'with record and data provided' do
+      it 'sends record attributes merged with data in data hash' do
+        [:on?, :off?, :control?].each do |method|
+          expect(split_client).to receive(:get_treatment).with(
+            'undefined_key', flag_name, { foo: :bar, org_id: '99', user_id: '123' }
+          ).and_call_original
+          ThisFeature.flag(flag_name, record: record, data: { foo: :bar }).public_send(method)
+        end
+      end
+    end
+
+    context 'with record and context provided' do
+      it 'sends context and record attributes in data hash' do
+        [:on?, :off?, :control?].each do |method|
+          expect(split_client).to receive(:get_treatment).with(
+            'foo', flag_name, { org_id: '99', user_id: '123' }
+          ).and_call_original
+          ThisFeature.flag(flag_name, context: 'foo', record: record).public_send(method)
+        end
       end
     end
   end

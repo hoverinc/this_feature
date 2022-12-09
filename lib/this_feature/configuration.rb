@@ -1,6 +1,6 @@
 class ThisFeature
   class Configuration
-    attr_writer :adapters, :default_adapter, :test_adapter
+    attr_writer :adapters, :default_adapter, :test_adapter, :base_data_lambda
 
     def init
       validate_adapters!
@@ -24,6 +24,10 @@ class ThisFeature
 
     def test_adapter
       @test_adapter ||= Adapters::Memory.new
+    end
+
+    def base_data_lambda
+      @base_data_lambda ||= -> (record) { {} }
     end
   end
 end

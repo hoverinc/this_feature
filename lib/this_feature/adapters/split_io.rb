@@ -18,24 +18,25 @@ class ThisFeature
         !control?(flag_name)
       end
 
-      def control?(flag_name, context: EMPTY_CONTEXT, data: {})
-        treatment(flag_name, context: context, data: data).include?('control')
+      def control?(flag_name, context: EMPTY_CONTEXT, data: {}, record: nil)
+        treatment(flag_name, context: context, data: data, record: record).include?('control')
       end
 
-      def on?(flag_name, context: EMPTY_CONTEXT, data: {})
-        treatment(flag_name, context: context, data: data).eql?('on')
+      def on?(flag_name, context: EMPTY_CONTEXT, data: {}, record: nil)
+        treatment(flag_name, context: context, data: data, record: record).eql?('on')
       end
 
-      def off?(flag_name, context: EMPTY_CONTEXT, data: {})
-        treatment(flag_name, context: context, data: data).eql?('off')
+      def off?(flag_name, context: EMPTY_CONTEXT, data: {}, record: nil)
+        treatment(flag_name, context: context, data: data, record: record).eql?('off')
       end
 
       private
 
       attr_reader :client, :context_key_method
 
-      def treatment(flag_name, context: EMPTY_CONTEXT, data: {})
-        client.get_treatment(context_key(context), flag_name, data)
+      def treatment(flag_name, context: EMPTY_CONTEXT, data: {}, record: nil)
+        base_data = record ? ThisFeature.base_data_lambda.call(record) : {}
+        client.get_treatment(context_key(context), flag_name, base_data.merge(data))
       end
 
       def context_key(context)
