@@ -12,7 +12,7 @@ RSpec.describe ThisFeature::Flag do
     subject { flag.on? }
 
     before do
-      expect(fake_adapter).to receive(:on?).with(flag_name, data: data, context: context).and_return(expected_return)
+      expect(fake_adapter).to receive(:on?).with(flag_name, data: data, context: context, record: nil).and_return(expected_return)
     end
 
     it { is_expected.to be(expected_return) }
@@ -22,7 +22,7 @@ RSpec.describe ThisFeature::Flag do
     subject { flag.off? }
 
     before do
-      expect(fake_adapter).to receive(:off?).with(flag_name, data: data, context: context).and_return(expected_return)
+      expect(fake_adapter).to receive(:off?).with(flag_name, data: data, context: context, record: nil).and_return(expected_return)
     end
 
     it { is_expected.to be(expected_return) }
@@ -32,7 +32,7 @@ RSpec.describe ThisFeature::Flag do
     subject { flag.control? }
 
     before do
-      expect(fake_adapter).to receive(:control?).with(flag_name, data: data, context: context).and_return(expected_return)
+      expect(fake_adapter).to receive(:control?).with(flag_name, data: data, context: context, record: nil).and_return(expected_return)
     end
 
     it { is_expected.to be(expected_return) }

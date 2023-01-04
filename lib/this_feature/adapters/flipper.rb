@@ -18,11 +18,11 @@ class ThisFeature
         !present?(flag_name)
       end
 
-      def on?(flag_name, context: nil, data: {})
+      def on?(flag_name, context: nil, data: {}, record: nil)
         client[flag_name].enabled?(*[context].compact)
       end
 
-      def off?(flag_name, context: nil, data: {})
+      def off?(flag_name, context: nil, data: {}, record: nil)
         !on?(flag_name, context: context)
       end
 
