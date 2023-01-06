@@ -9,6 +9,8 @@ memory
 /pkg/
 /spec/reports/
 /tmp/
+*.gem
+
 
 # rspec failure tracking
 .rspec_status
