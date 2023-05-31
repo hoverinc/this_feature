@@ -19,15 +19,6 @@ Lint/MissingSuper:
     - 'lib/this_feature/adapters/memory.rb'
     - 'lib/this_feature/adapters/split_io.rb'
 
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: IgnoreEmptyBlocks, AllowUnusedKeywordArguments.
-Lint/UnusedBlockArgument:
-  Exclude:
-    - '**/*.md'
-    - '**/*.markdown'
-    - 'lib/this_feature/configuration.rb'
-
 # Offense count: 23
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowUnusedKeywordArguments, IgnoreEmptyMethods, IgnoreNotImplementedMethods.
