@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.authors     = contributors.keys
   spec.email       = contributors.values
 
-  spec.summary     = "Feature flag control"
+  spec.summary     = "A common interface to interact with many feature flag providers"
   spec.description = spec.summary
   spec.homepage    = "https://github.com/hoverinc/this_feature"
 

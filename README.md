@@ -4,9 +4,7 @@
 
 ThisFeature can be used to more easily migrate from one feature flag service to another
 
-If your code uses ThisFeature,
-then you can just swap out the vendor adapter without needing to do a bunch of find-and-replace in your codebase
-from one vendor's class/method signature to the another's.
+If your code uses ThisFeature, then you can just swap out the vendor adapter without needing to do a bunch of find-and-replace in your codebase from one vendor's class/method signature to the another's.
 
 ## Installation
 
@@ -68,7 +66,7 @@ ThisFeature.flag('flag_name', context: context, data: { org_id: 1 }).on?
 
 ### Avoid Pitfalls
 
-1. If your flag has context-specific rules (e.g. on for some orgs, off for others), make sure that the code does a context-specific check. `ThisFeature.flag("flag_name").on?` may return true, while `ThisFeature.flag("flag_name", context: Org.first).on?` would return false. 
+1. If your flag has context-specific rules (e.g. on for some orgs, off for others), make sure that the code does a context-specific check. `ThisFeature.flag("flag_name").on?` may return true, while `ThisFeature.flag("flag_name", context: Org.first).on?` would return false.
 2. Related to the previous bullet point, if you are checking whether a flag is "globally enabled" (and thus may be removed from the codebase), do not just use `ThisFeature.flag("flag_name").on?`, it won't tell you the whole story.  Go to the vendor console and check whether there are context-specific rules enabled.
 
 ## Available Adapters
@@ -103,6 +101,3 @@ To write a new adapter, check the [Guide](./docs/writing_an_adapter.md).
 ## License
 
 ThisFeature is released under the [MIT License](https://choosealicense.com/licenses/mit).
-
-
-
