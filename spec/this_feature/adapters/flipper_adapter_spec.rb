@@ -20,7 +20,6 @@ RSpec.describe ThisFeature::Adapters::Flipper do
   end
 
   describe "#initialize" do
-
     context "when passed a custom client" do
       let(:fake_client) { "my fake client" }
       let(:adapter) { described_class.new(client: fake_client) }

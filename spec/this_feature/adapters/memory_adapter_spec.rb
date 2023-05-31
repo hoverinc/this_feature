@@ -155,7 +155,6 @@ RSpec.describe ThisFeature::Adapters::Memory do
           expect(ThisFeature.flag(flag_name, context: pseudo_user3).off?).to be true
         end
       end
-
     end
   end
 

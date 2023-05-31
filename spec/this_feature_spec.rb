@@ -1,5 +1,4 @@
 RSpec.describe ThisFeature do
-
   let(:fake_adapter) { described_class::Adapters::Fake.new }
   let(:flipper_adapter) { described_class::Adapters::Flipper.new }
   let(:adapters) { [fake_adapter] }
