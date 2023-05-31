@@ -107,7 +107,7 @@ RSpec.describe ThisFeature do
         configuration.adapters = adapters
       end
       allow(fake_adapter).to(
-        receive(:present?).with(any_args).and_return true
+        receive(:present?).with(any_args).and_return(true)
       )
     end
 
