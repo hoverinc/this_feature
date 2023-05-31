@@ -3,7 +3,7 @@
 ## Installation
 
 ```ruby
-gem 'this_feature-adapters-split-io
+gem 'this_feature-adapters-split-io'
 ```
 
 ## Configuration

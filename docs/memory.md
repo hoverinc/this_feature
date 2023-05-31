@@ -24,7 +24,7 @@ in test suites.
 This adapter is included with the core gem:
 
 ```ruby
-gem 'this_feature
+gem 'this_feature'
 ```
 
 ## Configuration
