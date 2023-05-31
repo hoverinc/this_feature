@@ -95,11 +95,6 @@ RSpec/NamedSubject:
 RSpec/NestedGroups:
   Max: 4
 
-# Offense count: 3
-RSpec/StubbedMock:
-  Exclude:
-    - 'spec/this_feature/flag_spec.rb'
-
 # Offense count: 1
 # Configuration parameters: IgnoreNameless, IgnoreSymbolicNames.
 RSpec/VerifiedDoubles:
