@@ -52,7 +52,7 @@ ThisFeature.configure do |config|
         org_name: record.org.name,
         user_email: record.email,
         user_id: record.id,
-        user_name: record.name,
+        user_name: record.name
       }
     end
   }
