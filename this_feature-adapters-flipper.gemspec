@@ -19,6 +19,6 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.add_runtime_dependency "this_feature"
-  s.add_runtime_dependency "flipper", "~> 0.16"
-  s.add_runtime_dependency "flipper-active_record", "~> 0.16"
+  s.add_runtime_dependency "flipper"
+  s.add_runtime_dependency "flipper-active_record"
 end
