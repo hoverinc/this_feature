@@ -162,9 +162,12 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
     context 'with only record provided' do
       it 'sends record attributes in data hash' do
         %i[on? off? control?].each do |method|
-          expect(split_client).to receive(:get_treatment).with(
-            'undefined_key', flag_name, { org_id: '99', user_id: '123' }
-          ).and_call_original
+          expect(split_client).to(
+            receive(:get_treatment)
+            .with('undefined_key', flag_name, { org_id: '99', user_id: '123' })
+            .and_call_original
+          )
+
           ThisFeature.flag(flag_name, record: record).public_send(method)
         end
       end
@@ -173,9 +176,12 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
     context 'with record and data provided' do
       it 'sends record attributes merged with data in data hash' do
         %i[on? off? control?].each do |method|
-          expect(split_client).to receive(:get_treatment).with(
-            'undefined_key', flag_name, { foo: :bar, org_id: '99', user_id: '123' }
-          ).and_call_original
+          expect(split_client).to(
+            receive(:get_treatment)
+            .with('undefined_key', flag_name, { foo: :bar, org_id: '99', user_id: '123' })
+            .and_call_original
+          )
+
           ThisFeature.flag(flag_name, record: record, data: { foo: :bar }).public_send(method)
         end
       end
@@ -184,9 +190,12 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
     context 'with record and context provided' do
       it 'sends context and record attributes in data hash' do
         %i[on? off? control?].each do |method|
-          expect(split_client).to receive(:get_treatment).with(
-            'foo', flag_name, { org_id: '99', user_id: '123' }
-          ).and_call_original
+          expect(split_client).to(
+            receive(:get_treatment)
+            .with('foo', flag_name, { org_id: '99', user_id: '123' })
+            .and_call_original
+          )
+
           ThisFeature.flag(flag_name, context: 'foo', record: record).public_send(method)
         end
       end
