@@ -19,6 +19,7 @@ Gem::Specification.new do |spec|
   spec.licenses    = ['MIT']
   spec.summary     = 'A ThisFeature adapter to Flipper'
   spec.description = ''
+  spec.homepage    = 'https://github.com/hoverinc/this_feature'
 
   spec.files         = Dir.glob('{bin/*,lib/**/*,[A-Z]*}')
   spec.platform      = Gem::Platform::RUBY
