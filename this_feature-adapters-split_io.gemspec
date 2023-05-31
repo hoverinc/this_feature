@@ -4,20 +4,26 @@ $:.unshift File.expand_path('../lib', __FILE__)
 
 require 'this_feature/version'
 
-Gem::Specification.new do |s|
-  s.name          = 'this_feature-adapters-split_io'
-  s.version       = ThisFeature::VERSION
-  s.authors       = ['Max Pleaner', 'Matt Fong']
-  s.email         = ['maxpleaner@gmail.com', 'matthewjf@gmail.com']
-  s.homepage      = 'http://hover.to'
-  s.licenses      = ['MIT']
-  s.summary       = '[summary]'
-  s.description   = '[description]'
+Gem::Specification.new do |spec|
+  spec.name    = 'this_feature-adapters-split_io'
+  spec.version = ThisFeature::VERSION
 
-  s.files         = Dir.glob('{bin/*,lib/**/*,[A-Z]*}')
-  s.platform      = Gem::Platform::RUBY
-  s.require_paths = ['lib']
+  spec.authors  = ['Max Pleaner', 'Matt Fong']
+  spec.email    = ['maxpleaner@gmail.com', 'matthewjf@gmail.com']
+  spec.homepage = 'http://hover.to'
 
-  s.add_runtime_dependency "splitclient-rb"
-  s.add_runtime_dependency "this_feature"
+  spec.metadata["homepage_uri"]          = spec.homepage
+  spec.metadata["source_code_uri"]       = spec.homepage
+  spec.metadata['rubygems_mfa_required'] = 'true'
+
+  spec.licenses    = ['MIT']
+  spec.summary     = "A ThisFeature adapter to Split.io"
+  spec.description = ''
+
+  spec.files         = Dir.glob('{bin/*,lib/**/*,[A-Z]*}')
+  spec.platform      = Gem::Platform::RUBY
+  spec.require_paths = ['lib']
+
+  spec.add_runtime_dependency "splitclient-rb"
+  spec.add_runtime_dependency "this_feature"
 end
