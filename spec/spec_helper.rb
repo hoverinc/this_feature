@@ -3,9 +3,9 @@ require 'this_feature'
 require 'ostruct'
 require 'database_cleaner/active_record'
 
-require_relative 'support/test_database.rb'
-require_relative 'support/schema.rb'
-require_relative 'support/fake.rb'
+require_relative 'support/test_database'
+require_relative 'support/schema'
+require_relative 'support/fake'
 
 require 'this_feature/adapters/flipper'
 require 'this_feature/adapters/split_io'
