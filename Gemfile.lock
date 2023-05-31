@@ -1,12 +1,12 @@
 PATH
   remote: .
   specs:
-    this_feature (0.8.0)
-    this_feature-adapters-flipper (0.8.0)
+    this_feature (0.9.0)
+    this_feature-adapters-flipper (0.9.0)
       flipper
       flipper-active_record
       this_feature
-    this_feature-adapters-split_io (0.8.0)
+    this_feature-adapters-split_io (0.9.0)
       splitclient-rb
       this_feature
 
