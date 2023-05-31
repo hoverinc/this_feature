@@ -150,7 +150,7 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
       ThisFeature.configure { |config| config.adapters = [adapter] }
       allow(ThisFeature).to receive(:adapter_for).and_return(adapter)
       allow(ThisFeature).to receive(:base_data_lambda).and_return(
-        -> (record) do
+        ->(record) do
           {
             org_id: record.org_id.to_s,
             user_id: record.id.to_s

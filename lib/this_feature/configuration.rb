@@ -27,7 +27,7 @@ class ThisFeature
     end
 
     def base_data_lambda
-      @base_data_lambda ||= -> (record) { {} }
+      @base_data_lambda ||= ->(record) { {} }
     end
   end
 end

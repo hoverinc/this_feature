@@ -39,7 +39,7 @@ attributes to the `data` hash. To take advantage of this, the application must
 set a `base_data_lambda` in the config. An example—
 ```ruby
 ThisFeature.configure do |config|
-  config.base_data_lambda = -> (record) do
+  config.base_data_lambda = ->(record) do
     case record
     when Org
       {
