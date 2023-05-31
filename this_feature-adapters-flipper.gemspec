@@ -8,6 +8,8 @@ Gem::Specification.new do |spec|
   spec.name    = 'this_feature-adapters-flipper'
   spec.version = ThisFeature::VERSION
 
+  spec.required_ruby_version = '>= 3.2'
+
   spec.authors  = ['Max Pleaner', 'Matt Fong']
   spec.email    = ['maxpleaner@gmail.com', 'matthewjf@gmail.com']
   spec.homepage = 'http://hover.to'

@@ -6,6 +6,8 @@ Gem::Specification.new do |spec|
   spec.name    = "this_feature"
   spec.version = ThisFeature::VERSION
 
+  spec.required_ruby_version = '>= 3.2'
+
   contributors = {
     "Max Pleaner"    => "max.pleaner@hover.to",
     "Matt Fong"      => "matt.fong@hover.to",
