@@ -1,5 +1,4 @@
 class ThisFeature
-
   class Error < StandardError; end
 
   class UnimplementedError < Error
@@ -19,5 +18,4 @@ class ThisFeature
       super("No adapters configured.")
     end
   end
-
 end
