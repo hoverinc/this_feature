@@ -101,6 +101,7 @@ RSpec.describe ThisFeature do
   end
 
   describe ".flag" do
+    subject(:flag) { described_class.flag(flag_name, **opts) }
     before do
       described_class.configure do |configuration|
         configuration.adapters = adapters
@@ -114,7 +115,6 @@ RSpec.describe ThisFeature do
     let(:data) { "bar" }
     let(:opts) { { context: context, data: data } }
 
-    subject(:flag) { described_class.flag(flag_name, **opts) }
 
     it "returns a new flag object with the matched adapter" do
       expect(flag.adapter).to eq(fake_adapter)

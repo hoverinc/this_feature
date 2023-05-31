@@ -66,12 +66,6 @@ RSpec/IndexedLet:
   Exclude:
     - 'spec/this_feature/adapters/memory_adapter_spec.rb'
 
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-RSpec/LeadingSubject:
-  Exclude:
-    - 'spec/this_feature_spec.rb'
-
 # Offense count: 6
 # Configuration parameters: .
 # SupportedStyles: have_received, receive
