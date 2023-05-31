@@ -3,7 +3,7 @@
 ## Installation
 
 ```ruby
-gem 'this_feature-adapters-split-io
+gem 'this_feature-adapters-split-io'
 ```
 
 ## Configuration
@@ -39,7 +39,7 @@ attributes to the `data` hash. To take advantage of this, the application must
 set a `base_data_lambda` in the config. An example—
 ```ruby
 ThisFeature.configure do |config|
-  config.base_data_lambda = -> (record) do
+  config.base_data_lambda = lambda { |record|
     case record
     when Org
       {
@@ -52,10 +52,10 @@ ThisFeature.configure do |config|
         org_name: record.org.name,
         user_email: record.email,
         user_id: record.id,
-        user_name: record.name,
+        user_name: record.name
       }
     end
-  end
+  }
 end
 ```
 Then `ThisFeature.flag("my-flag", record: user).on?` will automatically include

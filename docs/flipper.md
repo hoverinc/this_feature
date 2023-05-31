@@ -3,7 +3,7 @@
 ## Installation
 
 ```ruby
-gem 'this_feature-adapters-flipper
+gem 'this_feature-adapters-flipper'
 ```
 
 ## Configuration

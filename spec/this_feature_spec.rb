@@ -1,17 +1,16 @@
 RSpec.describe ThisFeature do
-
   let(:fake_adapter) { described_class::Adapters::Fake.new }
   let(:flipper_adapter) { described_class::Adapters::Flipper.new }
   let(:adapters) { [fake_adapter] }
   let(:flag_name) { :made_up_flag }
 
-  it "has a version number" do
-    expect(described_class::VERSION).not_to be nil
+  it 'has a version number' do
+    expect(described_class::VERSION).not_to be_nil
   end
 
   describe '.test_adapter' do
-    it "delegates to configuration.test_adapter" do
-      described_class.configuration.test_adapter = double("adapter")
+    it 'delegates to configuration.test_adapter' do
+      described_class.configuration.test_adapter = double('adapter')
       expect(described_class.test_adapter).to eq(described_class.configuration.test_adapter)
     end
   end
@@ -54,20 +53,20 @@ RSpec.describe ThisFeature do
     end
   end
 
-  describe ".configure" do
+  describe '.configure' do
     let(:adapters) { [fake_adapter, flipper_adapter] }
     let(:bad_adapter) { described_class::Adapters::Base.new }
     let(:bad_adapters) { [bad_adapter] }
 
-    it "raises an error if no adapters are given" do
+    it 'raises an error if no adapters are given' do
       expect do
-        described_class.configure { }
+        described_class.configure {}
       end.to raise_error(described_class::NoAdaptersError) do |err|
-        expect(err.message).to eq("No adapters configured.")
+        expect(err.message).to eq('No adapters configured.')
       end
     end
 
-    it "wont accept any adapter that doesn't inherit from Base" do
+    it 'won’t accept any adapter that doesn’t inherit from Base' do
       expect do
         described_class.configure do |configuration|
           configuration.adapters = bad_adapters
@@ -79,8 +78,8 @@ RSpec.describe ThisFeature do
       end
     end
 
-    context "test_adapter" do
-      it "defaults to a memory adapter" do
+    describe '.test_adapter' do
+      it 'defaults to a memory adapter' do
         described_class.configure do |config|
           config.test_adapter = nil # wipe out the value
           config.adapters = [config.test_adapter] # so the custom reader logic is used
@@ -90,7 +89,7 @@ RSpec.describe ThisFeature do
         )
       end
 
-      it "can be set to a custom value" do
+      it 'can be set to a custom value' do
         adapter = described_class::Adapters::Memory.new
         described_class.configure do |config|
           config.test_adapter = adapter
@@ -101,23 +100,22 @@ RSpec.describe ThisFeature do
     end
   end
 
-  describe ".flag" do
+  describe '.flag' do
+    subject(:flag) { described_class.flag(flag_name, **opts) }
+
     before do
       described_class.configure do |configuration|
         configuration.adapters = adapters
       end
-      allow(fake_adapter).to(
-        receive(:present?).with(any_args).and_return true
-      )
+
+      allow(fake_adapter).to receive(:present?).with(any_args).and_return(true)
     end
 
-    let(:context) { "foo" }
-    let(:data) { "bar" }
+    let(:context) { 'foo' }
+    let(:data) { 'bar' }
     let(:opts) { { context: context, data: data } }
 
-    subject(:flag) { described_class.flag(flag_name, **opts) }
-
-    it "returns a new flag object with the matched adapter" do
+    it 'returns a new flag object with the matched adapter' do
       expect(flag.adapter).to eq(fake_adapter)
       expect(flag.flag_name).to eq(flag_name)
       expect(flag.context).to eq(context)

@@ -24,7 +24,7 @@ in test suites.
 This adapter is included with the core gem:
 
 ```ruby
-gem 'this_feature
+gem 'this_feature'
 ```
 
 ## Configuration
@@ -50,7 +50,7 @@ For example:
 # of a context object (e.g. imagine this module is included onto User)
 module FeatureFlaggable
   def this_feature_id
-    "#{self.class}-#{self.id}"
+    "#{self.class}-#{id}"
   end
 end
 

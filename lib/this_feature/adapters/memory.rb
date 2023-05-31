@@ -1,7 +1,6 @@
 class ThisFeature
   module Adapters
     class Memory < Base
-
       def initialize(context_key_method: nil)
         @context_key_method = context_key_method
       end

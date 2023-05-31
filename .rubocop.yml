@@ -1,0 +1,32 @@
+require:
+  - rubocop-md
+  - rubocop-performance
+  - rubocop-rake
+  - rubocop-rspec
+  - rubocop-thread_safety
+
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  NewCops: enable
+
+RSpec/NestedGroups:
+  Max: 4
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19
+  EnforcedShorthandSyntax: never
+
+Style/WordArray:
+  Exclude:
+    - spec/support/schema.rb
+
+Style/NumericLiterals:
+  Exclude:
+    - 'spec/support/schema.rb'

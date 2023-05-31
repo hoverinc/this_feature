@@ -7,7 +7,7 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
   let(:adapter) { described_class.new(client: split_client) }
 
   context 'with split client provided' do
-    before(:each) do
+    before do
       ThisFeature.configure do |config|
         config.adapters = [adapter]
       end
@@ -82,7 +82,7 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
 
   context 'without split client provided' do
     let(:adapter) { described_class.new }
-    let(:client_double) { instance_double( SplitIoClient::SplitClient) }
+    let(:client_double) { instance_double(SplitIoClient::SplitClient) }
 
     before do
       allow_any_instance_of(described_class).to receive(:default_split_client).and_return(client_double)
@@ -104,7 +104,7 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
 
     let(:flag_name) { :partially_on_feature }
 
-    before(:each) do
+    before do
       ThisFeature.configure do |config|
         config.adapters = [adapter]
       end
@@ -130,7 +130,7 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
       end
     end
 
-    context "when context doesn't respond to context key method" do
+    context 'when context doesn’t respond to context key method' do
       let(:context) { 'some string' }
 
       it 'raises an exception' do
@@ -146,11 +146,11 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
     let(:flag_name) { :partially_on_feature }
     let(:record) { OpenStruct.new(id: 123, org_id: 99) }
 
-    before(:each) do
+    before do
       ThisFeature.configure { |config| config.adapters = [adapter] }
       allow(ThisFeature).to receive(:adapter_for).and_return(adapter)
       allow(ThisFeature).to receive(:base_data_lambda).and_return(
-        -> (record) do
+        lambda do |record|
           {
             org_id: record.org_id.to_s,
             user_id: record.id.to_s
@@ -161,10 +161,13 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
 
     context 'with only record provided' do
       it 'sends record attributes in data hash' do
-        [:on?, :off?, :control?].each do |method|
-          expect(split_client).to receive(:get_treatment).with(
-            'undefined_key', flag_name, { org_id: '99', user_id: '123' }
-          ).and_call_original
+        %i[on? off? control?].each do |method|
+          expect(split_client).to(
+            receive(:get_treatment)
+            .with('undefined_key', flag_name, { org_id: '99', user_id: '123' })
+            .and_call_original
+          )
+
           ThisFeature.flag(flag_name, record: record).public_send(method)
         end
       end
@@ -172,10 +175,13 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
 
     context 'with record and data provided' do
       it 'sends record attributes merged with data in data hash' do
-        [:on?, :off?, :control?].each do |method|
-          expect(split_client).to receive(:get_treatment).with(
-            'undefined_key', flag_name, { foo: :bar, org_id: '99', user_id: '123' }
-          ).and_call_original
+        %i[on? off? control?].each do |method|
+          expect(split_client).to(
+            receive(:get_treatment)
+            .with('undefined_key', flag_name, { foo: :bar, org_id: '99', user_id: '123' })
+            .and_call_original
+          )
+
           ThisFeature.flag(flag_name, record: record, data: { foo: :bar }).public_send(method)
         end
       end
@@ -183,10 +189,13 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
 
     context 'with record and context provided' do
       it 'sends context and record attributes in data hash' do
-        [:on?, :off?, :control?].each do |method|
-          expect(split_client).to receive(:get_treatment).with(
-            'foo', flag_name, { org_id: '99', user_id: '123' }
-          ).and_call_original
+        %i[on? off? control?].each do |method|
+          expect(split_client).to(
+            receive(:get_treatment)
+            .with('foo', flag_name, { org_id: '99', user_id: '123' })
+            .and_call_original
+          )
+
           ThisFeature.flag(flag_name, context: 'foo', record: record).public_send(method)
         end
       end

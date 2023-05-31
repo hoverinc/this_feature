@@ -10,7 +10,7 @@ RSpec.describe ThisFeature::Adapters::Memory do
   let(:adapter) { described_class.new }
   let(:flag) { ThisFeature.flag(flag_name, context: context, data: data) }
 
-  before(:each) do
+  before do
     adapter.clear
 
     ThisFeature.configure do |config|
@@ -21,11 +21,11 @@ RSpec.describe ThisFeature::Adapters::Memory do
   describe 'on?' do
     subject(:on?) { flag.on? }
 
-    context "looking up a flag that doesn't exist" do
+    context 'when looking up a flag that doesn’t exist' do
       it { is_expected.to be(false) }
     end
 
-    context 'looking up a flag that is set to on' do
+    context 'when looking up a flag that is set to on' do
       before { adapter.on!(flag_name) }
 
       it { is_expected.to be(true) }
@@ -36,7 +36,7 @@ RSpec.describe ThisFeature::Adapters::Memory do
       end
     end
 
-    context 'looking up a flag that is set to off' do
+    context 'when looking up a flag that is set to off' do
       before { adapter.off!(flag_name) }
 
       it { is_expected.to be(false) }
@@ -77,19 +77,19 @@ RSpec.describe ThisFeature::Adapters::Memory do
   describe 'off?' do
     subject(:off?) { flag.off? }
 
-    context "looking up a flag that doesn't exist" do
-      it "returns nil" do
+    context 'when looking up a flag that doesn’t exist' do
+      it 'returns nil' do
         expect(subject).to be(true)
       end
     end
 
-    context "looking up a flag that is set to off" do
+    context 'when looking up a flag that is set to off' do
       before { adapter.off!(flag_name) }
 
       it { is_expected.to be(true) }
     end
 
-    context 'looking up a flag that is set to on' do
+    context 'when looking up a flag that is set to on' do
       before { adapter.on!(flag_name) }
 
       it { is_expected.to be(false) }
@@ -103,25 +103,25 @@ RSpec.describe ThisFeature::Adapters::Memory do
         expect(ThisFeature.flag(flag_name, context: pseudo_user).off?).to be false
       end
 
-      context "when the flag is globally on but turned off for a specific user" do
+      context 'when the flag is globally on but turned off for a specific user' do
         before do
           adapter.on!(flag_name)
           adapter.off!(flag_name, context: pseudo_user)
         end
 
-        it "returns off when queried with that user as context" do
+        it 'returns off when queried with that user as context' do
           expect(ThisFeature.flag(flag_name).on?).to be true
           expect(ThisFeature.flag(flag_name, context: pseudo_user).on?).to be false
         end
       end
 
-      context "when the flag is globally off but turned on for a specific user" do
+      context 'when the flag is globally off but turned on for a specific user' do
         before do
           adapter.off!(flag_name)
           adapter.on!(flag_name, context: pseudo_user)
         end
 
-        it "returns on when queried with that user as context" do
+        it 'returns on when queried with that user as context' do
           expect(ThisFeature.flag(flag_name).on?).to be false
           expect(ThisFeature.flag(flag_name, context: pseudo_user).on?).to be true
         end
@@ -155,20 +155,19 @@ RSpec.describe ThisFeature::Adapters::Memory do
           expect(ThisFeature.flag(flag_name, context: pseudo_user3).off?).to be true
         end
       end
-
     end
   end
 
   describe 'control?' do
     subject(:control?) { flag.control? }
 
-    context "when the flag doesn't exist" do
+    context 'when the flag doesn’t exist' do
       it 'returns true' do
         expect(control?).to be true
       end
     end
 
-    context "when the flag exists" do
+    context 'when the flag exists' do
       before do
         adapter.on!(flag_name, context: pseudo_user)
       end
@@ -214,7 +213,7 @@ RSpec.describe ThisFeature::Adapters::Memory do
 
     it 'turns on the flag' do
       subject
-      expect(adapter.on?(flag_name)).to eq(true)
+      expect(adapter.on?(flag_name)).to be(true)
     end
 
     context 'with a user passed as the context' do
@@ -236,7 +235,7 @@ RSpec.describe ThisFeature::Adapters::Memory do
 
     it 'turns off the flag' do
       subject
-      expect(adapter.off?(flag_name)).to eq(true)
+      expect(adapter.off?(flag_name)).to be(true)
     end
 
     context 'with a user passed as the context' do
