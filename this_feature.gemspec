@@ -3,14 +3,21 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "this_feature/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "this_feature"
-  spec.version       = ThisFeature::VERSION
-  spec.authors       = ["Max Pleaner"]
-  spec.email         = ["max.pleaner@hover.to"]
+  spec.name        = "this_feature"
+  spec.version     = ThisFeature::VERSION
 
-  spec.summary       = %q{Feature flag control}
-  spec.description   = spec.summary
-  spec.homepage      = "https://github.com/hoverinc/this_feature"
+  contributors = {
+    "Max Pleaner"    => "max.pleaner@hover.to",
+    "Matt Fong"      => "matt.fong@hover.to",
+    "Shane Becker"   => "shane.becker@hover.to",
+    "Daniel Deutsch" => "daniel.deutsch@hover.to"
+  }
+  spec.authors     = contributors.keys
+  spec.email       = contributors.values
+
+  spec.summary     = "Feature flag control"
+  spec.description = spec.summary
+  spec.homepage    = "https://github.com/hoverinc/this_feature"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
