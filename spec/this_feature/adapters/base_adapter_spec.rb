@@ -17,7 +17,7 @@ RSpec.describe ThisFeature::Adapters::Base do
     include_examples "examples for interface method", :off?, :some_flag_name, context: :fake_user, data: :stuff, record: :fake_org
 
     it 'implements #control? and returns false by default' do
-      expect(described_class.new.control?(:some_flag_name)).to eq(false)
+      expect(described_class.new.control?(:some_flag_name)).to be(false)
     end
   end
 end

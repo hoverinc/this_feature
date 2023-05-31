@@ -77,7 +77,7 @@ RSpec.describe ThisFeature::Adapters::Flipper do
     context "when given a flag name and a user" do
       it "qualifies the search" do
         Flipper[flag_name].enable(pseudo_user)
-        expect(Flipper[flag_name].enabled?(pseudo_user)).to eq true
+        expect(Flipper[flag_name].enabled?(pseudo_user)).to be true
         expect(adapter.on?(flag_name)).to be false
         expect(adapter.on?(flag_name, context: pseudo_user2)).to be false
         expect(adapter.on?(flag_name, context: pseudo_user)).to be true
@@ -87,7 +87,7 @@ RSpec.describe ThisFeature::Adapters::Flipper do
     context "when given a flag name and an org" do
       it "qualifies the search" do
         Flipper[flag_name].enable(pseudo_org)
-        expect(Flipper[flag_name].enabled?(pseudo_org)).to eq true
+        expect(Flipper[flag_name].enabled?(pseudo_org)).to be true
         expect(adapter.on?(flag_name)).to be false
         expect(adapter.on?(flag_name, context: pseudo_org2)).to be false
         expect(adapter.on?(flag_name, context: pseudo_org)).to be true
@@ -119,7 +119,7 @@ RSpec.describe ThisFeature::Adapters::Flipper do
     context "when given a flag name and a user" do
       it "qualifies the search" do
         Flipper[flag_name].enable(pseudo_user)
-        expect(Flipper[flag_name].enabled?(pseudo_user)).to eq true
+        expect(Flipper[flag_name].enabled?(pseudo_user)).to be true
         expect(adapter.off?(flag_name)).to be true
         expect(adapter.off?(flag_name, context: pseudo_user2)).to be true
         expect(adapter.off?(flag_name, context: pseudo_user)).to be false
@@ -129,7 +129,7 @@ RSpec.describe ThisFeature::Adapters::Flipper do
     context "when given a flag name and an org" do
       it "qualifies the search" do
         Flipper[flag_name].enable(pseudo_org)
-        expect(Flipper[flag_name].enabled?(pseudo_org)).to eq true
+        expect(Flipper[flag_name].enabled?(pseudo_org)).to be true
         expect(adapter.off?(flag_name)).to be true
         expect(adapter.off?(flag_name, context: pseudo_org2)).to be true
         expect(adapter.off?(flag_name, context: pseudo_org)).to be false

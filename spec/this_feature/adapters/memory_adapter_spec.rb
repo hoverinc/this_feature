@@ -213,7 +213,7 @@ RSpec.describe ThisFeature::Adapters::Memory do
 
     it 'turns on the flag' do
       subject
-      expect(adapter.on?(flag_name)).to eq(true)
+      expect(adapter.on?(flag_name)).to be(true)
     end
 
     context 'with a user passed as the context' do
@@ -235,7 +235,7 @@ RSpec.describe ThisFeature::Adapters::Memory do
 
     it 'turns off the flag' do
       subject
-      expect(adapter.off?(flag_name)).to eq(true)
+      expect(adapter.off?(flag_name)).to be(true)
     end
 
     context 'with a user passed as the context' do
