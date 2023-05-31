@@ -82,7 +82,7 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
 
   context 'without split client provided' do
     let(:adapter) { described_class.new }
-    let(:client_double) { instance_double( SplitIoClient::SplitClient) }
+    let(:client_double) { instance_double(SplitIoClient::SplitClient) }
 
     before do
       allow_any_instance_of(described_class).to receive(:default_split_client).and_return(client_double)
