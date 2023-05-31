@@ -30,16 +30,4 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-
-  spec.add_development_dependency "rubocop"
-  spec.add_development_dependency "rubocop-md"
-  spec.add_development_dependency "rubocop-performance"
-  spec.add_development_dependency "rubocop-rspec"
-  spec.add_development_dependency "rubocop-thread_safety"
-  spec.add_development_dependency "bundler"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec"
-  spec.add_development_dependency "sqlite3"
-  spec.add_development_dependency "database_cleaner-active_record"
-  spec.add_development_dependency "gem-release"
 end
