@@ -1,4 +1,3 @@
-
 RSpec.shared_examples "examples for interface method" do |fn_name, args|
   it "raises an unimplemented error for `#{fn_name}` with args #{args}`" do
     expect do

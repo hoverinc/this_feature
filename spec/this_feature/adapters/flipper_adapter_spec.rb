@@ -1,4 +1,3 @@
-
 RSpec.describe ThisFeature::Adapters::Flipper do
   let(:flag_name) { 'a_flag' }
 
