@@ -85,11 +85,6 @@ RSpec/NamedSubject:
     - 'spec/this_feature/adapters/memory_adapter_spec.rb'
     - 'spec/this_feature_spec.rb'
 
-# Offense count: 4
-# Configuration parameters: AllowedGroups.
-RSpec/NestedGroups:
-  Max: 4
-
 # Offense count: 1
 # Configuration parameters: IgnoreNameless, IgnoreSymbolicNames.
 RSpec/VerifiedDoubles:

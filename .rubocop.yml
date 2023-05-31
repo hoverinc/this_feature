@@ -10,6 +10,9 @@ inherit_from: .rubocop_todo.yml
 AllCops:
   NewCops: enable
 
+RSpec/NestedGroups:
+  Max: 4
+
 Style/Documentation:
   Enabled: false
 
