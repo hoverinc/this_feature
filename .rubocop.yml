@@ -1,12 +1,8 @@
 require:
-  # - rubocop-factory_bot
-  # - rubocop-graphql
-  # - rubocop-i18n
-  # - rubocop-md
+  - rubocop-md
   - rubocop-performance
-  # - rubocop-rails
-  # - rubocop-rspec
-  # - rubocop-thread_safety
+  - rubocop-rspec
+  - rubocop-thread_safety
 
 inherit_from: .rubocop_todo.yml
 
