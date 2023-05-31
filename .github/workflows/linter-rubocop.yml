@@ -1,0 +1,19 @@
+on: [push]
+
+name: Ruby linter (Rubocop)
+
+jobs:
+  linter_rubocop:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Run Rubocop
+        run: bundle exec rubocop --parallel
