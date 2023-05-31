@@ -61,7 +61,7 @@ RSpec.describe ThisFeature do
 
     it "raises an error if no adapters are given" do
       expect do
-        described_class.configure { }
+        described_class.configure {}
       end.to raise_error(described_class::NoAdaptersError) do |err|
         expect(err.message).to eq("No adapters configured.")
       end
