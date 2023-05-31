@@ -7,7 +7,7 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
   let(:adapter) { described_class.new(client: split_client) }
 
   context 'with split client provided' do
-    before(:each) do
+    before do
       ThisFeature.configure do |config|
         config.adapters = [adapter]
       end
@@ -104,7 +104,7 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
 
     let(:flag_name) { :partially_on_feature }
 
-    before(:each) do
+    before do
       ThisFeature.configure do |config|
         config.adapters = [adapter]
       end
@@ -146,7 +146,7 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
     let(:flag_name) { :partially_on_feature }
     let(:record) { OpenStruct.new(id: 123, org_id: 99) }
 
-    before(:each) do
+    before do
       ThisFeature.configure { |config| config.adapters = [adapter] }
       allow(ThisFeature).to receive(:adapter_for).and_return(adapter)
       allow(ThisFeature).to receive(:base_data_lambda).and_return(

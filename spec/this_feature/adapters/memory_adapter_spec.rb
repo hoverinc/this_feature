@@ -10,7 +10,7 @@ RSpec.describe ThisFeature::Adapters::Memory do
   let(:adapter) { described_class.new }
   let(:flag) { ThisFeature.flag(flag_name, context: context, data: data) }
 
-  before(:each) do
+  before do
     adapter.clear
 
     ThisFeature.configure do |config|
