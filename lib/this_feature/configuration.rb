@@ -7,10 +7,10 @@ class ThisFeature
     end
 
     def validate_adapters!
-      raise(NoAdaptersError.new) unless adapters.any?
+      raise NoAdaptersError unless adapters.any?
 
       adapters.each do |adapter|
-        raise BadAdapterError.new(adapter) unless adapter.class < Adapters::Base
+        raise BadAdapterError, adapter unless adapter.class < Adapters::Base
       end
     end
 
