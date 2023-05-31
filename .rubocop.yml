@@ -23,3 +23,7 @@ Style/HashSyntax:
 Style/WordArray:
   Exclude:
     - spec/support/schema.rb
+
+Style/NumericLiterals:
+  Exclude:
+    - 'spec/support/schema.rb'

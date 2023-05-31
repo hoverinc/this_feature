@@ -102,13 +102,6 @@ Style/MultilineBlockChain:
     - 'spec/this_feature/adapters/base_adapter_spec.rb'
     - 'spec/this_feature_spec.rb'
 
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: MinDigits, Strict, AllowedNumbers, AllowedPatterns.
-Style/NumericLiterals:
-  Exclude:
-    - 'spec/support/schema.rb'
-
 # Offense count: 15
 Style/OpenStructUse:
   Exclude:
