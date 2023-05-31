@@ -19,3 +19,7 @@ Style/FrozenStringLiteralComment:
 Style/HashSyntax:
   EnforcedStyle: ruby19
   EnforcedShorthandSyntax: never
+
+Style/WordArray:
+  Exclude:
+    - spec/support/schema.rb
