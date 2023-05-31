@@ -5,7 +5,7 @@ RSpec.describe ThisFeature do
   let(:flag_name) { :made_up_flag }
 
   it "has a version number" do
-    expect(described_class::VERSION).not_to be nil
+    expect(described_class::VERSION).not_to be_nil
   end
 
   describe '.test_adapter' do
