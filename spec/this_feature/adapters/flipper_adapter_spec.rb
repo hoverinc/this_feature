@@ -32,7 +32,7 @@ RSpec.describe ThisFeature::Adapters::Flipper do
       let(:adapter) { described_class.new }
 
       it "uses a default client" do
-        expect(adapter.client).to eq(::Flipper)
+        expect(adapter.client).to eq(Flipper)
       end
     end
   end

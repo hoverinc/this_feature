@@ -121,12 +121,6 @@ Style/OpenStructUse:
     - 'spec/this_feature/adapters/memory_adapter_spec.rb'
     - 'spec/this_feature/adapters/split_io_adapter_spec.rb'
 
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-Style/RedundantConstantBase:
-  Exclude:
-    - 'spec/this_feature/adapters/flipper_adapter_spec.rb'
-
 # Offense count: 5
 # This cop supports safe autocorrection (--autocorrect).
 Style/RedundantFileExtensionInRequire:
