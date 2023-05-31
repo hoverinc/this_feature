@@ -1,4 +1,4 @@
-RSpec.shared_examples "examples for interface method" do |fn_name, args|
+RSpec.shared_examples 'examples for interface method' do |fn_name, args|
   it "raises an unimplemented error for `#{fn_name}` with args #{args}`" do
     expect do
       described_class.new.public_send(fn_name, args)
@@ -9,20 +9,20 @@ RSpec.shared_examples "examples for interface method" do |fn_name, args|
 end
 
 RSpec.describe ThisFeature::Adapters::Base do
-  context "methods providing an interface for descendent classes to implement" do
-    include_examples "examples for interface method", :present?, :some_flag_name
-    include_examples "examples for interface method", :on?, :some_flag_name
+  context 'methods providing an interface for descendent classes to implement' do
+    include_examples 'examples for interface method', :present?, :some_flag_name
+    include_examples 'examples for interface method', :on?, :some_flag_name
 
-    include_examples "examples for interface method",
+    include_examples 'examples for interface method',
                      :on?,
                      :some_flag_name,
                      context: :fake_user,
                      data: :stuff,
                      record: :fake_org
 
-    include_examples "examples for interface method", :off?, :some_flag_name
+    include_examples 'examples for interface method', :off?, :some_flag_name
 
-    include_examples "examples for interface method",
+    include_examples 'examples for interface method',
                      :off?,
                      :some_flag_name,
                      context: :fake_user,

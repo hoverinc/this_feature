@@ -1,5 +1,5 @@
-require "flipper"
-require "flipper/adapters/active_record"
+require 'flipper'
+require 'flipper/adapters/active_record'
 
 class ThisFeature
   module Adapters

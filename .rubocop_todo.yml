@@ -116,13 +116,6 @@ Style/OpenStructUse:
     - 'spec/this_feature/adapters/memory_adapter_spec.rb'
     - 'spec/this_feature/adapters/split_io_adapter_spec.rb'
 
-# Offense count: 128
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
-# SupportedStyles: single_quotes, double_quotes
-Style/StringLiterals:
-  Enabled: false
-
 # Offense count: 2
 ThreadSafety/InstanceVariableInClassMethod:
   Exclude:

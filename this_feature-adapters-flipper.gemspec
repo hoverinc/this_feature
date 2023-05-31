@@ -12,19 +12,19 @@ Gem::Specification.new do |spec|
   spec.email    = ['maxpleaner@gmail.com', 'matthewjf@gmail.com']
   spec.homepage = 'http://hover.to'
 
-  spec.metadata["homepage_uri"]          = spec.homepage
-  spec.metadata["source_code_uri"]       = spec.homepage
+  spec.metadata['homepage_uri']          = spec.homepage
+  spec.metadata['source_code_uri']       = spec.homepage
   spec.metadata['rubygems_mfa_required'] = 'true'
 
   spec.licenses    = ['MIT']
-  spec.summary     = "A ThisFeature adapter to Flipper"
+  spec.summary     = 'A ThisFeature adapter to Flipper'
   spec.description = ''
 
   spec.files         = Dir.glob('{bin/*,lib/**/*,[A-Z]*}')
   spec.platform      = Gem::Platform::RUBY
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency "flipper"
-  spec.add_runtime_dependency "flipper-active_record"
-  spec.add_runtime_dependency "this_feature"
+  spec.add_runtime_dependency 'flipper'
+  spec.add_runtime_dependency 'flipper-active_record'
+  spec.add_runtime_dependency 'this_feature'
 end

@@ -1,3 +1,3 @@
 class ThisFeature
-  VERSION = "0.8.0".freeze
+  VERSION = '0.8.0'.freeze
 end

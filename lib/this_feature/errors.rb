@@ -15,7 +15,7 @@ class ThisFeature
 
   class NoAdaptersError < Error
     def initialize
-      super("No adapters configured.")
+      super('No adapters configured.')
     end
   end
 end

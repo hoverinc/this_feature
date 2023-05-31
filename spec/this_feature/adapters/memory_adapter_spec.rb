@@ -78,12 +78,12 @@ RSpec.describe ThisFeature::Adapters::Memory do
     subject(:off?) { flag.off? }
 
     context "looking up a flag that doesn't exist" do
-      it "returns nil" do
+      it 'returns nil' do
         expect(subject).to be(true)
       end
     end
 
-    context "looking up a flag that is set to off" do
+    context 'looking up a flag that is set to off' do
       before { adapter.off!(flag_name) }
 
       it { is_expected.to be(true) }
@@ -103,25 +103,25 @@ RSpec.describe ThisFeature::Adapters::Memory do
         expect(ThisFeature.flag(flag_name, context: pseudo_user).off?).to be false
       end
 
-      context "when the flag is globally on but turned off for a specific user" do
+      context 'when the flag is globally on but turned off for a specific user' do
         before do
           adapter.on!(flag_name)
           adapter.off!(flag_name, context: pseudo_user)
         end
 
-        it "returns off when queried with that user as context" do
+        it 'returns off when queried with that user as context' do
           expect(ThisFeature.flag(flag_name).on?).to be true
           expect(ThisFeature.flag(flag_name, context: pseudo_user).on?).to be false
         end
       end
 
-      context "when the flag is globally off but turned on for a specific user" do
+      context 'when the flag is globally off but turned on for a specific user' do
         before do
           adapter.off!(flag_name)
           adapter.on!(flag_name, context: pseudo_user)
         end
 
-        it "returns on when queried with that user as context" do
+        it 'returns on when queried with that user as context' do
           expect(ThisFeature.flag(flag_name).on?).to be false
           expect(ThisFeature.flag(flag_name, context: pseudo_user).on?).to be true
         end
@@ -167,7 +167,7 @@ RSpec.describe ThisFeature::Adapters::Memory do
       end
     end
 
-    context "when the flag exists" do
+    context 'when the flag exists' do
       before do
         adapter.on!(flag_name, context: pseudo_user)
       end
