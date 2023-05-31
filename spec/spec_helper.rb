@@ -2,7 +2,6 @@ require 'bundler/setup'
 require 'this_feature'
 require 'ostruct'
 require 'database_cleaner/active_record'
-require 'pry-byebug'
 
 require_relative 'support/test_database.rb'
 require_relative 'support/schema.rb'

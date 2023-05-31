@@ -1,6 +1,7 @@
 # sqlite3 database for tests, just called 'memory' for some reason
 memory
 
+*.gem
 /.bundle/
 /.yardoc
 /_yardoc/
