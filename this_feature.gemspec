@@ -32,10 +32,10 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "rubocop"
-  spec.add_development_dependency "rubocop- md"
-  spec.add_development_dependency "rubocop- performance"
-  spec.add_development_dependency "rubocop- rspec"
-  spec.add_development_dependency "rubocop- thread_safety"
+  spec.add_development_dependency "rubocop-md"
+  spec.add_development_dependency "rubocop-performance"
+  spec.add_development_dependency "rubocop-rspec"
+  spec.add_development_dependency "rubocop-thread_safety"
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
