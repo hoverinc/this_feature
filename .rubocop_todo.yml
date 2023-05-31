@@ -121,12 +121,6 @@ Style/OpenStructUse:
     - 'spec/this_feature/adapters/memory_adapter_spec.rb'
     - 'spec/this_feature/adapters/split_io_adapter_spec.rb'
 
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-Style/RedundantSelf:
-  Exclude:
-    - 'docs/memory.md'
-
 # Offense count: 2
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: RequireEnglish, EnforcedStyle.
