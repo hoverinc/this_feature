@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
 
   spec.licenses    = ['MIT']
   spec.summary     = 'A common interface to interact with many feature flag providers'
-  spec.description = spec.summary
+  spec.description = ''
   spec.homepage    = 'https://github.com/hoverinc/this_feature'
 
   spec.metadata['homepage_uri']          = spec.homepage
