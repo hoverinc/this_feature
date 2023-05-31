@@ -102,19 +102,18 @@ RSpec.describe ThisFeature do
 
   describe ".flag" do
     subject(:flag) { described_class.flag(flag_name, **opts) }
+
     before do
       described_class.configure do |configuration|
         configuration.adapters = adapters
       end
-      allow(fake_adapter).to(
-        receive(:present?).with(any_args).and_return(true)
-      )
+
+      allow(fake_adapter).to receive(:present?).with(any_args).and_return(true)
     end
 
     let(:context) { "foo" }
     let(:data) { "bar" }
     let(:opts) { { context: context, data: data } }
-
 
     it "returns a new flag object with the matched adapter" do
       expect(flag.adapter).to eq(fake_adapter)
