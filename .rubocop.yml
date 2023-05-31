@@ -10,15 +10,6 @@ inherit_from: .rubocop_todo.yml
 AllCops:
   NewCops: enable
 
-Performance/Casecmp:
-  Enabled: false
-
-Performance/RegexpMatch:
-  Enabled: false
-
-Style/AsciiComments:
-  Enabled: false
-
 Style/Documentation:
   Enabled: false
 
@@ -28,7 +19,3 @@ Style/FrozenStringLiteralComment:
 Style/HashSyntax:
   EnforcedStyle: ruby19
   EnforcedShorthandSyntax: never
-
-# Style/MixinUsage:
-#   Exclude:
-#     - bin/*
