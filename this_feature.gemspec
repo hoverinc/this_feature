@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 3.2'
 
   contributors = {
-    "Max Pleaner"    => "max.pleaner@hover.to",
-    "Matt Fong"      => "matt.fong@hover.to",
-    "Shane Becker"   => "shane.becker@hover.to",
+    "Max Pleaner" => "max.pleaner@hover.to",
+    "Matt Fong" => "matt.fong@hover.to",
+    "Shane Becker" => "shane.becker@hover.to",
     "Daniel Deutsch" => "daniel.deutsch@hover.to"
   }
   spec.authors = contributors.keys
