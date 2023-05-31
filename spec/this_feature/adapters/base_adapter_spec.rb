@@ -3,13 +3,13 @@ RSpec.shared_examples 'examples for interface method' do |fn_name, args|
     expect do
       described_class.new.public_send(fn_name, args)
     end.to raise_error(ThisFeature::UnimplementedError) do |err|
-      expect(err.message).to eq("class #{described_class.name} doesnt implement method .#{fn_name}")
+      expect(err.message).to eq("class #{described_class.name} doesn't implement method .#{fn_name}")
     end
   end
 end
 
 RSpec.describe ThisFeature::Adapters::Base do
-  context 'methods providing an interface for descendent classes to implement' do
+  context 'with methods providing an interface for descendent classes to implement' do
     include_examples 'examples for interface method', :present?, :some_flag_name
     include_examples 'examples for interface method', :on?, :some_flag_name
 

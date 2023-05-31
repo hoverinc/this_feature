@@ -21,11 +21,11 @@ RSpec.describe ThisFeature::Adapters::Memory do
   describe 'on?' do
     subject(:on?) { flag.on? }
 
-    context "looking up a flag that doesn't exist" do
+    context 'when looking up a flag that doesn’t exist' do
       it { is_expected.to be(false) }
     end
 
-    context 'looking up a flag that is set to on' do
+    context 'when looking up a flag that is set to on' do
       before { adapter.on!(flag_name) }
 
       it { is_expected.to be(true) }
@@ -36,7 +36,7 @@ RSpec.describe ThisFeature::Adapters::Memory do
       end
     end
 
-    context 'looking up a flag that is set to off' do
+    context 'when looking up a flag that is set to off' do
       before { adapter.off!(flag_name) }
 
       it { is_expected.to be(false) }
@@ -77,19 +77,19 @@ RSpec.describe ThisFeature::Adapters::Memory do
   describe 'off?' do
     subject(:off?) { flag.off? }
 
-    context "looking up a flag that doesn't exist" do
+    context 'when looking up a flag that doesn’t exist' do
       it 'returns nil' do
         expect(subject).to be(true)
       end
     end
 
-    context 'looking up a flag that is set to off' do
+    context 'when looking up a flag that is set to off' do
       before { adapter.off!(flag_name) }
 
       it { is_expected.to be(true) }
     end
 
-    context 'looking up a flag that is set to on' do
+    context 'when looking up a flag that is set to on' do
       before { adapter.on!(flag_name) }
 
       it { is_expected.to be(false) }
@@ -161,7 +161,7 @@ RSpec.describe ThisFeature::Adapters::Memory do
   describe 'control?' do
     subject(:control?) { flag.control? }
 
-    context "when the flag doesn't exist" do
+    context 'when the flag doesn’t exist' do
       it 'returns true' do
         expect(control?).to be true
       end

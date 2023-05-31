@@ -3,7 +3,7 @@ class ThisFeature
 
   class UnimplementedError < Error
     def initialize(adapter_instance, fn_name)
-      super("class #{adapter_instance.class.name} doesnt implement method .#{fn_name}")
+      super("class #{adapter_instance.class.name} doesn't implement method .#{fn_name}")
     end
   end
 

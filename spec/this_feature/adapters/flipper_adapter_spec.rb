@@ -58,17 +58,17 @@ RSpec.describe ThisFeature::Adapters::Flipper do
   describe 'on?' do
     subject(:on?) { flag.on? }
 
-    context 'looking up a flag that doesnt exist' do
+    context 'when looking up a flag that doesn’t exist' do
       it { is_expected.to be false }
     end
 
-    context 'looking up a flag that is set to on' do
+    context 'when looking up a flag that is set to on' do
       before { Flipper[flag_name].enable }
 
       it { is_expected.to be(true) }
     end
 
-    context 'looking up a flag that is set to off' do
+    context 'when looking up a flag that is set to off' do
       before { Flipper[flag_name].disable }
 
       it { is_expected.to be(false) }
@@ -98,19 +98,19 @@ RSpec.describe ThisFeature::Adapters::Flipper do
   describe 'off?' do
     subject(:off?) { flag.off? }
 
-    context 'looking up a flag that doesnt exist' do
+    context 'when looking up a flag that doesn’t exist' do
       it 'returns true' do
         expect(subject).to be true
       end
     end
 
-    context 'looking up a flag that is set to off' do
+    context 'when looking up a flag that is set to off' do
       before { Flipper[flag_name].disable }
 
       it { is_expected.to be(true) }
     end
 
-    context 'looking up a flag that is set to on' do
+    context 'when looking up a flag that is set to on' do
       before { Flipper[flag_name].enable }
 
       it { is_expected.to be(false) }

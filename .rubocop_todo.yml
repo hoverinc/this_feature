@@ -38,16 +38,6 @@ RSpec/AnyInstance:
   Exclude:
     - 'spec/this_feature/adapters/split_io_adapter_spec.rb'
 
-# Offense count: 14
-# Configuration parameters: Prefixes, AllowedPatterns.
-# Prefixes: when, with, without
-RSpec/ContextWording:
-  Exclude:
-    - 'spec/this_feature/adapters/base_adapter_spec.rb'
-    - 'spec/this_feature/adapters/flipper_adapter_spec.rb'
-    - 'spec/this_feature/adapters/memory_adapter_spec.rb'
-    - 'spec/this_feature_spec.rb'
-
 # Offense count: 10
 # Configuration parameters: CountAsOne.
 RSpec/ExampleLength:

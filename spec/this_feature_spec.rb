@@ -66,7 +66,7 @@ RSpec.describe ThisFeature do
       end
     end
 
-    it "wont accept any adapter that doesn't inherit from Base" do
+    it 'won’t accept any adapter that doesn’t inherit from Base' do
       expect do
         described_class.configure do |configuration|
           configuration.adapters = bad_adapters
@@ -78,7 +78,7 @@ RSpec.describe ThisFeature do
       end
     end
 
-    context 'test_adapter' do
+    describe '.test_adapter' do
       it 'defaults to a memory adapter' do
         described_class.configure do |config|
           config.test_adapter = nil # wipe out the value

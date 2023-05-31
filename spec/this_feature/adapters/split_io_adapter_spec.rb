@@ -130,7 +130,7 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
       end
     end
 
-    context "when context doesn't respond to context key method" do
+    context 'when context doesn’t respond to context key method' do
       let(:context) { 'some string' }
 
       it 'raises an exception' do
