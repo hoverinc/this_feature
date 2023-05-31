@@ -5,7 +5,7 @@ class ThisFeature
     class SplitIo < Base
       # Used as the context key when none is given. This arg is required by
       # Split, but it's nice not to have to pass it when the context is empty.
-      EMPTY_CONTEXT = 'undefined_key'
+      EMPTY_CONTEXT = 'undefined_key'.freeze
 
       def initialize(client: nil, context_key_method: nil)
         @client = client || default_split_client
