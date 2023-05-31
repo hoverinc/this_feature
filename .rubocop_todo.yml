@@ -24,8 +24,6 @@ Lint/MissingSuper:
 # Configuration parameters: AllowUnusedKeywordArguments, IgnoreEmptyMethods, IgnoreNotImplementedMethods.
 Lint/UnusedMethodArgument:
   Exclude:
-    - '**/*.md'
-    - '**/*.markdown'
     - 'lib/this_feature/adapters/base.rb'
     - 'lib/this_feature/adapters/flipper.rb'
     - 'lib/this_feature/adapters/memory.rb'
