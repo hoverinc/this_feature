@@ -11,14 +11,14 @@ Gem::Specification.new do |spec|
   spec.authors  = ['Max Pleaner', 'Matt Fong']
   spec.email    = ['maxpleaner@gmail.com', 'matthewjf@gmail.com']
 
-  spec.metadata['homepage_uri']          = spec.homepage
-  spec.metadata['source_code_uri']       = spec.homepage
-  spec.metadata['rubygems_mfa_required'] = 'true'
-
   spec.licenses    = ['MIT']
   spec.summary     = 'A ThisFeature adapter to Flipper'
   spec.description = ''
   spec.homepage    = 'https://github.com/hoverinc/this_feature'
+
+  spec.metadata['homepage_uri']          = spec.homepage
+  spec.metadata['source_code_uri']       = spec.homepage
+  spec.metadata['rubygems_mfa_required'] = 'true'
 
   spec.files         = Dir.glob('{bin/*,lib/**/*,[A-Z]*}')
   spec.platform      = Gem::Platform::RUBY
