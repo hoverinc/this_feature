@@ -10,7 +10,6 @@ Gem::Specification.new do |spec|
 
   spec.authors  = ['Max Pleaner', 'Matt Fong']
   spec.email    = ['maxpleaner@gmail.com', 'matthewjf@gmail.com']
-  spec.homepage = 'http://hover.to'
 
   spec.metadata['homepage_uri']          = spec.homepage
   spec.metadata['source_code_uri']       = spec.homepage
