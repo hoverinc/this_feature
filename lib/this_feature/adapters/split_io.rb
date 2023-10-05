@@ -30,6 +30,10 @@ class ThisFeature
         treatment(flag_name, context: context, data: data, record: record).eql?('off')
       end
 
+      def get_treatment(flag_name, record: nil)
+        client.get_treatment(record, flag_name)
+      end
+
       private
 
       attr_reader :client, :context_key_method

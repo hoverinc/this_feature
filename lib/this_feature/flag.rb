@@ -21,5 +21,9 @@ class ThisFeature
     def control?
       adapter.control?(flag_name, context: context, data: data, record: record)
     end
+
+    def get_treatment
+      adapter.get_treatment(flag_name, record: record)
+    end
   end
 end
