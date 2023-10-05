@@ -12,3 +12,14 @@
     treatment: 'off'
     keys:
     config: {'desc': 'this applies only to OFF treatment'}
+
+- treatment_feature:
+    treatment: 'v1'
+    keys: '1'
+    config: {'desc': 'this applies only to when there are many treatments'}
+
+- treatment_feature:
+      treatment: 'v2'
+      keys: '2'
+      config: {'desc': 'this applies only to when there are many treatments'}
+
