@@ -23,7 +23,7 @@ class ThisFeature
     end
 
     def get_treatment
-      adapter.get_treatment(flag_name, record: record)
+      adapter.get_treatment(flag_name, context: context, data: data, record: record)
     end
   end
 end
