@@ -16,10 +16,12 @@
 - treatment_feature:
     treatment: 'v1'
     keys: '1'
-    config: {'desc': 'this applies only to when there are many treatments'}
+    config:
+      plan_id: 1
 
 - treatment_feature:
-      treatment: 'v2'
-      keys: '2'
-      config: {'desc': 'this applies only to when there are many treatments'}
+    treatment: 'v2'
+    keys: '2'
+    config:
+      plan_id: 2
 
