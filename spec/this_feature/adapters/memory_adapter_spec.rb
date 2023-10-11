@@ -208,6 +208,75 @@ RSpec.describe ThisFeature::Adapters::Memory do
     end
   end
 
+  describe '#enable_treatment!' do
+    subject(:enable_treatment!) { adapter.enable_treatment!(flag_name, treatment: treatment, context: context) }
+
+    let(:flag_name) { 'test-flag' }
+    let(:treatment) { 'v1' }
+    let(:context) { pseudo_user }
+
+    let(:treatment2) { 'v2' }
+    let(:context2) { pseudo_user2 }
+
+    it 'configures treatment for specific context' do
+      subject
+
+      expect(adapter.treatment_value(flag_name, context: context)).to eq(treatment)
+    end
+
+    it 'allows context ids to be overwritten' do
+      subject
+
+      expect(adapter.treatment_value(flag_name, context: context)).to eq(treatment)
+
+      adapter.enable_treatment!(flag_name, treatment: treatment2, context: context)
+
+      expect(adapter.treatment_value(flag_name, context: context)).to eq(treatment2)
+    end
+
+    it 'can accumulate many treatments for different contexts ids' do
+      subject
+
+      expect(adapter.treatment_value(flag_name, context: context)).to eq(treatment)
+
+      adapter.enable_treatment!(flag_name, treatment: treatment2, context: context2)
+
+      expect(adapter.treatment_value(flag_name, context: context2)).to eq(treatment2)
+    end
+  end
+
+  describe '#treatment_value' do
+    subject(:treatment_value) { adapter.treatment_value(flag_name, context: context) }
+
+    let(:enabled_flag_name) { 'test-flag' }
+    let(:treatment) { 'v1' }
+    let(:context) { pseudo_user }
+
+    before do
+      adapter.enable_treatment!(enabled_flag_name, treatment: treatment, context: context)
+    end
+
+    context 'when flag has been enebaled with treatment' do
+      let(:flag_name) { enabled_flag_name }
+
+      it 'returns treatment name for given context' do
+        expect(subject).to eq(treatment)
+      end
+    end
+
+    context 'when given flag is not configured with a treatment' do
+      let(:flag_name) { 'no-treatment' }
+
+      it 'returns control group name for flags with no treatments' do
+        expect(subject).to eq('control')
+      end
+    end
+  end
+
+  # describe '#treatment_config' do
+  # returns nil if there is none
+  # end
+
   describe '.on!' do
     subject(:on!) { adapter.on!(flag_name) }
 
