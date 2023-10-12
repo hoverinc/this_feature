@@ -30,6 +30,14 @@ class ThisFeature
         treatment(flag_name, context: context, data: data, record: record).eql?('off')
       end
 
+      def treatment_value(flag_name, context: EMPTY_CONTEXT, data: {}, record: nil)
+        treatment_with_config(flag_name, context: context, data: data, record: record)[:treatment]
+      end
+
+      def treatment_config(flag_name, context: EMPTY_CONTEXT, data: {}, record: nil)
+        treatment_with_config(flag_name, context: context, data: data, record: record)[:config]
+      end
+
       private
 
       attr_reader :client, :context_key_method
@@ -37,6 +45,11 @@ class ThisFeature
       def treatment(flag_name, context: EMPTY_CONTEXT, data: {}, record: nil)
         base_data = record ? ThisFeature.base_data_lambda.call(record) : {}
         client.get_treatment(context_key(context), flag_name, base_data.merge(data))
+      end
+
+      def treatment_with_config(flag_name, context: EMPTY_CONTEXT, data: {}, record: nil)
+        base_data = record ? ThisFeature.base_data_lambda.call(record) : {}
+        client.get_treatment_with_config(context_key(context), flag_name, base_data.merge(data))
       end
 
       def context_key(context)

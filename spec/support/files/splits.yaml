@@ -12,3 +12,16 @@
     treatment: 'off'
     keys:
     config: {'desc': 'this applies only to OFF treatment'}
+
+- treatment_feature:
+    treatment: 'v1'
+    keys: '1'
+    config:
+      plan_id: 1
+
+- treatment_feature:
+    treatment: 'v2'
+    keys: '2'
+    config:
+      plan_id: 2
+

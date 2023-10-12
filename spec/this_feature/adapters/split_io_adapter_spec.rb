@@ -35,6 +35,36 @@ RSpec.describe ThisFeature::Adapters::SplitIo do
       end
     end
 
+    context 'when the flag has multiple treatments' do
+      let(:flag_name) { :treatment_feature }
+
+      context 'when org id is 1' do
+        it 'returns the right treatment' do
+          expect(ThisFeature.flag(flag_name).treatment_value).to eq 'control_treatment'
+          expect(ThisFeature.flag(flag_name, context: org_id).treatment_value).to eq 'v1'
+
+          this_feature = ThisFeature.flag(flag_name, context: org_id, data: { a: :b })
+
+          expect(this_feature.treatment_value).to eq 'v1'
+          expect(JSON.parse(this_feature.treatment_config)).to eq({ 'plan_id' => 1 })
+        end
+      end
+
+      context 'when org id is 2' do
+        let(:org_id) { 2 }
+
+        it 'returns the right treatment' do
+          expect(ThisFeature.flag(flag_name).treatment_value).to eq 'control_treatment'
+          expect(ThisFeature.flag(flag_name, context: org_id).treatment_value).to eq 'v2'
+
+          this_feature = ThisFeature.flag(flag_name, context: org_id, data: { a: :b })
+
+          expect(this_feature.treatment_value).to eq 'v2'
+          expect(JSON.parse(this_feature.treatment_config)).to eq({ 'plan_id' => 2 })
+        end
+      end
+    end
+
     context 'when turned on for specific keys' do
       let(:flag_name) { :partially_on_feature }
 
