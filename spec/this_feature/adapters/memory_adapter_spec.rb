@@ -273,10 +273,6 @@ RSpec.describe ThisFeature::Adapters::Memory do
     end
   end
 
-  # describe '#treatment_config' do
-  # returns nil if there is none
-  # end
-
   describe '.on!' do
     subject(:on!) { adapter.on!(flag_name) }
 

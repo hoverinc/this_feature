@@ -34,8 +34,6 @@ class ThisFeature
         !present?(flag_name)
       end
 
-      # def treatment_config(flag_name, context: nil, data: {}, record: nil)
-
       def treatment_value(flag_name, context: nil, data: {}, record: nil)
         return 'control' if !present?(flag_name) || context.nil?
 
