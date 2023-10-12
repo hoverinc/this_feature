@@ -14,9 +14,9 @@ Under the hood, the memory adapter stores data in a dictionary like so:
     }
   },
   some_flag_name_with_treatments: {
-    User1: 'treatment_name_1',
-    User2: 'treatment_name_2',
-    User3: 'treatment_name_3'
+    User1: { treatment: 'treatment_name_1', config: { account_id: 123} },
+    User2: { treatment: 'treatment_name_2', config: nil },
+    User3: { treatment: 'treatment_name_3'}
   }
 }
 ```
@@ -103,21 +103,40 @@ Per flag name, there can only be one treatment per `context_key` (the ID of obje
 
 ```ruby
 ThisFeature.test_adapter.enable_treatment!('flag_a', treatment: 'treatment_1', context: user1)
-ThisFeature.test_adapter.storage # => { 'flag_a' => { 'User1': 'treatment_1' } }
+ThisFeature.test_adapter.storage # => { 'flag_a' => { 'User1': { treatment: 'treatment_1' } } }
 
 ThisFeature.test_adapter.enable_treatment!(:flag_a, treatment: 'treatment_2', context: user1)
-ThisFeature.test_adapter.storage # => { 'flag_a' => { 'User1': 'treatment_2' } }
+ThisFeature.test_adapter.storage # => { 'flag_a' => { 'User1': { treatment: 'treatment_2' } } }
 ```
 
-### **#treatment_value**
+#### Enabling with config data
+You may want to also store configuration data with the treatment and context. You can pass the config data, with the optional `data` argument. The `data` is a Hash type, and must have a `config` as a key with its value as another Hash.
 
-You can retrieve the flag's treatment name for a specific context.
+```ruby
+ThisFeature.test_adapter.enable_treatment!('flag_a', treatment: 'treatment_1', context: user1, data: { config: { key1: value1 } })
+ThisFeature.test_adapter.storage # =>
+{
+  'flag_a' => {
+    'User1': {
+      treatment: 'treatment_1',
+      config: {
+        key1: value1
+      }
+    }
+  }
+}
+```
+
+### **#treatment_value / #treatment_config**
+
+You can retrieve the flag's treatment name or config data for a specific context.
 
 Usage example of these:
 
 ```ruby
 # If you have configured the in-memory adapter as the default
 ThisFeature.test_adapter.treatment_value(:flag_name, context: user)
+ThisFeature.test_adapter.treatment_context(:flag_name, context: user)
 ```
 
 #### This method requires 2 arguments:
