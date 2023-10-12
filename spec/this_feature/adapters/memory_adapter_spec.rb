@@ -209,9 +209,12 @@ RSpec.describe ThisFeature::Adapters::Memory do
   end
 
   describe '#enable_treatment!' do
-    subject(:enable_treatment!) { adapter.enable_treatment!(flag_name, treatment: treatment, context: context) }
+    subject(:enable_treatment!) do
+      adapter.enable_treatment!(flag_name, treatment: treatment, context: context, data: data)
+    end
 
     let(:flag_name) { 'test-flag' }
+    let(:data) { nil }
     let(:treatment) { 'v1' }
     let(:context) { pseudo_user }
 
@@ -243,6 +246,20 @@ RSpec.describe ThisFeature::Adapters::Memory do
 
       expect(adapter.treatment_value(flag_name, context: context2)).to eq(treatment2)
     end
+
+    context 'when config data is passed' do
+      let(:data) do
+        { config: {
+          plan_id: 123
+        } }
+      end
+
+      it 'stores config data' do
+        subject
+
+        expect(adapter.treatment_config(flag_name, context: context)).to eq(data[:config])
+      end
+    end
   end
 
   describe '#treatment_value' do
@@ -269,6 +286,35 @@ RSpec.describe ThisFeature::Adapters::Memory do
 
       it 'returns control group name for flags with no treatments' do
         expect(subject).to eq('control')
+      end
+    end
+  end
+
+  describe '#treatment_config' do
+    subject(:treatment_config) { adapter.treatment_config(flag_name, context: context) }
+
+    let(:enabled_flag_name) { 'test-flag' }
+    let(:treatment) { 'v1' }
+    let(:context) { pseudo_user }
+    let(:data) do
+      { config: {
+        plan_id: 123
+      } }
+    end
+
+    before do
+      adapter.enable_treatment!(flag_name, treatment: treatment, context: context, data: data)
+    end
+
+    it 'returns config data' do
+      expect(subject).to eq(data[:config])
+    end
+
+    context 'when no config data was enabled with the treatment' do
+      let(:data) { nil }
+
+      it 'returns nil' do
+        expect(subject).to be_nil
       end
     end
   end

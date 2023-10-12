@@ -37,21 +37,34 @@ class ThisFeature
       def treatment_value(flag_name, context: nil, data: {}, record: nil)
         return 'control' if !present?(flag_name) || context.nil?
 
-        flag_data = storage[flag_name][:treatment_contexts]
+        flag_data = storage[flag_name]
         context_registered = flag_data&.key?(context_key(context))
 
         return 'control' if !flag_data || !context_registered
 
-        flag_data ||= {}
-        flag_data[context_key(context)]
+        flag_data[context_key(context)][:treatment]
       end
 
-      def enable_treatment!(flag_name, treatment: nil, context: nil)
+      def treatment_config(flag_name, context: nil, data: {}, record: nil)
+        return if !present?(flag_name) || context.nil?
+
+        flag_data = storage[flag_name]
+        context_registered = flag_data&.key?(context_key(context))
+
+        return if !flag_data || !context_registered
+
+        flag_data[context_key(context)][:config]
+      end
+
+      def enable_treatment!(flag_name, treatment: nil, context: nil, data: {})
         return false if treatment.nil? || flag_name.nil? || context.nil?
 
         storage[flag_name] ||= {}
-        storage[flag_name][:treatment_contexts] ||= {}
-        storage[flag_name][:treatment_contexts][context_key(context)] = treatment
+        storage[flag_name][context_key(context)] = { treatment: treatment }
+
+        return true unless data&.key?(:config)
+
+        storage[flag_name][context_key(context)][:config] = data[:config]
       end
 
       def on!(flag_name, context: nil, data: {})
