@@ -14,11 +14,9 @@ Under the hood, the memory adapter stores data in a dictionary like so:
     }
   },
   some_flag_name_with_treatments: {
-    treatment_contexts: {
-      User1: 'treatment_name_1',
-      User2: 'treatment_name_2',
-      User3: 'treatment_name_3'
-    }
+    User1: 'treatment_name_1',
+    User2: 'treatment_name_2',
+    User3: 'treatment_name_3'
   }
 }
 ```
@@ -105,10 +103,10 @@ Per flag name, there can only be one treatment per `context_key` (the ID of obje
 
 ```ruby
 ThisFeature.test_adapter.enable_treatment!('flag_a', treatment: 'treatment_1', context: user1)
-ThisFeature.test_adapter.storage # => { 'flag_a' => { :treatment_contexts => { 'User1': 'treatment_1' } } }
+ThisFeature.test_adapter.storage # => { 'flag_a' => { 'User1': 'treatment_1' } }
 
 ThisFeature.test_adapter.enable_treatment!(:flag_a, treatment: 'treatment_2', context: user1)
-ThisFeature.test_adapter.storage # => { 'flag_a' => { :treatment_contexts => { 'User1': 'treatment_2' } } }
+ThisFeature.test_adapter.storage # => { 'flag_a' => { 'User1': 'treatment_2' } }
 ```
 
 ### **#treatment_value**
