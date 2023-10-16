@@ -98,6 +98,10 @@ bundle install && bundle exec rspec
 
 To write a new adapter, check the [Guide](./docs/writing_an_adapter.md).
 
+## Deployment
+
+If you are working at Hover, see [this confluence doc](https://hoverinc.atlassian.net/wiki/spaces/EN/pages/3149266988/deploying+this+feature+gem)
+
 ## License
 
 ThisFeature is released under the [MIT License](https://choosealicense.com/licenses/mit).
