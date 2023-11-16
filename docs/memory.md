@@ -18,6 +18,10 @@ Under the hood, the memory adapter stores data in a dictionary like so:
       User1: 'treatment_name_1',
       User2: 'treatment_name_2',
       User3: 'treatment_name_3'
+    },
+    config_contexts: {
+      User1: {},
+      User2: {}
     }
   }
 }
