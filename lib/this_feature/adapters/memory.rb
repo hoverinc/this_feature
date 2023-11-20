@@ -34,6 +34,25 @@ class ThisFeature
         !present?(flag_name)
       end
 
+      def treatment_config(flag_name, context: nil, data: {}, record: nil)
+        return if !present?(flag_name) || context.nil?
+
+        flag_data = storage[flag_name][:config_contexts]
+        context_registered = flag_data&.key?(context_key(context))
+
+        return if !flag_data || !context_registered
+
+        flag_data[context_key(context)]
+      end
+
+      def enable_config!(flag_name, config: nil, context: nil)
+        return false if config.nil? || flag_name.nil? || context.nil?
+
+        storage[flag_name] ||= {}
+        storage[flag_name][:config_contexts] ||= {}
+        storage[flag_name][:config_contexts][context_key(context)] = config
+      end
+
       def treatment_value(flag_name, context: nil, data: {}, record: nil)
         return 'control' if !present?(flag_name) || context.nil?
 
@@ -42,7 +61,6 @@ class ThisFeature
 
         return 'control' if !flag_data || !context_registered
 
-        flag_data ||= {}
         flag_data[context_key(context)]
       end
 

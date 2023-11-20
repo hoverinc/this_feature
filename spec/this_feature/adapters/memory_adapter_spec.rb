@@ -208,6 +208,23 @@ RSpec.describe ThisFeature::Adapters::Memory do
     end
   end
 
+  describe '#enable_config!' do
+    subject(:enable_config!) { adapter.enable_config!(flag_name, config: config, context: context) }
+
+    let(:flag_name) { 'test-flag' }
+    let(:config) { { foo: 123 } }
+    let(:context) { pseudo_user }
+
+    let(:treatment2) { 'v2' }
+    let(:context2) { pseudo_user2 }
+
+    it 'registers config for specific context' do
+      subject
+
+      expect(adapter.treatment_config(flag_name, context: context)).to eq(config)
+    end
+  end
+
   describe '#enable_treatment!' do
     subject(:enable_treatment!) { adapter.enable_treatment!(flag_name, treatment: treatment, context: context) }
 
@@ -242,6 +259,34 @@ RSpec.describe ThisFeature::Adapters::Memory do
       adapter.enable_treatment!(flag_name, treatment: treatment2, context: context2)
 
       expect(adapter.treatment_value(flag_name, context: context2)).to eq(treatment2)
+    end
+  end
+
+  describe '#treatment_config' do
+    subject(:treatment_config) { adapter.treatment_config(flag_name, context: context) }
+
+    let(:enabled_flag_name) { 'test-flag' }
+    let(:config) { { bar: 456 } }
+    let(:context) { pseudo_user }
+
+    before do
+      adapter.enable_config!(enabled_flag_name, config: config, context: context)
+    end
+
+    context 'when flag has been enabled with config' do
+      let(:flag_name) { enabled_flag_name }
+
+      it 'returns treatment configs for given context' do
+        expect(subject).to eq(config)
+      end
+    end
+
+    context 'when given flag is not registered with a config' do
+      let(:flag_name) { 'no-treatment' }
+
+      it 'returns nil' do
+        expect(subject).to be_nil
+      end
     end
   end
 
